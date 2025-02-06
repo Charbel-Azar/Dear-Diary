@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tell Stories That Matter" />
+  <meta name="author" content="Dear Diary">
+  <link rel="icon" type="image/ico" href="./assests/images/camera/favicon.ico" />
+  <link rel="stylesheet" href="./assests/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <title>Dear Diary</title>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="./assests/images/logo/white_transparent_logo.png" alt="Dear Diary Logo">
+      </div>
+      
+      <div class="nav-links">
+        <a href="#our-story">Our Story</a>
+        <a href="#services">Services</a>
+        <a href="#playground">Playground</a>
+        <a href="#career">Career</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="social-links">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      </div>
+
+      <button class="mobile-menu-btn" aria-label="Toggle menu">
+        <div class="menu-circle">
+          <div class="menu-bar"></div>
+          <div class="menu-bar"></div>
+          <div class="menu-bar"></div>
+        </div>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <div class="mobile-menu-links">
+      <a href="#our-story">Our Story</a>
+      <a href="#services">Services</a>
+      <a href="#playground">Playground</a>
+      <a href="#career">Career</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+
+  <!-- LOADING SCREEN -->
+<!-- LOADING SCREEN -->
+<section id="loading-screen" class="loading-screen-section">
+  <div class="containercamera">
+    <video class="videocamera" autoplay muted loop playsinline>
+      <source src="./assests/images/camera/introvideo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div class="flash"></div>
+  <div class="wave-text">
+    <span>P</span>
+    <span>r</span>
+    <span>e</span>
+    <span>s</span>
+    <span>s</span>
+    <span>&nbsp;</span>
+    <span>t</span>
+    <span>o</span>
+    <span>&nbsp;</span>
+    <span>t</span>
+    <span>a</span>
+    <span>k</span>
+    <span>e</span>
+    <span>&nbsp;</span>
+    <span>a</span>
+    <span>&nbsp;</span>
+    <span>p</span>
+    <span>i</span>
+    <span>c</span>
+    <span>t</span>
+    <span>u</span>
+    <span>r</span>
+    <span>e</span>
+  </div>
+</section>
+
+  <!-- MAIN WEBSITE CONTENT -->
+  <main id="main-content" class="main-content-section">
+    <!-- Hero Video Section -->
+    <section class="hero-video-section">
+      <div class="video-container">
+        <video class="hero-video" autoplay muted loop playsinline>
+          <source src="./assests/images/camera/introvideo.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </section>
+
+
+
+    <!-- Story Section -->
+<section class="story-section">
+  <div class="story-container">
+    <h1 class="story-heading">Once Upon a Time</h1>
+    <div class="book-container">
+      <section class="notebook-section">
+        <style>
+        
+        </style>
+      
+        <div class="notebook">
+          <!-- Cover -->
+          <div class="page" 
+               id="coverPage"
+               onclick="
+                  this.classList.toggle('active'); 
+                  this.closest('.notebook').classList.toggle('tilted');
+               ">
+            <div class="page-front">
+              <img src="./assests/images/logo/black_transparent_logo.png" alt="Notebook Cover" class="cover-image">
+            </div>
+            <div class="page-back">
+              <div class="page-content">
+                Dear Diary,
+                <br><br>
+                Today marks the beginning...
+              </div>
+            </div>
+          </div>
+      
+          <!-- Page 1 -->
+          <div class="page" onclick="this.classList.toggle('active')">
+            <div class="page-front">
+              <div class="page-content">
+                Chapter One
+                <br><br>
+                The journey begins here...
+              </div>
+            </div>
+            <div class="page-back">
+              <div class="page-content">
+                Continuing the story
+                <br><br>
+                With each passing day...
+              </div>
+            </div>
+          </div>
+      
+          <!-- Page 2 -->
+          <div class="page" onclick="this.classList.toggle('active')">
+            <div class="page-front">
+              <div class="page-content">
+                Chapter Two
+                <br><br>
+                New adventures await...
+              </div>
+            </div>
+            <div class="page-back">
+              <div class="page-content">
+                The plot thickens
+                <br><br>
+                As we discover more...
+              </div>
+            </div>
+          </div>
+      
+          <!-- Page 3 -->
+          <div class="page" onclick="this.classList.toggle('active')">
+            <div class="page-front">
+              <div class="page-content">
+                Chapter Three
+                <br><br>
+                The story unfolds...
+              </div>
+            </div>
+            <div class="page-back">
+              <div class="page-content">
+                Mysteries revealed
+                <br><br>
+                One page at a time...
+              </div>
+            </div>
+          </div>
+      
+          <!-- Page 4 -->
+          <div class="page" onclick="this.classList.toggle('active')">
+            <div class="page-front">
+              <div class="page-content">
+                Chapter Four
+                <br><br>
+                Nearly at the end...
+              </div>
+            </div>
+            <div class="page-back">
+              <div class="page-content">
+                Final chapter
+                <br><br>
+                The conclusion nears...
+              </div>
+            </div>
+          </div>
+      
+          <!-- Back Cover (Last Page) -->
+          <div class="page back-cover">
+            <div class="page-front">
+              <div class="page-content">
+                The End
+              </div>
+            </div>
+            <div class="page-back">
+              <img src="./assests/images/logo/black_transparent_logo.png" alt="Back Cover" class="cover-image">
+            </div>
+          </div>
+        </div>
+        <div class="scroll-spacer"></div>
+      </section>
+    </div>
+  </div>
+
+
+</section>
+
+<section>
+  <div class="slogan">
+    Tell Stories  <span class="neon-text">That Matter</span>
+  </div>
+</section>
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="./assests/js/camera.js"></script>
+  <script src="./assests/js/main.js"></script>
+  <script src="./assests/js/book.js"></script>
+</body>
+</html>

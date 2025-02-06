@@ -1,0 +1,748 @@
+/* =========================
+   FONT-FACE DECLARATIONS
+   ========================= */
+/* 
+   Assuming your CSS file is inside something like "assets/css/" 
+   and your fonts folder is "assets/fonts/". If it's different, 
+   adjust the paths in the url() accordingly.
+*/
+@font-face {
+    font-family: 'GalleryModern';
+    src: url('../fonts/gallerymodern-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'SyneRegular';
+    src: url('../fonts/Syne-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'MsMadi';
+    src: url('../fonts/MsMadi-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* =========================
+     ROOT VARIABLES
+     ========================= */
+  :root {
+    /* Use your local fonts in these variables */
+    --heading-font: 'GalleryModern', serif;
+    --body-font: 'SyneRegular', sans-serif;
+  }
+  
+  /* =========================
+     GLOBAL STYLES
+     ========================= */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: var(--body-font);
+    background: #fff;
+    color: #000;
+  }
+  
+  /* Headings: Use heading font */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+  }
+
+
+/* Updated body styles */
+body {
+    font-family: var(--body-font);
+    background: #000;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  
+ /*=========================
+NAVIGATION STYLES
+========================= */
+
+
+ /* Update the z-index values and loading screen transition */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Lower than loading screen */
+    transition: all 0.3s ease;
+  }
+  
+  .navbar.scrolled {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  .nav-container {
+    max-width: 120vh;
+    margin: 0 auto;
+    padding: 0 3vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Logo styles and hover effect */
+.logo {
+    transition: all 0.3s ease;
+  }
+  
+  .logo img {
+    height: 12vh;
+    width: auto;
+    transition: all 0.3s ease;
+  }
+  
+  .logo:hover img {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8))
+           drop-shadow(0 0 20px rgba(255, 255, 255, 0.8))
+           drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
+    transform: scale(1.05);
+  }
+  
+  
+  .nav-links {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1vh 3vh;
+    border-radius: 5vh;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+  
+ /* Navigation Links Hover Effect */
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    padding: 1vh 2vh;
+    margin: 0 1vh;
+    font-size: 2vh;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                 0 0 20px rgba(255, 255, 255, 0.8),
+                 0 0 30px rgba(255, 255, 255, 0.6);
+  }
+  
+  /* Social Links Hover Effect */
+  .social-links a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 2vh;
+    font-size: 2.5vh;
+    transition: all 0.3s ease;
+  }
+  
+  .social-links a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                 0 0 20px rgba(255, 255, 255, 0.8),
+                 0 0 30px rgba(255, 255, 255, 0.6);
+    transform: scale(1.1);
+  }
+  
+  /* Mobile Menu Button */
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .menu-circle {
+    width: 4vh;
+    height: 4vh;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .menu-bar {
+    width: 2vh;
+    height: 0.2vh;
+    background: #fff;
+    transition: all 0.3s ease;
+  }
+  
+  /* Mobile Menu */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: right 0.3s ease;
+    z-index: 1001;
+  }
+  
+  .mobile-menu.active {
+    right: 0;
+  }
+  
+  .mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    padding: 80px 2rem;
+  }
+  
+  .mobile-menu-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 2.5vh;
+    padding: 2vh 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Mobile Menu Button Active State */
+  .mobile-menu-btn.active .menu-bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  
+  .mobile-menu-btn.active .menu-bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .mobile-menu-btn.active .menu-bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .nav-links, .social-links {
+      display: none;
+    }
+  
+    .mobile-menu-btn {
+      display: block;
+    }
+  
+    .nav-container {
+      padding: 0 1rem;
+    }
+  
+    .logo img {
+      height: 10vh;
+      width: auto;
+    }
+  }
+  
+
+
+
+
+
+/* =========================
+LOADING SCREEN
+========================= */
+/* Full-page loading screen */
+
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 10000; /* Highest z-index */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out; /* Add opacity transition */
+    flex-direction: column;
+    opacity: 1;
+  }
+  
+  /* Modified hide class for loading screen */
+  #loading-screen.hide {
+    transform: translateY(-100%);
+    opacity: 0; /* Fade out while sliding */
+    pointer-events: none; /* Prevent interaction while hidden */
+    z-index: 10000; /* Maintain high z-index during transition */
+  }
+  
+
+  .containercamera {
+    position: relative;
+    width: 80vh;
+    height: 50vh;
+    overflow: hidden;
+    cursor: crosshair;
+    border-radius: 20px; /* Added border radius */
+  }
+  
+  .videocamera {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px; /* Added border radius */
+  }
+
+  /* Keep your existing wave-text and other styles */
+  .wave-text {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-family: var(--body-font);
+    font-size: 18px;
+    white-space: nowrap;
+  }
+  
+  .wave-text span {
+    display: inline-block;
+    animation: wave 1.5s infinite;
+    animation-timing-function: ease-in-out;
+  }
+  
+  /* Keep your existing wave animation delays */
+  .wave-text span:nth-child(1) { animation-delay: 0.0s; }
+  .wave-text span:nth-child(2) { animation-delay: 0.05s; }
+  /* ... rest of the delays ... */
+  
+  @keyframes wave {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+  
+
+
+  .imagecamera {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .activecamera {
+    opacity: 1;
+  }
+
+  .flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  .polaroid {
+    position: fixed; /* Changed to fixed for viewport-relative positioning */
+    width: 20vh;
+    height: 20vh;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: scale(0);
+    transition: transform 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28),
+                opacity 1s ease-out;
+    z-index: 99999;
+    opacity: 1;
+  }
+  
+  .polaroid.show {
+    transform: scale(1) rotate(var(--rotation));
+  }
+  
+  .polaroid-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #333;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .polaroid-image canvas {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+  }
+  
+  /* Add no-scroll class */
+  body.no-scroll {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+ 
+  .polaroid.fade-out {
+    opacity: 0;
+  }
+
+
+
+  .capture-area {
+    position: absolute;
+    border: 2px solid white;
+    width: 18vh;
+    height: 18vh;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 99;
+    border-radius: 5px;
+  }
+
+  /* Ensure mobile menu stays below loading screen */
+.mobile-menu {
+    z-index: 99;
+  }
+ /*=========================
+ Video intro
+========================= */
+/* Hero Video Section */
+/* Hero Video Section */
+/* Hero Video Section with fade */
+.hero-video-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+  }
+  
+  .video-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30vh; /* Adjust this value to control the fade height */
+    background: linear-gradient(to bottom, transparent, #000);
+    pointer-events: none;
+    z-index: 2;
+  }
+  
+  .hero-video {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  /* Keep your existing media queries */
+  @media (min-width: 769px) {
+    .hero-video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hero-video {
+      height: 100vh;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  /* Ensure main content is visible */
+  #main-content {
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
+
+
+  /*=========================
+  boook
+========================= */
+/* Story Section Styles */
+/* Story Section Styles */
+.story-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+
+ 
+ .story-container {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+ }
+ 
+ .story-heading {
+  font-family: var(--heading-font);
+  font-size: 4rem;
+  color: #fff;
+  margin-bottom: 3rem;
+  transition: all 0.3s ease;
+  cursor: default;
+ }
+ 
+ .story-heading:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+               0 0 20px rgba(255, 255, 255, 0.8),
+               0 0 30px rgba(255, 255, 255, 0.6),
+               0 0 40px rgba(255, 255, 255, 0.4),
+               0 0 70px rgba(255, 255, 255, 0.3);
+ }
+ 
+ .book-container {
+  width: 100%;
+  min-height: 400px;
+ }
+ 
+ .notebook-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  margin-top: 40vh;
+  background: #000000;
+ }
+ 
+
+ .notebook {
+  position: sticky;
+  top: 50vh;
+  width: 18vh;
+  height: 25vh;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease;
+  transform: translateY(-50%) perspective(1500px);
+  perspective: 1500px;
+}
+/* Update media query for desktop */
+@media (min-width: 768px) {
+  .notebook {
+    width: 50vh;
+    height: 70vh;
+  }
+}
+
+.notebook:has(.page.active)::after {
+  opacity: 1;
+}
+
+/* Add crest in the middle */
+.notebook::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 15vh;
+  height: 15vh;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;}
+.notebook:has(.page.active)::before {
+  opacity: 1;
+}
+
+ 
+/* Remove these classes as we're handling positioning via JavaScript */
+.notebook.tilted,
+.notebook.tilted.slid-right {
+  transform: none;
+}
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: left;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-in-out;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 
+    10px 0 20px rgba(102, 101, 101, 0.4),
+    0 0 30px rgba(0, 0, 0, 0.1) inset;
+}
+
+/* Enhance page shadow when flipped */
+.page.active {
+  transform: rotateY(-180deg);
+  box-shadow: 
+    -10px 0 20px rgba(255, 255, 255, 0.4),
+    0 0 30px rgba(0, 0, 0, 0.1) inset;
+}
+ .page {
+  transition: transform 0.5s ease-in-out;
+}
+
+ .page-front,
+ .page-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+ 
+ .page-back {
+  transform: rotateY(180deg);
+ }
+ 
+ .page.active {
+  transform: rotateY(-180deg);
+ }
+ 
+ .page:nth-child(1) { z-index: 7; }
+ .page:nth-child(2) { z-index: 6; }
+ .page:nth-child(3) { z-index: 5; }
+ .page:nth-child(4) { z-index: 4; }
+ .page:nth-child(5) { z-index: 3; }
+ .page:nth-child(6) { z-index: 2; }
+ 
+ .page-content {
+  font-family: 'MsMadi', cursive;
+  font-size: 2.5vh;
+  color: #333;
+  line-height: 1.6;
+  text-align: center;
+  width: 90%;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+ }
+ @media (min-width: 768px) {
+  .page-content {
+    font-size: 6vh; /* Desktop size */
+  }
+ }
+ 
+ .cover-image {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+ }
+ 
+ .back-cover {
+  z-index: 1;
+  cursor: pointer;
+ }
+ 
+ .back-cover .page-front,
+ .back-cover .page-back {
+  padding: 0;
+ }
+
+ 
+ .scroll-spacer {
+  height: 300vh;
+  pointer-events: none;
+ }
+ 
+ @media (max-width: 768px) {
+  .story-heading {
+    font-size: 2.5rem;
+  }
+  
+  .story-section {
+    padding: 3rem 1rem;
+  }
+ }
+/*=========================
+  slogan
+========================= */
+.slogan {
+  text-align: center;
+  font-family: var(--heading-font);
+  font-size: 5rem;
+  color: #fff;
+  position: relative;
+}
+
+.neon-text {
+  color: #E2CB9F;
+  text-shadow: 
+    0 0 7px #E2CB9F,
+    0 0 10px #E2CB9F,
+    0 0 21px #E2CB9F,
+    0 0 42px #E2CB9F;
+  animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow: 
+      0 0 7px #E2CB9F,
+      0 0 10px #E2CB9F,
+      0 0 21px #E2CB9F,
+      0 0 42px #E2CB9F;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .slogan {
+    font-size: 3rem;
+  }
+}
