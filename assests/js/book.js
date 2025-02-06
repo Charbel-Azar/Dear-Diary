@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     breakpoint: 768
   };
   
+  // Prevent click interactions on pages
+  pages.forEach(page => {
+    page.style.pointerEvents = 'none';
+  });
+  
   // Calculate heights
   const sectionHeight = storySection.offsetHeight;
   const pageHeight = spacer.offsetHeight / pages.length;

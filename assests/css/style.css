@@ -713,12 +713,30 @@ LOADING SCREEN
 .slogan {
   text-align: center;
   font-family: var(--heading-font);
-  font-size: 5rem;
   color: #fff;
   margin-bottom: 10vh;
   position: relative;
+  /* Mobile font size */
+  font-size: 8vh;
 }
 
+/* Desktop font size */
+@media (min-width: 768px) {
+  .slogan {
+    font-size: 13vh;
+  }
+}
+/* Hide br on mobile */
+.slogan br {
+  display: block;
+}
+
+/* Show br on desktop */
+@media (min-width: 768px) {
+  .slogan br {
+    display: none;
+  }
+}
 .neon-text {
   color: #E2CB9F;
   text-shadow: 
@@ -742,11 +760,7 @@ LOADING SCREEN
   }
 }
 
-@media (max-width: 768px) {
-  .slogan {
-    font-size: 3rem;
-  }
-}
+
 
 /*=========================
   Round video 
@@ -756,7 +770,7 @@ LOADING SCREEN
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 20vh 0;
+  padding-top: 40vh;
   position: relative;
   overflow: hidden;
 }
@@ -778,4 +792,242 @@ LOADING SCREEN
   object-fit: cover;
   border-radius: 50%;
   transition: all 0.1s ease-out;
+}
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volume-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.volume-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.volume-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.volume-btn i {
+  color: white;
+  font-size: 20px;
+}
+/*================
+Dirty Secret
+================ */
+.secret-section {
+  text-align: center;
+  padding: 10vh 0;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.secret-slogan {
+  font-family: var(--heading-font);
+  color: #fff;
+  /* Mobile font size */
+  font-size: 8vh;
+  margin-bottom: 5vh;
+}
+
+/* Desktop font size */
+@media (min-width: 768px) {
+  .secret-slogan {
+    font-size: 13vh;
+  }
+}
+
+
+
+.gif-container {
+  max-width: 500px;
+  margin: 0 auto;
+  margin-bottom: 4vh;
+}
+
+.secret-gif {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #e2cb9f2a;
+}
+
+.secret-text {
+  font-family: var(--body-font);
+  color: #fff;
+  font-size: 2.5vh;
+  margin-bottom: 4vh;
+  opacity: 0.9;
+}
+/* Button Base Styles */
+.secret-button {
+  --button-color: #E2CB9F;
+  --button-hover-bg: rgba(226, 203, 159, 0.1);
+  --button-active-bg: rgba(226, 203, 159, 0.3);
+  --button-ready-bg: rgba(226, 203, 159, 0.2);
+  
+  background: transparent;
+  border: 2px solid var(--button-color);
+  color: #fff;
+  padding: 1.5vh 4vh;
+  border-radius: 50px;
+  font-family: var(--body-font);
+  font-size: 2.2vh;
+  cursor: pointer;
+  position: relative;
+  overflow: visible;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 1vh;
+  will-change: transform, background, box-shadow;
+}
+
+/* Button States */
+.secret-button:hover {
+  background: var(--button-hover-bg);
+  box-shadow: 0 0 15px rgba(226, 203, 159, 0.5);
+}
+
+.secret-button.clicked {
+  background: var(--button-active-bg);
+  transform: scale(0.95);
+}
+
+.secret-button.ready {
+  background: var(--button-ready-bg);
+  animation: pulseButton 2s infinite;
+}
+
+/* Button Key Icon */
+.button-key {
+  font-size: 2vh;
+  color: var(--button-color);
+  transition: all 0.3s ease;
+}
+
+/* Flying Key Styles */
+.flying-key {
+  position: fixed;
+  font-size: 3vh;
+  color: var(--button-color);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 0 5px rgba(226, 203, 159, 0.5))
+          drop-shadow(0 0 8px rgba(226, 203, 159, 0.3));
+}
+
+/* Flying Key States */
+.flying-key.active {
+  opacity: 1;
+  pointer-events: auto;
+  cursor: grab;
+}
+
+.flying-key.active:active {
+  cursor: grabbing;
+}
+
+/* Smooth Hardware Accelerated Transforms */
+.flying-key {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Animations */
+@keyframes pulseButton {
+  0% {
+    box-shadow: 0 0 0 0 rgba(226, 203, 159, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(226, 203, 159, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(226, 203, 159, 0);
+  }
+}
+/*=========================
+  Sliding Videos
+========================= */
+.video-grid-section {
+  background: #000;
+  padding: 5vh 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.video-row {
+  margin: 5vh 0;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 1s ease-out;
+  width: 100%;
+}
+
+.video-track {
+  display: flex;
+  gap: 2rem;
+  padding: 0 2rem;
+  width: fit-content; /* Allow track to be as wide as needed */
+  min-width: 100%; /* Ensure it fills the container */
+}
+
+.video-card {
+  flex: 0 0 300px;
+  position: relative;
+  height: 200px; /* Add explicit height */
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Update visibility classes */
+.video-row.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.video-row.slide-left {
+  transform: translateX(100%);
+}
+
+.video-row.slide-right {
+  transform: translateX(-100%);
 }
