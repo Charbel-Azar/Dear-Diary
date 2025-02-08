@@ -766,7 +766,6 @@ LOADING SCREEN
   Round video 
 ========================= */
 .video-expand-section {
-  min-height: 150vh;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -835,45 +834,50 @@ LOADING SCREEN
   color: white;
   font-size: 20px;
 }
+
 /*================
 Dirty Secret
 ================ */
+/* Section Base Styles */
 .secret-section {
+  /* overflow: hidden; */ /* <-- Remove this if you want the key floating outside */
   text-align: center;
   padding: 10vh 0;
-  background: #000;
   position: relative;
-  overflow: hidden;
 }
+
 
 .secret-slogan {
   font-family: var(--heading-font);
   color: #fff;
-  /* Mobile font size */
   font-size: 8vh;
   margin-bottom: 5vh;
 }
 
-/* Desktop font size */
 @media (min-width: 768px) {
   .secret-slogan {
-    font-size: 13vh;
+      font-size: 11vh;
   }
 }
 
-
-
-.gif-container {
-  max-width: 500px;
-  margin: 0 auto;
-  margin-bottom: 4vh;
+.videosecret-container {
+  max-width: 40vh;    /* Adjust as needed */
+  margin: 0 auto;      /* Center the container */
+  margin-bottom: 4vh;  /* Same spacing as before */
+  text-align: center;  /* If you want it centered in text context */
 }
 
-.secret-gif {
+.secret-video {
   width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 0 20px #e2cb9f2a;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 0 20px rgba(255,255,255,0.15);
+  /* Or try a white border plus shadow:
+     border: 2px solid #fff;
+     box-shadow: 0 0 20px rgba(255,255,255,0.2);
+  */
+  display: block;
 }
+
 
 .secret-text {
   font-family: var(--body-font);
@@ -882,13 +886,111 @@ Dirty Secret
   margin-bottom: 4vh;
   opacity: 0.9;
 }
-/* Button Base Styles */
+
+/* Keys specific styles */.keys-container {
+    text-align: center;
+    margin: 2rem 0;
+    position: relative;
+    z-index: 2000;
+}
+
+.keys-text {
+    font-family: var(--body-font);
+    color: #E2CB9F;
+    font-size: 2vh;
+    margin-bottom: 2vh;
+}
+
+.floating-keys {
+  position: relative; /* Let .floating-keys be the positioning context */
+  width: 40vh;       /* or some fixed width */
+  height: 200px;      /* or some fixed height */
+  margin: 2rem auto;  /* center the container itself */
+  /* Remove display: flex and gap, because we no longer want them to reflow */
+  /* display: flex;  
+     gap: 3rem; 
+     ... REMOVED ... */
+}
+
+.flying-key {
+  position: absolute; /* Start absolute so it doesn’t reflow the other keys */
+  font-size: 3vh;
+  color: #E2CB9F;
+  cursor: grab;
+  transition: filter 0.3s ease;
+  filter: drop-shadow(0 0 5px rgba(226, 203, 159, 0.3));
+  /* Arbitrary positions (example) */
+  /* you can also set these in JS if you want random positions */
+}
+.drag-clone {
+  pointer-events: none;
+}
+/* Keyframe that pulses the drop-shadow from smaller to bigger */
+@keyframes breathingGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px rgba(226, 203, 159, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(226, 203, 159, 1));
+  }
+}
+
+/* The class that activates the glow */
+.glow-breathing {
+  animation: breathingGlow 2s infinite ease-in-out;
+}
+
+/* OPTIONAL: Stagger them in 0.5s increments so they glow in order */
+.flying-key:nth-child(1).glow-breathing {
+  animation-delay: 0s;
+}
+.flying-key:nth-child(2).glow-breathing {
+  animation-delay: 0.5s;
+}
+.flying-key:nth-child(3).glow-breathing {
+  animation-delay: 1s;
+}
+.flying-key:nth-child(4).glow-breathing {
+  animation-delay: 1.5s;
+}
+
+
+/* Example for 4 keys in a horizontal line */
+.flying-key:nth-child(1) {
+  top: 50%; left: 20%; transform: translate(-50%, -50%);
+}
+.flying-key:nth-child(2) {
+  top: 50%; left: 40%; transform: translate(-50%, -50%);
+}
+.flying-key:nth-child(3) {
+  top: 50%; left: 60%; transform: translate(-50%, -50%);
+}
+.flying-key:nth-child(4) {
+  top: 50%; left: 80%; transform: translate(-50%, -50%);
+}
+.drag-clone.dragging {
+  filter: drop-shadow(0 0 10px rgba(226, 203, 159, 0.8))
+          drop-shadow(0 0 20px rgba(226, 203, 159, 0.4));
+}
+
+/* Same floating/dragging states as before */
+.flying-key.floating {
+  /* If you want them to become fixed globally: */
+  position: fixed; 
+  z-index: 999999;
+  pointer-events: auto; 
+}
+.flying-key.dragging {
+  filter: drop-shadow(0 0 10px rgba(226, 203, 159, 0.8))
+          drop-shadow(0 0 20px rgba(226, 203, 159, 0.4));
+}
+.flying-key:hover {
+  filter: drop-shadow(0 0 8px rgba(226, 203, 159, 0.5));
+}
+
+/* Button styles */
 .secret-button {
   --button-color: #E2CB9F;
-  --button-hover-bg: rgba(226, 203, 159, 0.1);
-  --button-active-bg: rgba(226, 203, 159, 0.3);
-  --button-ready-bg: rgba(226, 203, 159, 0.2);
-  
   background: transparent;
   border: 2px solid var(--button-color);
   color: #fff;
@@ -897,81 +999,21 @@ Dirty Secret
   font-family: var(--body-font);
   font-size: 2.2vh;
   cursor: pointer;
-  position: relative;
-  overflow: visible;
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
-  gap: 1vh;
-  will-change: transform, background, box-shadow;
 }
 
-/* Button States */
 .secret-button:hover {
-  background: var(--button-hover-bg);
+  background: rgba(226, 203, 159, 0.1);
   box-shadow: 0 0 15px rgba(226, 203, 159, 0.5);
 }
 
-.secret-button.clicked {
-  background: var(--button-active-bg);
+.secret-button:active {
+  background: rgba(226, 203, 159, 0.3);
   transform: scale(0.95);
 }
 
-.secret-button.ready {
-  background: var(--button-ready-bg);
-  animation: pulseButton 2s infinite;
-}
-
-/* Button Key Icon */
-.button-key {
-  font-size: 2vh;
-  color: var(--button-color);
-  transition: all 0.3s ease;
-}
-
-/* Flying Key Styles */
-.flying-key {
-  position: fixed;
-  font-size: 3vh;
-  color: var(--button-color);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 9999;
-  will-change: transform, opacity;
-  filter: drop-shadow(0 0 5px rgba(226, 203, 159, 0.5))
-          drop-shadow(0 0 8px rgba(226, 203, 159, 0.3));
-}
-
-/* Flying Key States */
-.flying-key.active {
-  opacity: 1;
-  pointer-events: auto;
-  cursor: grab;
-}
-
-.flying-key.active:active {
-  cursor: grabbing;
-}
-
-/* Smooth Hardware Accelerated Transforms */
-.flying-key {
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
-/* Animations */
-@keyframes pulseButton {
-  0% {
-    box-shadow: 0 0 0 0 rgba(226, 203, 159, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(226, 203, 159, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(226, 203, 159, 0);
-  }
-}
 /*=========================
   Sliding Videos
 ========================= */

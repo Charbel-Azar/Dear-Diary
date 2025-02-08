@@ -8,6 +8,7 @@
   <link rel="icon" type="image/ico" href="./assests/images/camera/favicon.ico" />
   <link rel="stylesheet" href="./assests/css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  
   <title>Dear Diary</title>
 </head>
 <body>
@@ -243,25 +244,45 @@
 
 <section class="secret-section">
   <div class="secret-slogan">
-    Tell Us Your <br><span class="neon-text">Dirty</span> Little Secret
+    Tell Us Your <br><span class="neon-text">Dirty</span> <br>Little Secret
   </div>
   
-  <div class="gif-container">
-    <img src="./assests/images/secret.gif" alt="Secret Whisper" class="secret-gif">
+  <div class="videosecret-container">
+    <!-- 
+      Autoplay, loop, muted, and playsinline ensure 
+      it loops silently without user interaction. 
+    -->
+    <video
+      class="secret-video"
+      autoplay
+      loop
+      muted
+      playsinline
+    >
+      <source src="./assests/images/secrets/secrets.mp4" type="video/mp4">
+      <!-- Optionally provide a WebM source for better browser coverage -->
+      <!-- <source src="./assets/videos/secret.webm" type="video/webm"> -->
+      Your browser does not support the video tag.
+    </video>
   </div>
-
   <p class="secret-text">Every brand has a story untold. Let yours be heard.</p>
   
+  <div class="keys-container">
+    <p class="keys-text">Throw away your keys and unlock your story...</p>
+    <div class="floating-keys">
+      <!-- Each key starts with the glow-breathing class -->
+      <div class="flying-key glow-breathing"><i class="fas fa-key"></i></div>
+      <div class="flying-key glow-breathing"><i class="fas fa-key"></i></div>
+      <div class="flying-key glow-breathing"><i class="fas fa-key"></i></div>
+      <div class="flying-key glow-breathing"><i class="fas fa-key"></i></div>
+    </div>
+  </div>
+  
+
   <button class="secret-button">
     <span class="button-text">Whisper It To Us</span>
-    <i class="fas fa-key button-key"></i>
   </button>
-
-  <div class="flying-key">
-    <i class="fas fa-key"></i>
-  </div>
 </section>
-
 <!--
 
 <section class="video-grid-section">
