@@ -771,6 +771,7 @@ LOADING SCREEN
   justify-content: center;
   padding-top: 40vh;
   position: relative;
+  margin-bottom: -20vh;
   overflow: hidden;
 }
 
