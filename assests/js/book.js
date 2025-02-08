@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const slideConfig = {
     mobile: {
       centerSlide: 9,
-      finalSlide: 10
+      finalSlide: 9
     },
     desktop: {
       centerSlide: 25,

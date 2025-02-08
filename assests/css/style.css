@@ -715,6 +715,7 @@ LOADING SCREEN
   font-family: var(--heading-font);
   color: #fff;
   margin-bottom: 10vh;
+  
   position: relative;
   /* Mobile font size */
   font-size: 8vh;
@@ -724,6 +725,7 @@ LOADING SCREEN
 @media (min-width: 768px) {
   .slogan {
     font-size: 13vh;
+    margin-top: -20vh;
   }
 }
 /* Hide br on mobile */
@@ -765,20 +767,21 @@ LOADING SCREEN
 /*=========================
   Round video 
 ========================= */
+/* CSS Updates */
+/* CSS Updates */
 .video-expand-section {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   padding-top: 40vh;
   position: relative;
-  margin-bottom: -20vh;
   overflow: hidden;
 }
 
 .video-wrapper {
   position: sticky;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) !important;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -787,21 +790,22 @@ LOADING SCREEN
 }
 
 .expanding-video {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 50%;
-  transition: all 0.1s ease-out;
-}
-.video-wrapper {
-  position: relative;
   width: 100%;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: cover;
+  box-shadow: none !important;
 }
 
+/* Override any hover effects */
+.video-wrapper:hover {
+  transform: translateY(-50%) !important;
+}
+
+.video-wrapper:hover .expanding-video {
+  box-shadow: none !important;
+}
+
+/* Volume button styles */
 .volume-btn {
   position: absolute;
   top: 50%;
@@ -817,7 +821,7 @@ LOADING SCREEN
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease;
   opacity: 0;
   pointer-events: none;
 }
@@ -836,6 +840,25 @@ LOADING SCREEN
   font-size: 20px;
 }
 
+/* Override any hover effects on the video */
+.video-wrapper:hover .expanding-video {
+  box-shadow: none;
+  transform: none;
+}
+
+/* Remove volume button styles */
+
+/* Override any additional hover effects from the sliding video styles */
+.video-wrapper:hover,
+.sliding-wrapper:hover {
+  transform: translateY(-50%) !important;
+  z-index: auto;
+}
+
+.video-wrapper:hover .expanding-video,
+.sliding-wrapper:hover .expanding-video {
+  box-shadow: none;
+}
 /*================
 Dirty Secret
 ================ */
@@ -844,6 +867,7 @@ Dirty Secret
   /* overflow: hidden; */ /* <-- Remove this if you want the key floating outside */
   text-align: center;
   padding: 10vh 0;
+  margin-top: -50vh;
   position: relative;
 }
 
@@ -929,10 +953,10 @@ Dirty Secret
 /* Keyframe that pulses the drop-shadow from smaller to bigger */
 @keyframes breathingGlow {
   0%, 100% {
-    filter: drop-shadow(0 0 5px rgba(226, 203, 159, 0.3));
+    filter: drop-shadow(0 0 10px rgba(241, 188, 88, 0.651));
   }
   50% {
-    filter: drop-shadow(0 0 15px rgba(226, 203, 159, 1));
+    filter: drop-shadow(0 0 30px rgba(226, 203, 159, 1));
   }
 }
 
@@ -1015,62 +1039,77 @@ Dirty Secret
   transform: scale(0.95);
 }
 
+.reset-text {
+  /* By default, show normal text styling (or whatever you prefer) */
+  cursor: pointer;                 /* Shows the hand cursor even without hovering */
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.reset-text:hover {
+  color: #fff;                     /* Change text to white on hover */
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); 
+}
 /*=========================
-  Sliding Videos
+  Horizontal scroll videos
 ========================= */
-.video-grid-section {
+.video-scroll-section {
+  height: 100vh;
+  position: relative;
   background: #000;
-  padding: 5vh 0;
   overflow: hidden;
-  position: relative;
 }
 
-.video-row {
-  margin: 5vh 0;
-  opacity: 0;
-  transform: translateX(100%);
-  transition: all 1s ease-out;
+.scroll-container {
   width: 100%;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
 }
 
-.video-track {
+.video-gallery {
   display: flex;
-  gap: 2rem;
-  padding: 0 2rem;
-  width: fit-content; /* Allow track to be as wide as needed */
-  min-width: 100%; /* Ensure it fills the container */
-}
-
-.video-card {
-  flex: 0 0 300px;
-  position: relative;
-  height: 200px; /* Add explicit height */
-}
-
-.video-wrapper {
-  position: relative;
-  width: 100%;
+  padding: 50px;
+  gap: 80px;
+  width: max-content;
   height: 100%;
-  border-radius: 15px;
-  overflow: hidden;
+  transform: rotate(-10deg) translateX(0);
+  transition: transform 0.5s ease-out;
 }
 
-.video-wrapper video {
+.sliding-wrapper {
+  position: relative;
+  width: 480px;
+  height: 270px;
+  transform-origin: center center;
+  transition: all 0.4s ease;
+}
+
+.video-wrapper:nth-child(4n + 1) { transform: translateY(-160px); }
+.video-wrapper:nth-child(4n + 2) { transform: translateY(-60px); }
+.video-wrapper:nth-child(4n + 3) { transform: translateY(60px); }
+.video-wrapper:nth-child(4n + 4) { transform: translateY(160px); }
+
+.sliding-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+  transition: all 0.4s ease;
 }
 
-/* Update visibility classes */
-.video-row.visible {
-  opacity: 1;
-  transform: translateX(0);
+.video-wrapper:hover {
+  transform: scale(1.1);
+  z-index: 10;
 }
 
-.video-row.slide-left {
-  transform: translateX(100%);
+.video-wrapper:hover .expanding-video {
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.6),
+              0 0 100px rgba(255, 255, 255, 0.3);
 }
 
-.video-row.slide-right {
-  transform: translateX(-100%);
+.section-spacer {
+  height: 200vh; /* Space for scroll animation */
+  position: relative;
 }
