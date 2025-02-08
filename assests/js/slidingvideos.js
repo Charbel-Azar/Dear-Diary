@@ -1,54 +1,50 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const videoRows = document.querySelectorAll('.video-row');
-    
-    // Function to check if element is in viewport
-    function isInViewport(element) {
-      const rect = element.getBoundingClientRect();
-      return (
-        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.bottom >= 0
-      );
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    const videos = document.querySelectorAll('.video-row video');
+    const leftRows = document.querySelectorAll('.row-left');
+    const rightRows = document.querySelectorAll('.row-right');
   
-    // Function to handle scroll
-    function handleScroll() {
-      videoRows.forEach(row => {
-        if (isInViewport(row)) {
-          row.classList.add('visible');
-        }
+    // Clone videos for infinite scroll
+    function cloneForInfiniteScroll(row) {
+      const videos = Array.from(row.children);
+      videos.forEach(video => {
+        const clone = video.cloneNode(true);
+        row.appendChild(clone);
       });
     }
   
-    // Initial check
-    handleScroll();
+    leftRows.forEach(cloneForInfiniteScroll);
+    rightRows.forEach(cloneForInfiniteScroll);
   
-    // Add scroll event listener
-    window.addEventListener('scroll', handleScroll);
-  
-    // Handle video muting/unmuting
-    const volumeBtns = document.querySelectorAll('.volume-btn');
-    volumeBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
-        const video = this.parentElement.querySelector('video');
-        const icon = this.querySelector('i');
-        
-        if (video.muted) {
-          video.muted = false;
-          icon.classList.remove('fa-volume-mute');
-          icon.classList.add('fa-volume-up');
-        } else {
-          video.muted = true;
-          icon.classList.remove('fa-volume-up');
-          icon.classList.add('fa-volume-mute');
-        }
-      });
-    });
-  
-    // Start playing videos when they become visible
-    const videos = document.querySelectorAll('.video-wrapper video');
+    // Video interaction setup
     videos.forEach(video => {
-      video.play().catch(function(error) {
-        console.log("Video play failed:", error);
-      });
+      // Add autoplay attribute
+      video.setAttribute('autoplay', '');
+      video.muted = true;
+      
+      // Touch and mouse event handlers
+      const startPlayback = () => {
+        video.muted = false;
+        video.style.filter = 'grayscale(0%)';
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.log("Playback failed:", error);
+          });
+        }
+      };
+  
+      const stopPlayback = () => {
+        video.muted = true;
+        video.style.filter = 'grayscale(100%)';
+        video.pause();
+      };
+  
+      // Mouse events
+      video.addEventListener('mouseenter', startPlayback);
+      video.addEventListener('mouseleave', stopPlayback);
+  
+      // Touch events
+      video.addEventListener('touchstart', startPlayback);
+      video.addEventListener('touchend', stopPlayback);
     });
   });

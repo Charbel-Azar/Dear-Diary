@@ -1049,67 +1049,81 @@ Dirty Secret
   color: #fff;                     /* Change text to white on hover */
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); 
 }
+
 /*=========================
-  Horizontal scroll videos
+  Sliding
 ========================= */
-.video-scroll-section {
-  height: 100vh;
+/* Sliding Videos Section */
+/* CSS */
+.slidingvideos {
   position: relative;
-  background: #000;
-  overflow: hidden;
-}
-
-.scroll-container {
   width: 100%;
-  height: 100vh;
-  position: sticky;
-  top: 0;
   overflow: hidden;
+  padding: 50px 0;
+  background: #000000;
+  text-align: center;
 }
 
-.video-gallery {
+.video-row {
   display: flex;
-  padding: 50px;
-  gap: 80px;
-  width: max-content;
-  height: 100%;
-  transform: rotate(-10deg) translateX(0);
-  transition: transform 0.5s ease-out;
-}
-
-.sliding-wrapper {
+  gap: 3vh;
+  padding: 20px 0;
+  margin-bottom: 4vh;
   position: relative;
-  width: 480px;
-  height: 270px;
-  transform-origin: center center;
-  transition: all 0.4s ease;
+  width: fit-content; /* Changed from max-content for better mobile support */
+  transform: translateZ(0);
 }
 
-.video-wrapper:nth-child(4n + 1) { transform: translateY(-160px); }
-.video-wrapper:nth-child(4n + 2) { transform: translateY(-60px); }
-.video-wrapper:nth-child(4n + 3) { transform: translateY(60px); }
-.video-wrapper:nth-child(4n + 4) { transform: translateY(160px); }
-
-.sliding-video {
-  width: 100%;
-  height: 100%;
+.video-row video {
+  width: 30vh;
+  height: 200px;
   object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
-  transition: all 0.4s ease;
+  background: #000;
+  border-radius: 15px;
+  flex-shrink: 0;
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.video-wrapper:hover {
-  transform: scale(1.1);
-  z-index: 10;
+.video-row video:hover {
+  transform: scale(1.05) translateZ(0);
+  border-color: #fff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  z-index: 1;
+  filter: grayscale(0%);
 }
 
-.video-wrapper:hover .expanding-video {
-  box-shadow: 0 0 50px rgba(255, 255, 255, 0.6),
-              0 0 100px rgba(255, 255, 255, 0.3);
+.row-left {
+  animation: slideLeft 40s linear infinite;
 }
 
-.section-spacer {
-  height: 200vh; /* Space for scroll animation */
-  position: relative;
+.row-right {
+  animation: slideRight 40s linear infinite;
+}
+
+@keyframes slideLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 1.5vh)); } /* Adjusted for gap */
+}
+
+@keyframes slideRight {
+  0% { transform: translateX(calc(-50% - 1.5vh)); } /* Adjusted for gap */
+  100% { transform: translateX(0); }
+}
+
+.video-row:hover {
+  animation-play-state: paused;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .video-row video {
+    width: 40vw; /* Adjust video size for mobile */
+    height: 150px;
+  }
+  
+  .video-row {
+    gap: 2vw; /* Smaller gap on mobile */
+  }
 }
