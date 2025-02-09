@@ -8,11 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
   let animationInProgress = false;
   let activePageIndex = -1;
   
+  
   // Configure your slide amounts here
   const slideConfig = {
     mobile: {
-      centerSlide: 9,
-      finalSlide: 9
+      centerSlide: 7,
+      finalSlide: 8
     },
     desktop: {
       centerSlide: 25,
@@ -42,17 +43,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollProgress = Math.max(0, Math.min(1, scrollInSection / spacer.offsetHeight));
     
     if (scrollProgress < 0.03) {
+      // from 0 to "centerSlide"
       const slideProgress = scrollProgress / 0.03;
-      const slideAmount = centerSlide * slideProgress;
-      notebook.style.transform = `translateY(-50%) perspective(1500px) translateX(${slideAmount}vh)`;
+      let slideAmount = centerSlide * slideProgress;
+      
+      // CLAMP if you want, or keep as-is
+      // slideAmount = Math.min(slideAmount, someMaxValue);
+      
+      notebook.style.transform = `
+        translateY(-50%) perspective(1500px) translateX(${slideAmount}vh)
+      `;
     }
     else if (scrollProgress > 0.97) {
+      // from "centerSlide" to "centerSlide + finalSlide"
       const finalSlideProgress = (scrollProgress - 0.97) / 0.03;
-      const finalSlideAmount = centerSlide + (finalSlide * finalSlideProgress);
-      notebook.style.transform = `translateY(-50%) perspective(1500px) translateX(${finalSlideAmount}vh)`;
+      let finalSlideAmount = centerSlide + (finalSlide * finalSlideProgress);
+  
+      // *** Here’s the important clamp: limit how far to the right it goes. ***
+      const someMaxValue = 20; // example: 60vh is the max allowed
+      finalSlideAmount = Math.min(finalSlideAmount, someMaxValue);
+  
+      notebook.style.transform = `
+        translateY(-50%) perspective(1500px) translateX(${finalSlideAmount}vh)
+      `;
     }
     else {
-      notebook.style.transform = `translateY(-50%) perspective(1500px) translateX(${centerSlide}vh)`;
+      // middle "steady" position
+      notebook.style.transform = `
+        translateY(-50%) perspective(1500px) translateX(${centerSlide}vh)
+      `;
     }
   }
   

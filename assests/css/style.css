@@ -1,11 +1,5 @@
-/* =========================
-   FONT-FACE DECLARATIONS
-   ========================= */
-/* 
-   Assuming your CSS file is inside something like "assets/css/" 
-   and your fonts folder is "assets/fonts/". If it's different, 
-   adjust the paths in the url() accordingly.
-*/
+
+
 @font-face {
     font-family: 'GalleryModern';
     src: url('../fonts/gallerymodern-webfont.ttf') format('truetype');
@@ -507,6 +501,7 @@ LOADING SCREEN
   display: flex;
   justify-content: center;
   align-items: flex-start;
+
 }
 
 
@@ -554,7 +549,7 @@ LOADING SCREEN
  .notebook {
   position: sticky;
   top: 50vh;
-  width: 18vh;
+  width: 15vh;
   height: 25vh;
   transform-style: preserve-3d;
   transition: transform 0.1s ease;
@@ -650,7 +645,7 @@ LOADING SCREEN
  
  .page-content {
   font-family: 'MsMadi', cursive;
-  font-size: 2.5vh;
+  font-size: 2vh;
   color: #333;
   line-height: 1.6;
   text-align: center;
@@ -714,7 +709,7 @@ LOADING SCREEN
   text-align: center;
   font-family: var(--heading-font);
   color: #fff;
-  margin-bottom: 10vh;
+  margin-bottom: 8vh;
   
   position: relative;
   /* Mobile font size */
@@ -1075,8 +1070,8 @@ Dirty Secret
 }
 
 .video-row video {
-  width: 30vh;
-  height: 200px;
+  width: 40vh;
+  height: 30vh;
   object-fit: cover;
   background: #000;
   border-radius: 15px;
@@ -1125,5 +1120,162 @@ Dirty Secret
   
   .video-row {
     gap: 2vw; /* Smaller gap on mobile */
+  }
+}
+
+/*=========================
+  Video cubes
+========================= */
+
+/* Outer container (optional styling) */
+.video-cube {
+  background: #000;
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the grid + heading horizontally */
+  justify-content: flex-start; /* Keep heading at the top */
+}
+
+/* Heading Styles */
+.cube-heading {
+  color: #fff;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+/* Hide by default */
+.mobile-only {
+  display: none;
+}
+
+/* Show on screens <= 768px (or your preferred breakpoint) */
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block; /* or inline-block, etc. */
+  }
+}
+/* The Grid Container */
+.video-grid {
+  position: relative;
+
+  /* On larger screens (PC): use 65vh, aspect ratio keeps it square */
+  width: 65vh;
+  aspect-ratio: 1 / 1;
+  max-width: 800px; /* optional cap */
+
+  display: grid;
+  grid-template-rows: var(--row1, 1fr) var(--row2, 1fr) var(--row3, 1fr);
+  grid-template-columns: var(--col1, 1fr) var(--col2, 1fr) var(--col3, 1fr);
+  gap: 0.5rem;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+/* Media query for mobile: switch to 90vw while retaining a square aspect */
+@media (max-width: 768px) {
+  .video-grid {
+    width: 90vw;
+    max-width: none;
+  }
+}
+
+/* Each cell in the 3×3 grid */
+.video-cell {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  /* Fade/slide in animation (controlled by JS/IntersectionObserver) */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* When .video-cell becomes visible (via JS) */
+.video-cell.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 
+  Inner wrapper that actually scales on hover.
+  This keeps the cell’s outer box the same size, 
+  preserving the gap. 
+*/
+.video-inner {
+  width: 100%;
+  height: 100%;
+  position: relative; 
+  transition: transform 0.3s ease;
+}
+
+/* On hover, scale only the inner content, not the entire cell */
+.video-cell:hover .video-inner {
+  transform: scale(1.02);
+  z-index: 5; /* The content is on top, but the cell bounding box remains the same */
+}
+
+/* The <video> */
+.video-cell video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 0.5s ease;
+}
+
+/* Remove grayscale on hover */
+.video-cell:hover video {
+  filter: grayscale(0%);
+}
+
+/* Overlay and play button */
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.video-cell:hover .video-overlay {
+  opacity: 1;
+}
+
+.play-button {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.play-button:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.play-button svg {
+  width: 24px;
+  height: 24px;
+  fill: #fff;
+}
+
+/* Responsive adjustments as needed */
+@media (max-width: 768px) {
+  .cube-heading {
+    font-size: 2rem;
+  }
+  .video-grid {
+    gap: 0.3rem;
   }
 }
