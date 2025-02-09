@@ -41,26 +41,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const sectionTop = storySection.offsetTop;
     const scrollInSection = scrollPosition - sectionTop;
     const scrollProgress = Math.max(0, Math.min(1, scrollInSection / spacer.offsetHeight));
-    
+  
     if (scrollProgress < 0.03) {
-      // from 0 to "centerSlide"
       const slideProgress = scrollProgress / 0.03;
       let slideAmount = centerSlide * slideProgress;
-      
-      // CLAMP if you want, or keep as-is
-      // slideAmount = Math.min(slideAmount, someMaxValue);
-      
       notebook.style.transform = `
         translateY(-50%) perspective(1500px) translateX(${slideAmount}vh)
       `;
     }
     else if (scrollProgress > 0.97) {
-      // from "centerSlide" to "centerSlide + finalSlide"
       const finalSlideProgress = (scrollProgress - 0.97) / 0.03;
       let finalSlideAmount = centerSlide + (finalSlide * finalSlideProgress);
+      
+      // Dynamically set the clamp value based on device width
+      const someMaxValue = window.innerWidth < slideConfig.breakpoint ? 20 : 60; // Adjust 60 as needed for desktop
   
-      // *** Here’s the important clamp: limit how far to the right it goes. ***
-      const someMaxValue = 20; // example: 60vh is the max allowed
       finalSlideAmount = Math.min(finalSlideAmount, someMaxValue);
   
       notebook.style.transform = `
@@ -68,12 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }
     else {
-      // middle "steady" position
       notebook.style.transform = `
         translateY(-50%) perspective(1500px) translateX(${centerSlide}vh)
       `;
     }
   }
+  
   
   function resetPageStates() {
     animationInProgress = true;
