@@ -1414,9 +1414,11 @@ Dirty Secret
 ========================= */
 .footer-container {
   padding: 4rem 2rem 1rem;
-  background-color: #111111;
+  background-color: #0e0e0e;
   color: white;
 }
+
+
 
 .footer-message {
   font-size: clamp(2rem, 5vw, 4.5rem);
@@ -1439,6 +1441,7 @@ Dirty Secret
   font-family: 'MsMadi', cursive;
   font-size: 1.5rem;
   transition: all 0.3s ease;
+  animation: flicker 1.5s infinite alternate;
   text-shadow: 
       0 0 7px #E2CB9F,
       0 0 10px #E2CB9F,
@@ -1454,34 +1457,37 @@ Dirty Secret
 .footer-bottom {
   border-top: 1px solid #333;
   padding-top: 1rem;
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  flex-wrap: wrap;
   gap: 1rem;
   font-size: 0.9rem;
   font-family: 'SyneRegular', sans-serif;
 }
 
-.social-links {
+.socialf-links {
   display: flex;
   gap: 1.5rem;
+  justify-content: flex-start;
 }
 
-.social-links a {
+.socialf-links a {
   color: white;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 500;
   transition: color 0.3s ease;
+  font-family: 'GalleryModern', sans-serif;
 }
 
-.social-links a:hover {
+.socialf-links a:hover {
   color: #E2CB9F;
 }
 
 .copyright {
   color: #888;
+  text-align: center;
 }
 
 .contact-info {
@@ -1493,18 +1499,38 @@ Dirty Secret
   color: #888;
 }
 
+.contact-info a {
+  color: #888;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: #E2CB9F;
+}
+
 @media (max-width: 768px) {
   .footer-bottom {
-      flex-direction: column;
-      text-align: center;
+      grid-template-columns: 1fr;
       gap: 1.5rem;
+      text-align: center;
   }
 
-  .social-links {
+  .socialf-links {
       justify-content: center;
   }
 
   .contact-info {
       text-align: center;
+  }
+
+  .footer-message {
+      font-size: 2rem;
+      padding: 0 1rem;
+  }
+
+  .cta-button {
+      font-size: 1.2rem;
+      padding: 0.8rem 1.6rem;
   }
 }
