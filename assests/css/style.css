@@ -1388,21 +1388,34 @@ Dirty Secret
   transform: translate(-50%, -50%);
   cursor: ew-resize;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  /* Optional: Use flexbox if you decide to place inner content instead of pseudo-elements */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Style both arrows with similar properties */
+.slider-button::before,
+.slider-button::after {
+  position: absolute;
+  top: 50%;               /* Center vertically */
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 2.5vh;       /* Size the arrows using vh */
+}
+
+/* Position the left arrow slightly left of center */
 .slider-button::before {
   content: '<';
-  position: absolute;
-  left: 25%;
-  color: #666;
+  left: 7%;              /* Adjust as needed for perfect centering */
 }
 
+/* Position the right arrow slightly right of center */
 .slider-button::after {
   content: '>';
-  position: absolute;
-  right: 25%;
-  color: #666;
+  left: 47%;              /* Adjust as needed for perfect centering */
 }
+
 
 .neon-textslide {
   color: #E2CB9F;
