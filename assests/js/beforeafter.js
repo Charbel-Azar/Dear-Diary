@@ -33,7 +33,7 @@ document.querySelectorAll('.image-container').forEach(container => {
         beforeImage.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
 
         // Show text when slider is near the start (5% or less)
-        if (percent <= 5) {
+        if (percent <= 15) {
             neonText.style.opacity = '1';
         } else {
             neonText.style.opacity = '0';

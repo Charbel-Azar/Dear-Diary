@@ -28,7 +28,13 @@
     --heading-font: 'GalleryModern', serif;
     --body-font: 'SyneRegular', sans-serif;
   }
-  
+  a, button, input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+    
   /* =========================
      GLOBAL STYLES
      ========================= */
@@ -42,6 +48,7 @@
     font-family: var(--body-font);
     background: #fff;
     color: #000;
+    overflow-x: clip;
   }
   
   /* Headings: Use heading font */
@@ -277,56 +284,70 @@ LOADING SCREEN
     pointer-events: none; /* Prevent interaction while hidden */
     z-index: 10000; /* Maintain high z-index during transition */
   }
-  
+  /* Desktop styles */
+.containercamera {
+  position: relative;
+  width: 80vh;
+  height: 50vh;
+  overflow: hidden;
+  cursor: crosshair;
+  border-radius: 20px;
+}
 
+.videocamera {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* Mobile styles: make the container square and let the video fill it */
+@media only screen and (max-width: 768px) {
   .containercamera {
-    position: relative;
-    width: 80vh;
-    height: 50vh;
-    overflow: hidden;
-    cursor: crosshair;
-    border-radius: 20px; /* Added border radius */
+    /* For mobile, use a square container that fits within the viewport.
+       Adjust the vw value as needed. */
+    width: 90vw;
+    height: 90vw;
+    border-radius: 20px;
+    margin: 0 auto; /* center horizontally if desired */
   }
-  
   .videocamera {
-    position: absolute;
+    /* Reset to fill the container */
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 20px; /* Added border radius */
+    border-radius: 20px;
   }
+}
 
-  /* Keep your existing wave-text and other styles */
-  .wave-text {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    font-family: var(--body-font);
-    font-size: 18px;
-    white-space: nowrap;
+.wave-text {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-family: var(--body-font);
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.wave-text span {
+  display: inline-block;
+  /* Each span uses the custom property --i to determine its delay */
+  animation: wave 1.5s infinite ease-in-out;
+  animation-delay: calc(var(--i) * 0.05s);
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateY(0);
   }
-  
-  .wave-text span {
-    display: inline-block;
-    animation: wave 1.5s infinite;
-    animation-timing-function: ease-in-out;
+  50% {
+    transform: translateY(-15px);
   }
-  
-  /* Keep your existing wave animation delays */
-  .wave-text span:nth-child(1) { animation-delay: 0.0s; }
-  .wave-text span:nth-child(2) { animation-delay: 0.05s; }
-  /* ... rest of the delays ... */
-  
-  @keyframes wave {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-15px);
-    }
-  }
+}
+
   
 
 
@@ -362,7 +383,7 @@ LOADING SCREEN
     background: white;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.4vh 0.8vh rgba(0, 0, 0, 0.3);
     transform: scale(0);
     transition: transform 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28),
                 opacity 1s ease-out;
@@ -924,7 +945,7 @@ Dirty Secret
 .floating-keys {
   position: relative; /* Let .floating-keys be the positioning context */
   width: 40vh;       /* or some fixed width */
-  height: 200px;      /* or some fixed height */
+  height: 10vh;      /* or some fixed height */
   margin: 2rem auto;  /* center the container itself */
   /* Remove display: flex and gap, because we no longer want them to reflow */
   /* display: flex;  
