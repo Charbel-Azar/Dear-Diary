@@ -861,7 +861,7 @@ Dirty Secret
 .secret-section {
   /* overflow: hidden; */ /* <-- Remove this if you want the key floating outside */
   text-align: center;
-  padding: 10vh 0;
+  padding-top: 10vh;
   margin-top: -50vh;
   position: relative;
 }
@@ -1130,7 +1130,6 @@ Dirty Secret
 /* Outer container (optional styling) */
 .video-cube {
   background: #000;
-  min-height: 100vh;
   padding: 4rem 2rem;
   display: flex;
   flex-direction: column;
@@ -1277,5 +1276,235 @@ Dirty Secret
   }
   .video-grid {
     gap: 0.3rem;
+  }
+}
+/*=========================
+  Before after
+========================= */
+
+.comparison-section {
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+
+
+.comparison-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.comparison-wrapper {
+  position: relative;
+  width: 40vh;
+  height: 30vh;
+  overflow: hidden;
+  border-radius: 30px;
+  transition: box-shadow 0.3s ease;
+}
+
+.comparison-wrapper.active {
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.8),
+              0 0 60px rgba(255, 255, 255, 0.6),
+              0 0 90px rgba(255, 255, 255, 0.4);
+}
+
+.before-image,
+.after-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.before-image {
+  z-index: 1;
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+}
+
+.slider {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background: white;
+  left: 50%;
+  z-index: 2;
+  cursor: ew-resize;
+}
+
+.slider-button {
+  position: absolute;
+  width: 3vh;
+  height: 3vh;
+  border-radius: 50%;
+  background: white;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  cursor: ew-resize;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.slider-button::before {
+  content: '<';
+  position: absolute;
+  left: 25%;
+  color: #666;
+}
+
+.slider-button::after {
+  content: '>';
+  position: absolute;
+  right: 25%;
+  color: #666;
+}
+
+.neon-textslide {
+  color: #E2CB9F;
+  text-shadow: 
+      0 0 7px #E2CB9F,
+      0 0 10px #E2CB9F,
+      0 0 21px #E2CB9F,
+      0 0 42px #E2CB9F;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .comparison-wrapper {
+      width: 80vw;
+      height: 60vw;
+  }
+}
+.sloganslide {
+  text-align: center;
+  font-family: var(--heading-font);
+  color: #fff;
+  margin-bottom: 8vh;
+  
+  position: relative;
+  /* Mobile font size */
+  font-size: 8vh;
+}
+/* Desktop font size */
+@media (min-width: 768px) {
+  .slogan {
+    font-size: 13vh;
+
+  }
+}
+
+/*=========================
+  Footer
+========================= */
+.footer-container {
+  padding: 4rem 2rem 1rem;
+  background-color: #111111;
+  color: white;
+}
+
+.footer-message {
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-weight: 900;
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  font-family: 'GalleryModern', sans-serif;
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: transparent;
+  color: #E2CB9F;
+  padding: 1rem 2rem;
+  border: 1px solid #E2CB9F;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: 'MsMadi', cursive;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  text-shadow: 
+      0 0 7px #E2CB9F,
+      0 0 10px #E2CB9F,
+      0 0 21px #E2CB9F,
+      0 0 42px #E2CB9F;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #E2CB9F;
+}
+
+.footer-bottom {
+  border-top: 1px solid #333;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.9rem;
+  font-family: 'SyneRegular', sans-serif;
+}
+
+.social-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.social-links a {
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #E2CB9F;
+}
+
+.copyright {
+  color: #888;
+}
+
+.contact-info {
+  text-align: right;
+}
+
+.contact-info p {
+  margin: 0;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+      gap: 1.5rem;
+  }
+
+  .social-links {
+      justify-content: center;
+  }
+
+  .contact-info {
+      text-align: center;
   }
 }
