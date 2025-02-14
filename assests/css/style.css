@@ -1762,7 +1762,7 @@ Dirty Secret
   
 
   /*=========================
-  our story
+  our story instagram
 ========================= */
 
 .sloganstory {
@@ -1782,14 +1782,62 @@ Dirty Secret
   }
 } .stories-container {
   display: flex;
-  gap: 3vh; /* Increased from 2vh */
-  padding: 3vh 4vh; /* Increased top/bottom padding */
-  justify-content: center;
+  gap: 1.5vh;
+  padding: 1.5vh;
+  justify-content: flex-start; /* Default for mobile: align from start */
   margin: 0 auto;
-  max-width: 90vh;
+  max-width: 100%;
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+  .stories-container {
+      justify-content: center; /* Center on desktop */
+      max-width: 90vh; /* Limit width on desktop */
+      margin: 0 auto; /* Center the container */
+      gap: 3vh; /* Larger gap on desktop */
+      padding: 3vh 4vh; /* Original desktop padding */
+  }
+
+  .story {
+      width: 15vh; /* Desktop size */
+  }
+  
+  .story-border {
+      width: 15vh;
+      height: 15vh;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 767px) {
+  .stories-container {
+      justify-content: flex-start;
+      padding-left: 1.5vh;
+  }
+
+  .story {
+      width: 10vh; /* Mobile size */
+  }
+  
+  .story-border {
+      width: 10vh;
+      height: 10vh;
+  }
+}
+/* Ensure the first story (Add Story) is always visible */
+.stories-container .story:first-child {
+  margin-left: 0;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+@media (max-width: 768px) {
+  .stories-container {
+      padding-left: 1.5vh; /* Ensure consistent padding on mobile */
+  }
 }
 
 .stories-container::-webkit-scrollbar {
@@ -1866,29 +1914,26 @@ Dirty Secret
 
 @keyframes modalExpand {
   0% {
-      opacity: 0;
-      clip-path: circle(0% at var(--x) var(--y));
+    opacity: 0;
+    clip-path: circle(0% at var(--x) var(--y));
   }
   100% {
-      opacity: 1;
-      clip-path: circle(150% at var(--x) var(--y));
+    opacity: 1;
+    clip-path: circle(300% at var(--x) var(--y));
   }
-}
-
-.modal.animate-out {
-  animation: modalCollapse 300ms ease-in forwards;
 }
 
 @keyframes modalCollapse {
   0% {
-      opacity: 1;
-      clip-path: circle(150% at var(--x) var(--y));
+    opacity: 1;
+    clip-path: circle(300% at var(--x) var(--y));
   }
   100% {
-      opacity: 0;
-      clip-path: circle(0% at var(--x) var(--y));
+    opacity: 0;
+    clip-path: circle(0% at var(--x) var(--y));
   }
 }
+
 
 .modal-content {
   position: relative;
@@ -2002,6 +2047,195 @@ Dirty Secret
       height: 0.2vh;
   }
 }
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in {
+  animation: slideInFromRight 0.4s ease-out forwards;
+}
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-left {
+  animation: slideInFromLeft 0.4s ease-out forwards;
+}
+
+@media (min-width: 768px) {
+  /* Override the modal (overlay) style on desktop */
+  .modal {
+    width: 25vw;
+    height: 110vh; /* Adjust height as needed or use a fixed height like 90vh */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 3vh;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.658);
+    background-color: rgba(0, 0, 0, 0.95);
+    /* Optional: if you want to restrict the height */
+    max-height: 95vh;
+  }
+
+  /* Make sure the modal content inherits the border radius */
+  .modal-content {
+    border-radius: inherit;
+    overflow: hidden;
+  }
+
+  /* Reposition navigation and close buttons if needed */
+  .close-btn,
+  .nav-btn {
+    /* Example: position them relative to the modal’s edges */
+    position: absolute;
+  }
+
+  /* Center the progress container if necessary */
+  .progress-container {
+    width: 90%;      /* example width */
+    margin: 0 auto;  /* center horizontally */
+  }
+}/* Add Story Plus Button styles */
+.add-story-plus {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(45deg, #0095f6, #00c6ff);
+    border: 2px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    z-index: 2;
+}
+
+.add-story-plus::after {
+    content: '+';
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Make the plus button smaller on mobile */
+@media (max-width: 768px) {
+    .add-story-plus {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .add-story-plus::after {
+        font-size: 14px;
+    }
+}
+
+/* Ensure the story container has proper positioning */
+.story-img-container {
+    position: relative;
+}
+
+/* Add Story border styles */
+.add-story-border {
+  border: none;
+}
+
+.story-img-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+/* Plus button styles with breathing animation */
+.add-story-plus {
+  position: absolute;
+  bottom: -0.3vh;
+  right: -0.3vh;
+  width: 3vh;
+  height: 3vh;
+  background: #0095f6;
+  border: 2px solid black;
+  border-radius: 50%;
+  color: white;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  cursor: pointer;
+  animation: breathe 2s ease-in-out infinite;
+}
+
+/* Add the plus sign using pseudo-element */
+.add-story-plus::before {
+  line-height: 1;
+  font-weight: bold;
+}
+.add-story-plus::after {
+  content: '+';
+  font-size: 2vh;
+  font-weight: bold;
+  color: white;
+}
+@media (max-width: 768px) {
+  .add-story-plus::after {
+      font-size: 1.2vh;
+  }
+}
+/* Breathing animation */
+@keyframes breathe {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.1);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+/* Ensure plus button stays on top */
+.story:first-child .story-img-container {
+  overflow: visible;
+}
+
+@media (max-width: 768px) {
+  .add-story-plus {
+      width: 14px;
+      height: 14px;
+  }
+  .add-story-plus::before {
+      font-size: 10px;
+  }
+}
+
+/* Ensure plus button stays on top */
+.story:first-child .story-img-container {
+  overflow: visible;
+}
+
+@media (max-width: 768px) {
+  .add-story-plus {
+      width: 14px;
+      height: 14px;
+      font-size: 10px;
+  }
+}
 
 /*=========================
   our story paragraph
@@ -2059,142 +2293,270 @@ Dirty Secret
 /*=========================
   our team
 ========================= */   
- .team-section {
-            background-color: #000;
-            padding: 2rem;
-            margin-top:5vh;
-            margin-bottom: 5vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+.team-section {
+  background-color: #000;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 25vh);
-            gap: 3vh;
-            margin: 0 auto;
-            justify-content: center;
-        }
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 25vh);
+  gap: 3vh;
+  margin: 0 auto;
+  justify-content: center;
+}
 
-        .team-card {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
+.team-card {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
 
-        .team-card.active-work {
-            box-shadow: 0 0 25px rgba(0, 123, 255, 0.5);
-        }
-        .team-card.active-family {
-            box-shadow: 0 0 25px rgba(147, 51, 234, 0.5);
-        }
-        .team-card.active-hobby {
-            box-shadow: 0 0 25px rgba(52, 211, 153, 0.5);
-        }
-        .team-card.active-travel {
-            box-shadow: 0 0 25px rgba(251, 146, 60, 0.5);
-        }
+.image-containerteam {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+}
 
-        .image-container {
-            position: relative;
-            width: 100%;
-            padding-top: 100%;
-            overflow: hidden;
-        }
+.team-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
 
-        .team-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.3s ease;
-        }
+.filter-icons {
+  position: absolute;
+  bottom: 2vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1vh;
+  z-index: 2;
+}
 
-        .filter-button {
-            position: absolute;
-            top: 2vh;
-            right: 2vh;
-            background: #E2CB9F;
-            border-radius: 50%;
-            width: 5vh;
-            height: 5vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 2;
-        }
+.filter-icon {
+  width: 4vh;
+  height: 4vh;
+  border-radius: 50%;
+  background-color: rgba(128, 128, 128, 0.8);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-        .filter-menu {
-            position: absolute;
-            top: 8vh;
-            right: 2vh;
-            background: rgb(46, 46, 46);
-            color: white;
-            border-radius: 8px;
-            padding: 0.5rem;
-            display: none;
-            z-index: 2;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+.filter-icon i {
+  color: white;
+  font-size: 1.8vh;
+}
 
-        .filter-menu.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
+.filter-icon:hover {
+  background-color: #E2CB9F;
+}
 
-        .filter-option {
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: background-color 0.2s ease;
-        }
+.filter-icon.active {
+  background-color: #E2CB9F;
+}
 
-        .filter-option:hover {
-            background-color: #E2CB9F;
-            color: #000;
-        }
+.info-container {
+  background-color: #E2CB9F;
+  padding: 1rem;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
 
-        .info-container {
-            background-color: #E2CB9F;
-            padding: 1rem;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-        }
+.member-title {
+  font-family: 'SyneRegular', sans-serif;
+  font-size: 2vh;
+  font-weight: bold;
+  color: #0e0e0e;
+  margin: 0;
+}
 
-        .member-title {
-          font-family: 'SyneRegular', sans-serif;
-            font-size: 2vh;
-            font-weight: bold;
-            color: #0e0e0e;
-            margin: 0;
-        }
+.member-name {
+  font-size: 1vh;
+  color: #666;
+  margin: 0.5rem 0 0;
+  font-family: 'SyneRegular', sans-serif;
+}
 
-        .member-name {
-            font-size: 1vh;
-            color: #666;
-            margin: 0.5rem 0 0;
-            font-family: 'SyneRegular', sans-serif;
-        }
+@media (max-width: 1024px) {
+  .team-grid {
+      grid-template-columns: repeat(2, 35vh);
+  }
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+@media (max-width: 640px) {
+  .team-grid {
+      grid-template-columns: 45vh;
+  }
+}
 
-        @media (max-width: 1024px) {
-            .team-grid {
-                grid-template-columns: repeat(2, 35vh);
-            }
-        }
 
-        @media (max-width: 640px) {
-            .team-grid {
-                grid-template-columns: 45vh;
-                padding: 2vh;
-            }
-        }
+/*=========================
+  Moodboard 
+========================= */
+/* Container styles */
+.moodboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: #000000;
+}
+
+.moodboard {
+  width: 80vw;
+  height: 80vh;
+  background: #E2CB9F;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px #e2cb9f;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Title styles */
+.title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  text-align: center;
+  pointer-events: none;
+}
+
+.title h1 {
+  font-family: 'GalleryModern', sans-serif;
+  font-size: 3.5vw;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0;
+}
+
+.title p {
+ font-family: 'GalleryModern', sans-serif;
+  font-size: 1.2vw;
+  color: rgba(0, 0, 0, 0.6);
+  margin-top: 1rem;
+}
+
+/* Images container */
+.images {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* Update the element styles */
+.element {
+  position: absolute;
+  cursor: grab;
+  width: 20%; /* Default width for larger screens */
+  height: auto; /* Initial height */
+  border-radius: 10px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  animation: none;
+}
+
+/* Add media query for mobile devices */
+@media (max-width: 768px) {
+  .element {
+    width: 40%; /* Wider width for mobile screens */
+  }
+}
+/* Remove the .resize-handle class since we don't need it anymore */
+
+.element:hover {
+  box-shadow: 0 8px 25px rgb(0, 0, 0);
+}
+
+.element img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.element .description {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.938);
+  padding: 0.5rem;
+  font-size: 3vh;
+  color: #E2CB9F;
+  font-family: 'MsMadi', cursive;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  text-shadow: 0 0 10px rgba(226, 203, 159, 0.7),
+               0 0 20px rgba(226, 203, 159, 0.5),
+               0 0 30px rgba(226, 203, 159, 0.3);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px rgba(226, 203, 159, 0.7),
+                 0 0 20px rgba(226, 203, 159, 0.5),
+                 0 0 30px rgba(226, 203, 159, 0.3);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(226, 203, 159, 0.9),
+                 0 0 30px rgba(226, 203, 159, 0.7),
+                 0 0 40px rgba(226, 203, 159, 0.5);
+  }
+}
+
+.element:hover .description {
+  transform: translateY(0);
+}
+
+/* Floating animation */
+@keyframes float {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(var(--float-x1, 10px), var(--float-y1, -10px));
+  }
+  50% {
+    transform: translate(var(--float-x2, -10px), var(--float-y2, 10px));
+  }
+  75% {
+    transform: translate(var(--float-x3, 10px), var(--float-y3, 10px));
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .moodboard {
+    width: 90vw;
+    height: 90vh;
+  }
+  
+  .title h1 {
+    font-size: 6vw;
+  }
+  
+  .title p {
+    font-size: 2.5vw;
+  }
+}
