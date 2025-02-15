@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
       window.scrollTo(0, initialScroll);
       video.pause();
     }, 1000);
-  }, 1000);
+  }, 2000);
 
   function triggerFlash() {
     flash.style.opacity = '1';

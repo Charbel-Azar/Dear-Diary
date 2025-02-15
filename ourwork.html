@@ -200,21 +200,21 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="./assests/js/main.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function() {
-    // Constants for animation timing
-    const LETTER_DELAY = 0.1;
-    const RANDOM_VARIANCE = 0.05;
-    
+    const LETTER_DELAY = 0.1;  // Delay between each letter (in seconds)
+    const RANDOM_VARIANCE = 0.05;  // Random extra delay
+    const START_DELAY = 2; // Delay (in seconds) before starting animation
+
     const titleEl = document.querySelector('.quote-title');
     const textEl = document.querySelector('.quote-text');
     let currentIndex = -1;
-  
+
     // Create sparkles at the position of the last letter
     function createSparklesAt(lastSpan) {
       const spanRect = lastSpan.getBoundingClientRect();
       const containerRect = titleEl.getBoundingClientRect();
       const x = spanRect.left - containerRect.left + spanRect.width / 2;
       const y = spanRect.top - containerRect.top + spanRect.height / 2;
-  
+      
       const sparkleCount = 5;
       for (let i = 0; i < sparkleCount; i++) {
         const sparkle = document.createElement('div');
@@ -222,12 +222,12 @@
         sparkle.style.left = `${x}px`;
         sparkle.style.top = `${y}px`;
         titleEl.appendChild(sparkle);
-  
+        
         const angle = Math.random() * Math.PI * 2;
         const distance = 20 + Math.random() * 20;
         const targetX = Math.cos(angle) * distance;
         const targetY = Math.sin(angle) * distance;
-  
+        
         gsap.to(sparkle, {
           duration: 1,
           x: targetX,
@@ -239,20 +239,20 @@
         });
       }
     }
-  
+
     // Write "Dear Diary," letter by letter
     function writeTitle() {
       const title = "Dear Diary,";
       titleEl.innerHTML = '';
-  
+      
       const chars = title.split('');
       let lastSpan = null;
-  
+
       chars.forEach((char, index) => {
         const span = document.createElement('span');
         span.textContent = char;
         titleEl.appendChild(span);
-  
+
         gsap.from(span, {
           opacity: 0,
           duration: 0.1,
@@ -261,18 +261,17 @@
           onComplete: () => {
             if (index === chars.length - 1) {
               createSparklesAt(lastSpan);
-              startDiaryEntries(); // Start diary text animation immediately after title animation
+              setTimeout(startDiaryEntries, 1000);  // Start diary entries after title animation ends
             }
           }
         });
-  
+        
         if (index === chars.length - 1) {
           lastSpan = span;
         }
       });
     }
-  
-    // Start diary entries after the title animation
+
     function startDiaryEntries() {
       const quotes = [
         "Success is not final, failure is not fatal: it is the courage to continue that counts.",
@@ -281,7 +280,7 @@
         "Life is what happens while you're busy making other plans.",
         "Every moment is a fresh beginning."
       ];
-  
+
       function getRandomQuote() {
         let newIndex;
         do {
@@ -290,37 +289,37 @@
         currentIndex = newIndex;
         return quotes[currentIndex];
       }
-  
+
       function typeQuote() {
         const quote = getRandomQuote();
         textEl.innerHTML = '';
-  
+        
         const chars = quote.split('');
         let lastSpan = null;
-  
+
         chars.forEach((char, index) => {
           const span = document.createElement('span');
           span.textContent = char;
           textEl.appendChild(span);
-  
+          
           gsap.from(span, {
             opacity: 0,
             duration: 0.1,
             delay: (index * LETTER_DELAY) + (Math.random() * RANDOM_VARIANCE),
             ease: "power1.out"
           });
-  
+
           if (index === chars.length - 1) {
             lastSpan = span;
           }
         });
-  
+
         if (lastSpan) {
           gsap.delayedCall((chars.length * LETTER_DELAY) + 0.1, () => {
             createSparklesAt(lastSpan);
           });
         }
-  
+
         gsap.to(textEl, {
           delay: 20,
           duration: 1,
@@ -331,21 +330,13 @@
           }
         });
       }
-  
+
       typeQuote();
     }
-  
-    // Remove loading screen and start title animation immediately
-    const loadingScreen = document.getElementById('loading-screen');
-    const mainContent = document.getElementById('main-content');
-  
-    // Make sure loading screen is hidden when the page loads
-    loadingScreen.style.display = 'none'; // Hide loading screen
-    mainContent.style.display = 'block'; // Show main content
-    writeTitle(); // Start the title animation immediately after page load
-  
+
+    // Delay the start of the title animation
+    setTimeout(writeTitle, START_DELAY * 1000);
   });
-  
   </script>
   
 </body>
