@@ -2560,3 +2560,218 @@ Dirty Secret
     font-size: 2.5vw;
   }
 }
+
+/*=========================
+  our work
+========================= */  /* Outer container: width and height defined in viewport units */
+.quote-container {
+  width: 70vw;           /* 70% of viewport width */
+  height: 50vh;          /* 40% of viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+/* Quote box inside the container */
+.quote-box {
+  background-color: #E2CB9F;
+  border-radius: 2vh;
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 10px 20px #E2CB9F;
+  transition: transform 0.3s ease;
+}
+
+.quote-box:hover {
+  transform: translateY(-5px);
+}
+
+/* Quote title styling */
+.quote-title {
+  text-align: center;
+  color: #2c2c2c;
+  font-size: 7vh;  
+  margin-bottom: 2vh;
+  font-family: 'Ms Madi', cursive;
+  font-weight: 700;
+}
+
+/* Writing area (black notebook) */
+.writing-area {
+  background-color: #000;
+  border-radius: 1.5vh;
+  padding: 2vw;
+  /* Allow text to wrap normally inside the box */
+  overflow-wrap: break-word;
+  /* Optionally, set a max-height or let it grow */
+ height: 30vh;
+}
+
+/* The element where the quote text is typed */
+.quote-text {
+  color: #E2CB9F;
+  font-family: 'Ms Madi', cursive;
+  font-size: 3.8vw;
+  line-height: 1.2;
+  text-shadow: 0 0 5px #E2CB9F,
+               0 0 10px #E2CB9F,
+               0 0 15px #E2CB9F;
+  /* Allow natural wrapping */
+  white-space: normal;
+  word-break: break-word;
+  position: relative; 
+}
+/* Sparkle styling */
+.sparkle {
+  position: absolute;
+  width: 0.5em;
+  height: 0.5em;
+  background-color: #E2CB9F;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+
+  .quote-text {
+    font-size: 8vw;
+ 
+  }
+  .quote-container {
+    width: 80vw;  
+    height: 50vh;         /* 70% of viewport width */
+   
+  }
+  .quote-title {
+    font-size: 10vw;
+  }
+  
+}
+/*=========================
+  Work Videos
+========================= */
+
+.workvideos-spacer {
+
+}
+
+.workvideos-container {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.workvideos-section {
+  height: 150vh;
+  position: relative;
+}
+
+.workvideos-sticky {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.workvideos-pair {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.workvideos-card {
+  position: absolute;
+  width: 28vh;
+  height: 55vh;
+  background: #333;
+  border-radius: 25px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.workvideos-video-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.workvideos-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.workvideos-card-left {
+  transform: translateX(0) rotate(0deg);
+  transform-origin: center right;
+}
+
+.workvideos-card-right {
+  transform: translateX(0) rotate(0deg);
+  transform-origin: center left;
+}
+
+.workvideos-text {
+  position: absolute;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'SyneRegular', sans-serif;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.workvideos-card:hover .workvideos-video-wrapper {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes workvideos-glow {
+  0% { text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+  50% { text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.6); }
+  100% { text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+}
+
+.workvideos-text.visible {
+  animation: workvideos-glow 2s infinite;
+}
+
+.workvideos-title {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10vh;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.3);
+  z-index: 20;
+}
+@media (max-width: 768px) {
+  .workvideos-title {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 5vh;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+    z-index: 20;
+  }
+}
