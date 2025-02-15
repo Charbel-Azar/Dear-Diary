@@ -2849,7 +2849,7 @@ Dirty Secret
   display: flex;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 10vh;
   width: 100%;
 }
 
@@ -2864,7 +2864,7 @@ Dirty Secret
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 5vh;
-  font-family: 'MsMadi', cursive;
+  font-family: 'GalleryModern', serif;
 }
 
 .service-btn:hover {
@@ -2918,7 +2918,7 @@ Dirty Secret
 
 /* Package Card Styles */
 .package-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgb(0, 0, 0);
   border: 0.2vh solid #E2CB9F;
   padding: 2rem;
   border-radius: 4vh;
@@ -2979,7 +2979,7 @@ Dirty Secret
   box-sizing: border-box; /* Include padding and border in the width/height calculations */
   padding: 2rem;  /* Ensure padding is the same as the original card */
   border-radius: 4vh;  /* Match the original card's rounded corners */
-  background: rgba(255, 255, 255, 0.05); /* Match original background color */ /* Match original border style */
+  background: rgb(0, 0, 0); /* Match original background color */ /* Match original border style */
 }
 
 .drag-clone2.dragging {
@@ -3036,6 +3036,68 @@ Dirty Secret
     font-size: 1.8vh;
   }
 }
+#too-many-packages-message {
+  display: none;
+  position: absolute;  /* Position it absolutely to avoid pushing other content */
+  top: 17vh;           /* Adjust this value as needed for positioning */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  color: #E2CB9F;
+  font-size: 3vh;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  text-shadow: 0 0 10px #E2CB9F, 0 0 20px #E2CB9F;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  width: fit-content;
+  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s;
+  z-index: 9999;  /* Ensure it's above other elements */
+}
+
+@media (max-width: 768px) {
+  #too-many-packages-message {
+    font-size: 1.5vh;
+    top: 35vh;  
+  }
+}
+
+/* Fade in effect */
+#too-many-packages-message.visible {
+  display: block;
+  opacity: 1;
+  transform: translateX(-50%) scale(1.1);
+  visibility: visible;
+}
+
+/* Fade out effect */
+#too-many-packages-message.hidden {
+  opacity: 0;
+  transform: translateX(-50%) scale(0.9);
+  visibility: hidden;
+}
+
+/* Fade-out effect for floating clones */
+.drag-clone2 {
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.drag-clone2.hidden {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+/* Fade-in effect for original package cards */
+.package-card {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.package-card.hidden {
+  opacity: 0;
+}
+
 
 /*=========================
   PURPLE
@@ -3050,7 +3112,7 @@ Dirty Secret
   box-sizing: border-box; /* Include padding and border in the width/height calculations */
   padding: 2rem;  /* Ensure padding is the same as the original card */
   border-radius: 4vh;  /* Match the original card's rounded corners */
-  background: rgba(128, 0, 128, 0.1); /* Set purple background for Ads clone */
+  background: rgb(0, 0, 0); /* Set purple background for Ads clone */
   border: 0.2vh solid purple; /* Set border to purple for the Ads clone */
   color: purple; /* Set text color to purple */
 }

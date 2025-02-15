@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const packageContainers = document.querySelectorAll('.packages-container');
     const hoverSound = document.getElementById('hoverSound');
     const clickSound = document.getElementById('clickSound');
+    document.getElementById('too-many-packages-message').addEventListener('click', resetClones);
 
     // Package cards data storage
     const packageCardsData = [];
@@ -53,6 +54,44 @@ document.addEventListener('DOMContentLoaded', function () {
             activeContainer.classList.add('active');
         }
     }
+    function checkFloatingPackages() {
+        const floatingCount = packageCardsData.filter(card => card.isFloating).length;
+        const tooManyMessage = document.getElementById('too-many-packages-message');
+    
+        if (floatingCount >= 2) {
+            tooManyMessage.style.display = 'block'; // Ensure the message is displayed before transition
+            setTimeout(() => {
+                tooManyMessage.classList.remove('hidden'); // Ensure it's visible
+                tooManyMessage.classList.add('visible'); // Fade in
+            }, 10);
+        } else {
+            tooManyMessage.classList.remove('visible'); // Fade out
+            tooManyMessage.classList.add('hidden');
+            setTimeout(() => {
+                tooManyMessage.style.display = 'none'; // Hide the message after the transition
+            }, 500); // Wait for the fade-out transition to finish
+        }
+    }
+    
+    
+    
+    function resetClones() {
+        packageCardsData.forEach(cardData => {
+            if (cardData.clone) {
+                cardData.clone.classList.add('hidden'); // Fade out floating clone
+                setTimeout(() => {
+                    cardData.clone.remove();
+                    cardData.clone = null;
+                    cardData.isFloating = false;
+                    cardData.original.style.visibility = 'visible';
+                    cardData.original.classList.remove('hidden'); // Fade in original card
+                    checkFloatingPackages();
+                }, 500); // Wait for fade-out before removing
+            }
+        });
+    }
+    
+        
 
     // Update clone position
     function updateClonePosition(cardData) {
@@ -165,29 +204,23 @@ function startDrag(e, cardData) {
     function animate() {
         packageCardsData.forEach(cardData => {
             if (cardData.isFloating && !cardData.isDragging && cardData.clone) {
-                // Apply physics
                 cardData.velocityX *= FRICTION;
                 cardData.velocityY *= FRICTION;
                 cardData.x += cardData.velocityX;
                 cardData.y += cardData.velocityY;
-
+    
                 cardData.rotation += cardData.rotationSpeed;
                 cardData.rotationSpeed *= FRICTION;
-
-                // Screen wrapping
-                const width = window.innerWidth;
-                const height = window.innerHeight;
-                if (cardData.x > width) cardData.x = 0;
-                if (cardData.x < 0) cardData.x = width;
-                if (cardData.y > height) cardData.y = 0;
-                if (cardData.y < 0) cardData.y = height;
-
+    
+                checkFloatingPackages(); // Check if message should appear
+    
                 updateClonePosition(cardData);
             }
         });
-
+    
         requestAnimationFrame(animate);
     }
+    
 
     // Set up event listeners for service buttons
     serviceBtns.forEach(btn => {
