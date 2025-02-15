@@ -2758,6 +2758,7 @@ Dirty Secret
   top: 5%;
   left: 50%;
   transform: translateX(-50%);
+  text-align: center;
   font-size: 10vh;
   color: #fff;
   text-shadow: 0 0 10px rgba(255,255,255,0.3);
