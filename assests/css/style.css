@@ -507,7 +507,31 @@ LOADING SCREEN
     position: relative;
     z-index: 1;
   }
-
+  .mobile-social-links {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 3vh;
+    padding: 2vh 0;
+  }
+  
+  .mobile-social-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 2.5vh;
+    transition: all 0.3s ease;
+  }
+  
+  .mobile-social-links a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                 0 0 20px rgba(255, 255, 255, 0.8),
+                 0 0 30px rgba(255, 255, 255, 0.6);
+    transform: scale(1.1);
+  }
 
   /*=========================
   boook
@@ -2806,5 +2830,141 @@ Dirty Secret
     color: #fff;
     text-shadow: 0 0 10px rgba(255,255,255,0.3);
     z-index: 20;
+  }
+}
+
+/*=========================
+  Services
+========================= */
+
+.services-section {
+  background-color: black;
+  padding: 4rem 2rem;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+}
+
+.services-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.service-btn {
+  background-color: black;
+  color: #808080;
+  border: 2px solid #808080;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  border-radius: 25px;
+}
+
+.serviceflick {
+  animation: none;
+}
+
+.service-btn:hover {
+  color: #E2CB9F;
+  border-color: #E2CB9F;
+  animation: buttonFlicker 1.5s infinite alternate;
+}
+
+.service-btn.active {
+  background-color: black;
+  border-color: #E2CB9F;
+  color: #E2CB9F;
+  animation: none;
+  box-shadow: 
+      0 0 7px #E2CB9F,
+      0 0 10px #E2CB9F,
+      0 0 21px #E2CB9F;
+}
+
+@keyframes buttonFlicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+      text-shadow: 
+          0 0 7px #E2CB9F,
+          0 0 10px #E2CB9F,
+          0 0 21px #E2CB9F,
+          0 0 42px #E2CB9F;
+      box-shadow: 
+          0 0 7px #E2CB9F,
+          0 0 10px #E2CB9F,
+          0 0 21px #E2CB9F;
+  }
+  20%, 24%, 55% {
+      text-shadow: none;
+      box-shadow: none;
+  }
+}
+
+.packages-container {
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.packages-container.active {
+  display: grid;
+}
+
+.package-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #E2CB9F;
+  padding: 2rem;
+  border-radius: 10px;
+  color: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.package-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px #E2CB9F;
+}
+
+.package-card.active {
+  background: rgba(226, 203, 159, 0.2);
+  box-shadow: 0 0 30px #E2CB9F;
+}
+
+.package-card h3 {
+  color: #E2CB9F;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.package-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.package-card ul li {
+  margin-bottom: 0.8rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.package-card ul li::before {
+  content: "•";
+  color: #E2CB9F;
+  position: absolute;
+  left: 0;
+}
+
+@media (max-width: 768px) {
+  .services-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .packages-container {
+      grid-template-columns: 1fr;
   }
 }
