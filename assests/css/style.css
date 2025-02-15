@@ -2560,26 +2560,24 @@ Dirty Secret
     font-size: 2.5vw;
   }
 }
-
 /*=========================
-  our work
-========================= */  /* Outer container: width and height defined in viewport units */
+  Container & Box Styling
+=========================*/
 .quote-container {
-  width: 70vw;           /* 70% of viewport width */
-  height: 50vh;          /* 40% of viewport height */
+  width: 70vw;          /* 70% of viewport width (desktop default) */
+  height: 50vh;         /* 50% of viewport height */
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: black;
-  padding: 20px;
+  padding: 2vh;
   margin: 0 auto;
 }
 
-/* Quote box inside the container */
 .quote-box {
   background-color: #E2CB9F;
   border-radius: 2vh;
-  padding: 2rem;
+  padding: 2vh;
   width: 100%;
   height: 100%;
   box-shadow: 0 10px 20px #E2CB9F;
@@ -2590,67 +2588,101 @@ Dirty Secret
   transform: translateY(-5px);
 }
 
-/* Quote title styling */
+/*=========================
+  Title Styling
+=========================*/
 .quote-title {
   text-align: center;
   color: #2c2c2c;
-  font-size: 7vh;  
+  font-size: 7vh;
   margin-bottom: 2vh;
   font-family: 'Ms Madi', cursive;
   font-weight: 700;
 }
 
-/* Writing area (black notebook) */
+/*=========================
+  "Notebook" Writing Area
+=========================*/
 .writing-area {
+  /* Background color */
   background-color: #000;
+
+  /*
+    Notebook lines:
+    - Transparent gap controls the vertical spacing between lines
+    - "2em" means each set of lines is spaced by 2em
+    - "1px" means each line is 1px thick
+    - background-position-y: shift lines down to add a "top margin" for the first line
+  */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #e2cb9fcc 0,
+    #e2cb9fcc 1px,
+    transparent 0.1vh,
+    transparent 12vh
+  );
+  background-position-y: 0vh; /* Shift the first line 2em from the top */
+  
   border-radius: 1.5vh;
   padding: 2vw;
-  /* Allow text to wrap normally inside the box */
   overflow-wrap: break-word;
-  /* Optionally, set a max-height or let it grow */
- height: 30vh;
+  height: 30vh;
 }
 
-/* The element where the quote text is typed */
+/*=========================
+  Text Being Typed
+=========================*/
 .quote-text {
   color: #E2CB9F;
   font-family: 'Ms Madi', cursive;
-  font-size: 3.8vw;
-  line-height: 1.2;
-  text-shadow: 0 0 5px #E2CB9F,
-               0 0 10px #E2CB9F,
-               0 0 15px #E2CB9F;
-  /* Allow natural wrapping */
+  font-size: 3vw;        /* Desktop font size */
+  line-height: 2;        /* Aligns nicely with the 2em spacing in the background */
+  text-shadow:
+    0 0 5px   #E2CB9F,
+    0 0 10px  #E2CB9F,
+    0 0 15px  #E2CB9F;
   white-space: normal;
   word-break: break-word;
-  position: relative; 
-}
-/* Sparkle styling */
-.sparkle {
-  position: absolute;
-  width: 0.5em;
-  height: 0.5em;
-  background-color: #E2CB9F;
-  border-radius: 50%;
-  pointer-events: none;
+  position: relative;
 }
 
+
+/*=========================
+  Responsive (Phone)
+=========================*/
 @media (max-width: 768px) {
+  /* Adjust container dimensions for smaller screens if desired */
+  .quote-container {
+    width: 80vw;
+    height: 50vh;
+  }
+
+  .quote-title {
+    font-size: 10vw; /* Larger relative size on small devices */
+  }
+
+  .writing-area {
+    /*
+      Tighter line spacing on phone (optional).
+      This example changes from 2em to 1.5em. 
+      Also shift lines less from the top.
+    */
+    background-image: repeating-linear-gradient(
+      to bottom,
+      #e2cb9fcc 0,
+      #e2cb9fcc 1px,
+      transparent 0.1vh,
+      transparent 5vh
+    );
+    background-position-y: -0.1vh; /* Shift lines 1em from the top */
+  }
 
   .quote-text {
-    font-size: 8vw;
- 
+    font-size: 4vh;  /* Increase relative font size on mobile */
+    line-height: 5vh;
   }
-  .quote-container {
-    width: 80vw;  
-    height: 50vh;         /* 70% of viewport width */
-   
-  }
-  .quote-title {
-    font-size: 10vw;
-  }
-  
 }
+
 /*=========================
   Work Videos
 ========================= */
