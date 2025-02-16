@@ -323,12 +323,12 @@ LOADING SCREEN
 
 .wave-text {
   position: absolute;
-  bottom: 20px;
+  bottom: 5vh;
   left: 50%;
   transform: translateX(-50%);
   color: white;
   font-family: var(--body-font);
-  font-size: 18px;
+  font-size: 3vh;
   white-space: nowrap;
 }
 
@@ -509,7 +509,6 @@ LOADING SCREEN
   }
   .mobile-social-links {
     position: absolute;
-    bottom: 40px;
     left: 0;
     right: 0;
     display: flex;
@@ -534,10 +533,7 @@ LOADING SCREEN
   }
 
   /*=========================
-  boook
-========================= */
-/* Story Section Styles */
-/* Story Section Styles */
+  boook/* ===================== Story Section Styles ===================== */
 .story-section {
   position: relative;
   width: 100%;
@@ -546,41 +542,37 @@ LOADING SCREEN
   display: flex;
   justify-content: center;
   align-items: flex-start;
-
 }
 
-
- 
- .story-container {
+.story-container {
   max-width: 1200px;
   width: 100%;
   text-align: center;
- }
- 
- .story-heading {
+}
+
+.story-heading {
   font-family: var(--heading-font);
   font-size: 4rem;
   color: #fff;
   margin-bottom: 3rem;
   transition: all 0.3s ease;
   cursor: default;
- }
- 
- .story-heading:hover {
+}
+.story-heading:hover {
   color: #fff;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
                0 0 20px rgba(255, 255, 255, 0.8),
                0 0 30px rgba(255, 255, 255, 0.6),
                0 0 40px rgba(255, 255, 255, 0.4),
                0 0 70px rgba(255, 255, 255, 0.3);
- }
- 
- .book-container {
+}
+
+.book-container {
   width: 100%;
   min-height: 400px;
- }
- 
- .notebook-section {
+}
+
+.notebook-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -588,20 +580,20 @@ LOADING SCREEN
   min-height: 60vh;
   margin-top: 40vh;
   background: #000000;
- }
- 
+}
 
- .notebook {
+.notebook {
   position: sticky;
   top: 50vh;
   width: 15vh;
   height: 25vh;
   transform-style: preserve-3d;
-  transition: transform 0.1s ease;
+  /* Smoother or removed transition for the notebook's position */
+  transition: transform 0.3s ease-out;
   transform: translateY(-50%) perspective(1500px);
   perspective: 1500px;
 }
-/* Update media query for desktop */
+
 @media (min-width: 768px) {
   .notebook {
     width: 50vh;
@@ -609,11 +601,6 @@ LOADING SCREEN
   }
 }
 
-.notebook:has(.page.active)::after {
-  opacity: 1;
-}
-
-/* Add crest in the middle */
 .notebook::before {
   content: '';
   position: absolute;
@@ -625,24 +612,26 @@ LOADING SCREEN
   z-index: 100;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.5s ease;}
+  transition: opacity 0.5s ease;
+}
 .notebook:has(.page.active)::before {
   opacity: 1;
 }
 
- 
-/* Remove these classes as we're handling positioning via JavaScript */
+/* Remove these as we rely on JS now */
 .notebook.tilted,
 .notebook.tilted.slid-right {
   transform: none;
 }
+
 .page {
   position: absolute;
   width: 100%;
   height: 100%;
   transform-origin: left;
   transform-style: preserve-3d;
-  transition: transform 0.5s ease-in-out;
+  /* Use a slightly slower timing for flips and a smooth easing */
+  transition: transform 0.8s ease-in-out;
   cursor: pointer;
   background: #fff;
   border-radius: 10px;
@@ -651,19 +640,15 @@ LOADING SCREEN
     0 0 30px rgba(0, 0, 0, 0.1) inset;
 }
 
-/* Enhance page shadow when flipped */
 .page.active {
   transform: rotateY(-180deg);
   box-shadow: 
     -10px 0 20px rgba(255, 255, 255, 0.4),
     0 0 30px rgba(0, 0, 0, 0.1) inset;
 }
- .page {
-  transition: transform 0.5s ease-in-out;
-}
 
- .page-front,
- .page-back {
+.page-front,
+.page-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -671,24 +656,21 @@ LOADING SCREEN
   display: flex;
   justify-content: center;
   align-items: center;
- }
- 
- .page-back {
+}
+
+.page-back {
   transform: rotateY(180deg);
- }
- 
- .page.active {
-  transform: rotateY(-180deg);
- }
- 
- .page:nth-child(1) { z-index: 7; }
- .page:nth-child(2) { z-index: 6; }
- .page:nth-child(3) { z-index: 5; }
- .page:nth-child(4) { z-index: 4; }
- .page:nth-child(5) { z-index: 3; }
- .page:nth-child(6) { z-index: 2; }
- 
- .page-content {
+}
+
+/* Z-indices for stacking order */
+.page:nth-child(1) { z-index: 7; }
+.page:nth-child(2) { z-index: 6; }
+.page:nth-child(3) { z-index: 5; }
+.page:nth-child(4) { z-index: 4; }
+.page:nth-child(5) { z-index: 3; }
+.page:nth-child(6) { z-index: 2; }
+
+.page-content {
   font-family: 'MsMadi', cursive;
   font-size: 2vh;
   color: #333;
@@ -705,14 +687,14 @@ LOADING SCREEN
   align-items: center;
   justify-content: center;
   overflow: hidden;
- }
- @media (min-width: 768px) {
+}
+@media (min-width: 768px) {
   .page-content {
     font-size: 6vh; /* Desktop size */
   }
- }
- 
- .cover-image {
+}
+
+.cover-image {
   position: absolute;
   width: 80%;
   height: 80%;
@@ -720,25 +702,24 @@ LOADING SCREEN
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
- }
- 
- .back-cover {
+}
+
+.back-cover {
   z-index: 1;
   cursor: pointer;
- }
- 
- .back-cover .page-front,
- .back-cover .page-back {
+}
+.back-cover .page-front,
+.back-cover .page-back {
   padding: 0;
- }
+}
 
- 
- .scroll-spacer {
+.scroll-spacer {
   height: 300vh;
   pointer-events: none;
- }
- 
- @media (max-width: 768px) {
+}
+
+/* Responsive heading */
+@media (max-width: 768px) {
   .story-heading {
     font-size: 2.5rem;
   }
@@ -746,7 +727,8 @@ LOADING SCREEN
   .story-section {
     padding: 3rem 1rem;
   }
- }
+}
+
 /*=========================
   slogan
 ========================= */
@@ -1405,7 +1387,7 @@ Dirty Secret
   position: absolute;
   width: 2px;
   height: 100%;
-  background: white;
+  background: rgb(0, 0, 0);
   left: 50%;
   z-index: 2;
   cursor: ew-resize;
@@ -1416,7 +1398,7 @@ Dirty Secret
   width: 3vh;
   height: 3vh;
   border-radius: 50%;
-  background: white;
+  background: rgb(0, 0, 0);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -1434,7 +1416,7 @@ Dirty Secret
   position: absolute;
   top: 50%;               /* Center vertically */
   transform: translateY(-50%);
-  color: #666;
+  color: #E2CB9F;
   font-size: 2.5vh;       /* Size the arrows using vh */
 }
 
@@ -1495,7 +1477,7 @@ Dirty Secret
 ========================= */
 .footer-container {
   padding: 4rem 2rem 1rem;
-  background-color: #0e0e0e;
+  background-color: #000000;
   color: white;
 }
 
@@ -1559,7 +1541,7 @@ Dirty Secret
   text-transform: uppercase;
   font-weight: 500;
   transition: color 0.3s ease;
-  font-family: 'GalleryModern', sans-serif;
+  font-family: 'SyneRegular', sans-serif;
 }
 
 .socialf-links a:hover {
@@ -1569,9 +1551,11 @@ Dirty Secret
 .copyright {
   color: #888;
   text-align: center;
+  font-family: 'SyneRegular', sans-serif;
 }
 
 .contact-info {
+  font-family: 'SyneRegular', sans-serif;
   text-align: right;
 }
 
@@ -2316,22 +2300,23 @@ Dirty Secret
 
 /*=========================
   our team
-========================= */   
-.team-section {
+========================= */   .team-section {
   background-color: #000;
   margin-top: 5vh;
   margin-bottom: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(4, 25vh);
-  gap: 3vh;
+  grid-template-columns: repeat(3, 35vh); /* Changed to 3 columns, 35vh each */
+  gap: 5vh; /* Increased gap between cards */
   margin: 0 auto;
   justify-content: center;
+  width: fit-content; /* Ensure grid wraps content */
 }
 
 .team-card {
@@ -2339,12 +2324,13 @@ Dirty Secret
   border-radius: 15px;
   overflow: hidden;
   transition: all 0.3s ease;
+  width: 35vh; /* Fixed width */
 }
 
 .image-containerteam {
   position: relative;
-  width: 100%;
-  padding-top: 100%;
+  width: 35vh; /* Fixed width */
+  height: 35vh; /* Fixed height */
   overflow: hidden;
 }
 
@@ -2364,13 +2350,13 @@ Dirty Secret
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 1vh;
+  gap: 1.5vh; /* Slightly increased gap */
   z-index: 2;
 }
 
 .filter-icon {
-  width: 4vh;
-  height: 4vh;
+  width: 5vh; /* Increased size */
+  height: 5vh; /* Increased size */
   border-radius: 50%;
   background-color: rgba(128, 128, 128, 0.8);
   border: none;
@@ -2383,7 +2369,7 @@ Dirty Secret
 
 .filter-icon i {
   color: white;
-  font-size: 1.8vh;
+  font-size: 2.2vh; /* Increased size */
 }
 
 .filter-icon:hover {
@@ -2396,35 +2382,36 @@ Dirty Secret
 
 .info-container {
   background-color: #E2CB9F;
-  padding: 1rem;
+  padding: 1.5rem; /* Increased padding */
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
 }
 
 .member-title {
   font-family: 'SyneRegular', sans-serif;
-  font-size: 2vh;
+  font-size: 2.5vh; /* Increased size */
   font-weight: bold;
   color: #0e0e0e;
   margin: 0;
 }
 
 .member-name {
-  font-size: 1vh;
+  font-size: 1.8vh; /* Increased size */
   color: #666;
   margin: 0.5rem 0 0;
   font-family: 'SyneRegular', sans-serif;
 }
 
-@media (max-width: 1024px) {
+/* Responsive breakpoints */
+@media (max-width: 1200px) {
   .team-grid {
-      grid-template-columns: repeat(2, 35vh);
+    grid-template-columns: repeat(2, 35vh);
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .team-grid {
-      grid-template-columns: 45vh;
+    grid-template-columns: 35vh;
   }
 }
 
@@ -2437,6 +2424,7 @@ Dirty Secret
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 10vh;
   min-height: 100vh;
   padding: 2rem;
   background: #000000;
@@ -2599,12 +2587,12 @@ Dirty Secret
 }
 
 .quote-box {
-  background-color: #E2CB9F;
+  background-color: #000000;
   border-radius: 2vh;
   padding: 2vh;
   width: 100%;
   height: 100%;
-  box-shadow: 0 10px 20px #E2CB9F;
+  box-shadow: 0 10px 20px #000000;
   transition: transform 0.3s ease;
 }
 
@@ -2617,7 +2605,7 @@ Dirty Secret
 =========================*/
 .quote-title {
   text-align: center;
-  color: #2c2c2c;
+  color: #E2CB9F;
   font-size: 7vh;
   margin-bottom: 2vh;
   font-family: 'Ms Madi', cursive;
@@ -2866,10 +2854,12 @@ Dirty Secret
   font-family: 'GalleryModern', serif;
 }
 
+/* Flicker on Hover (Default) */
 .service-btn:hover {
   animation: buttonFlicker 3s infinite;
 }
 
+/* Glow on Click (Active State) */
 .service-btn.active {
   background-color: black;
   border-color: #E2CB9F;
@@ -2884,6 +2874,28 @@ Dirty Secret
     0 0 7px #E2CB9F,
     0 0 10px #E2CB9F,
     0 0 21px #E2CB9F;
+}
+
+/* Basic flicker animation for service buttons */
+@keyframes buttonFlicker {
+  0%, 10%, 42%, 44%, 65%, 67%, 80%, 82%, 100% {
+    color: #7e725b;
+    border-color: #7e725b;
+    text-shadow:
+      0 0 7px #7e725b,
+      0 0 10px #7e725b,
+      0 0 21px #7e725b;
+    box-shadow:
+      0 0 7px #7e725b,
+      0 0 10px #7e725b,
+      0 0 21px #7e725b;
+  }
+  41%, 43%, 66%, 81% {
+    color: #808080;
+    border-color: #808080;
+    text-shadow: none;
+    box-shadow: none;
+  }
 }
 
 /* Packages Container */
@@ -2908,7 +2920,6 @@ Dirty Secret
   transform: translateY(0);
 }
 
-/* Add fade out animation */
 .packages-container.fade-out {
   opacity: 0;
   transform: translateY(-20px);
@@ -2918,21 +2929,17 @@ Dirty Secret
 /* Package Card Styles */
 .package-card {
   background: rgb(0, 0, 0);
-  border: 0.2vh solid #E2CB9F;
+  border: 0.2vh solid #756952;
   padding: 2rem;
   border-radius: 4vh;
   color: white;
   transition: all 0.3s ease;
-  cursor: grab;
+  cursor: pointer;
   width: calc(33.33% - 2rem);
   min-width: 250px;
   box-sizing: border-box;
   position: relative;
-}
-.package-card:hover {
-  transform: translateY(-8px); /* Move up slightly slower */
-  animation: cardFlicker 3s infinite; /* Keep the flicker animation */
-  filter: drop-shadow(0 0 20px rgba(226, 203, 159, 0.5)); /* Stronger, slower glow */
+  opacity: 1;
 }
 
 .package-card h3 {
@@ -2961,36 +2968,118 @@ Dirty Secret
   left: 0;
 }
 
-/* Dragging and Animation States */
-.flying-card {
-  font-size: 3vh;
-  color: #E2CB9F;
-  cursor: grab;
-  transition: filter 0.3s ease;
-  filter: drop-shadow(0 0 5px rgba(226, 203, 159, 0.3));
-}
-
-.drag-clone2 {
-  position: fixed !important;
-  pointer-events: none;
-  z-index: 999998;
-  width: 30%;  /* Ensures that the clone width matches the parent width */
-  box-sizing: border-box; /* Include padding and border in the width/height calculations */
-  padding: 2rem;  /* Ensure padding is the same as the original card */
-  border-radius: 4vh;  /* Match the original card's rounded corners */
-  background: rgb(0, 0, 0); /* Match original background color */ /* Match original border style */
-}
-
-.drag-clone2.dragging {
-  filter: drop-shadow(0 0 10px rgba(226, 203, 159, 0.8))
-          drop-shadow(0 0 20px rgba(226, 203, 159, 0.4));
-}
-
+/* Flicker on Hover for Cards */
 .package-card:hover {
-  transform: translateY(-10px);
-
+  transform: translateY(-8px);
+  animation: cardFlicker 3s infinite;
+  filter: drop-shadow(0 0 20px rgba(226, 203, 159, 0.5));
 }
 
+/* Click Glow (active) for Cards */
+.package-card.active {
+  text-shadow:
+    0 0 7px #E2CB9F,
+    0 0 10px #E2CB9F,
+    0 0 21px #E2CB9F,
+    0 0 42px #E2CB9F;
+  box-shadow:
+    0 0 7px #E2CB9F,
+    0 0 10px #E2CB9F,
+    0 0 21px #E2CB9F;
+    border: 0.2vh solid #E2CB9F;
+}
+
+/* Card flicker animation */
+@keyframes cardFlicker {
+  0%, 10%, 42%, 44%, 65%, 67%, 80%, 82%, 100% {
+    border-color: #E2CB9F;
+    box-shadow:
+      0 0 7px #E2CB9F,
+      0 0 10px #E2CB9F,
+      0 0 21px #E2CB9F;
+  }
+  12%, 41%, 43%, 66% {
+    border-color: rgba(226, 203, 159, 0.3);
+    box-shadow: none;
+  }
+}
+
+/* Ads (Purple) Overrides --------------------------------- */
+.service-btn[data-service="ads"]:hover {
+  animation: buttonFlickerp 3s infinite;
+  color: purple;
+  border-color: purple;
+}
+
+.service-btn[data-service="ads"].active {
+  border-color: purple;
+  color: purple;
+  text-shadow: 
+    0 0 7px purple,
+    0 0 10px purple,
+    0 0 21px purple,
+    0 0 42px purple;
+  box-shadow: 
+    0 0 7px purple,
+    0 0 10px purple,
+    0 0 21px purple;
+}
+
+@keyframes buttonFlickerp {
+  0%, 10%, 42%, 44%, 65%, 67%, 80%, 82%, 100% {
+    color: purple;
+    border-color: purple;
+    text-shadow:
+      0 0 7px purple,
+      0 0 10px purple,
+      0 0 21px purple,
+      0 0 42px purple;
+    box-shadow:
+      0 0 7px purple,
+      0 0 10px purple,
+      0 0 21px purple;
+  }
+  41%, 43%, 66%, 81% {
+    color: #808080;
+    border-color: #808080;
+    text-shadow: none;
+    box-shadow: none;
+  }
+}
+
+#ads-packages .package-card,
+#ads-packages .package-card h3 {
+  border-color: purple;
+  color: purple;
+}
+
+#ads-packages .package-card:hover {
+  animation: cardFlickerp 3s infinite;
+  filter: drop-shadow(0 0 20px rgba(128, 0, 128, 0.5));
+}
+
+@keyframes cardFlickerp {
+  0%, 10%, 42%, 44%, 65%, 67%, 80%, 82%, 100% {
+    border-color: purple;
+    box-shadow:
+      0 0 7px purple,
+      0 0 10px purple,
+      0 0 21px purple;
+  }
+  12%, 41%, 43%, 66% {
+    border-color: rgba(128, 0, 128, 0.3);
+    box-shadow: none;
+  }
+}
+
+/* Adjust bullet and title color for Ads: */
+#ads-packages .package-card ul li::before {
+  color: purple;
+}
+
+#ads-packages .package-card h3 {
+  color: purple;
+}
 
 /* Responsive Design */
 @media (max-width: 1200px) {
@@ -3005,13 +3094,11 @@ Dirty Secret
     align-items: center;
     gap: 1rem;
   }
-
   .service-btn {
     width: 100%;
     max-width: 300px;
     font-size: 3vh;
   }
-
   .packages-container {
     padding: 1rem;
     gap: 1rem;
@@ -3022,294 +3109,14 @@ Dirty Secret
   .services-section {
     padding: 2rem 1rem;
   }
-
   .package-card {
     padding: 1.5rem;
   }
-
   .package-card h3 {
     font-size: 2.5vh;
   }
-
   .package-card ul {
     font-size: 1.8vh;
-  }
-}
-#too-many-packages-message {
-  display: none;
-  position: absolute;  /* Position it absolutely to avoid pushing other content */
-  top: 47vh;           /* Adjust this value as needed for positioning */
-  left: 50%;
-  transform: translateX(-50%); /* Center horizontally */
-  color: #E2CB9F;
-  font-size: 3vh;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  text-shadow: 0 0 10px #E2CB9F, 0 0 20px #E2CB9F;
-  background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 10px;
-  width: fit-content;
-  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s;
-  z-index: 9999;  /* Ensure it's above other elements */
-}
-
-@media (max-width: 768px) {
-  #too-many-packages-message {
-    font-size: 1.5vh;
-    top: 65vh;  
-  }
-}
-
-/* Fade in effect */
-#too-many-packages-message.visible {
-  display: block;
-  opacity: 1;
-  transform: translateX(-50%) scale(1.1);
-  visibility: visible;
-}
-
-/* Fade out effect */
-#too-many-packages-message.hidden {
-  opacity: 0;
-  transform: translateX(-50%) scale(0.9);
-  visibility: hidden;
-}
-
-/* Fade-out effect for floating clones */
-.drag-clone2 {
-  opacity: 1;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.drag-clone2.hidden {
-  opacity: 0;
-  transform: scale(0.5);
-}
-
-/* Fade-in effect for original package cards */
-.package-card {
-  opacity: 1;
-  transition: opacity 0.5s ease;
-}
-
-.package-card.hidden {
-  opacity: 0;
-}
-
-
-/*=========================
-  PURPLE
-========================= *//* Purple Clone for Ads only */
-/* Purple Clone for Ads only */
-/* Purple Clone for Ads only */
-.drag-clone-ads {
-  position: fixed !important;
-  pointer-events: none;
-  z-index: 999999;
-  width: 30%;  /* Ensures that the clone width matches the parent width */
-  box-sizing: border-box; /* Include padding and border in the width/height calculations */
-  padding: 2rem;  /* Ensure padding is the same as the original card */
-  border-radius: 4vh;  /* Match the original card's rounded corners */
-  background: rgb(0, 0, 0); /* Set purple background for Ads clone */
-  border: 0.2vh solid purple; /* Set border to purple for the Ads clone */
-  color: purple; /* Set text color to purple */
-}
-
-/* Purple clone drag effect */
-.drag-clone-ads.dragging {
-  filter: drop-shadow(0 0 10px rgba(128, 0, 128, 0.8)) 
-          drop-shadow(0 0 20px rgba(128, 0, 128, 0.4)); /* Purple glow for dragging clone */
-}
-
-/* Ads - Service Button Flicker Effect */
-@keyframes buttonFlickerp {
-  0%, 10%, 42%, 44%, 65%, 67%, 80%, 82%, 100% {
-    color: purple; /* Change text color to purple */
-    border-color: purple; /* Change border color to purple */
-    text-shadow: 
-      0 0 7px purple,
-      0 0 10px purple,
-      0 0 21px purple,
-      0 0 42px purple; /* Purple glow for text */
-    box-shadow: 
-      0 0 7px purple,
-      0 0 10px purple,
-      0 0 21px purple; /* Purple glow for button */
-  }
-  41%, 43%, 66%, 81% {
-    color: #808080; /* Keep grey color */
-    border-color: #808080; /* Keep grey border color */
-    text-shadow: none; /* No text shadow */
-    box-shadow: none; /* No box shadow */
-  }
-}
-
-/* Service Button Styles for Ads */
-.service-btn[data-service="ads"] {
-  color: #808080; /* Default grey text color */
-  border-color: #808080; /* Default grey border */
-}
-
-.service-btn[data-service="ads"]:hover {
-  animation: buttonFlickerp 3s infinite; /* Purple flicker animation */
-  color: purple; /* Change text color to purple on hover */
-  border-color: purple; /* Change border color to purple on hover */
-}
-
-.service-btn[data-service="ads"].active {
-  background-color: black;
-  border-color: purple; /* Active state border color is purple */
-  color: purple; /* Active state text color is purple */
-  animation: none; /* Stop flicker when active */
-  text-shadow: 
-    0 0 7px purple,
-    0 0 10px purple,
-    0 0 21px purple,
-    0 0 42px purple;
-  box-shadow: 
-    0 0 7px purple,
-    0 0 10px purple,
-    0 0 21px purple;
-}
-
-/* Ads - Package Card Styles */
-#ads-packages .package-card,
-#ads-packages .package-card h3 {
-  border-color: purple; /* Set border color to purple for Ads package cards */
-  color: purple; /* Set text color to purple inside Ads package cards */
-}
-
-/* Ads - Hover effect on package cards */
-#ads-packages .package-card:hover {
-  transform: translateY(-8px); /* Move up slightly slower */
-  animation: cardFlickerp 3s infinite; /* Keep the flicker animation in purple */
-  filter: drop-shadow(0 0 20px rgba(128, 0, 128, 0.5)); /* Apply purple glow for hover */
-}
-
-/* Bullet Points and Title Styling for Ads */
-#ads-packages .package-card ul li::before {
-  color: purple; /* Set bullet color to purple for Ads */
-}
-
-#ads-packages .package-card h3 {
-  color: purple; /* Set title color to purple for Ads */
-}
-
-/* Ads - Package Card Flicker Effect */
-@keyframes cardFlickerp {
-  0%, 10%, 42%, 44%, 65%, 67%, 80%, 82%, 100% {
-    border-color: purple; /* Change border color to purple */
-    box-shadow: 
-      0 0 7px purple,
-      0 0 10px purple,
-      0 0 21px purple; /* Purple glow for the card */
-  }
-  12%, 41%, 43%, 66% {
-    border-color: rgba(128, 0, 128, 0.3); /* Slightly dimmed purple border */
-    box-shadow: none; /* No box shadow during these moments */
-  }
-}
-
-/* Ensuring the Bullet Points for Ads Cards are Purple */
-#ads-packages .package-card ul li::before {
-  color: purple; /* Bullet point color for Ads */
-}
-
-/* Ensuring the Title Color for Ads Cards is Purple */
-#ads-packages .package-card h3 {
-  color: purple; /* Title color for Ads */
-}
-/*=========================
-  YELLOW
-========================= */
-
-/* Faced Businesses - Service Button Flicker Effect */
-@keyframes buttonFlickerYellow {
-  0%, 10%, 42%, 44%, 65%, 67%, 80%, 82%, 100% {
-    color: #E2CB9F; /* Yellow text color */
-    border-color: #E2CB9F; /* Yellow border color */
-    text-shadow: 
-      0 0 7px #E2CB9F,
-      0 0 10px #E2CB9F,
-      0 0 21px #E2CB9F,
-      0 0 42px #E2CB9F; /* Yellow glow for text */
-    box-shadow: 
-      0 0 7px #E2CB9F,
-      0 0 10px #E2CB9F,
-      0 0 21px #E2CB9F; /* Yellow glow for button */
-  }
-  41%, 43%, 66%, 81% {
-    color: #808080; /* Grey color when flicker off */
-    border-color: #808080; /* Grey border color when flicker off */
-    text-shadow: none; /* No text shadow */
-    box-shadow: none; /* No box shadow */
-  }
-}
-
-/* Faced Businesses - Service Button Styles */
-.service-btn[data-service="faced"] {
-  color: #808080; /* Default grey text color */
-  border-color: #808080; /* Default grey border */
-}
-
-.service-btn[data-service="faced"]:hover {
-  animation: buttonFlickerYellow 3s infinite; /* Yellow flicker animation */
-  color: #E2CB9F; /* Change text color to yellow on hover */
-  border-color: #E2CB9F; /* Change border color to yellow on hover */
-}
-
-.service-btn[data-service="faced"].active {
-  background-color: black;
-  border-color: #E2CB9F; /* Active state yellow border */
-  color: #E2CB9F; /* Active state yellow text */
-  animation: none; /* Stop flicker when active */
-  text-shadow: 
-    0 0 7px #E2CB9F,
-    0 0 10px #E2CB9F,
-    0 0 21px #E2CB9F,
-    0 0 42px #E2CB9F;
-  box-shadow: 
-    0 0 7px #E2CB9F,
-    0 0 10px #E2CB9F,
-    0 0 21px #E2CB9F;
-}
-
-/* Faced Businesses - Package Card Styles */
-#faced-packages .package-card,
-#faced-packages .package-card h3 {
-  border-color: #E2CB9F; /* Yellow border for Faced Businesses */
-  color: #E2CB9F; /* Yellow text for Faced Businesses */
-}
-
-/* Faced Businesses - Hover effect on package cards */
-#faced-packages .package-card:hover {
-  transform: translateY(-8px); /* Move up slightly slower */
-  animation: cardFlickerYellow 3s infinite; /* Keep the yellow flicker animation */
-  filter: drop-shadow(0 0 20px rgba(226, 203, 159, 0.5)); /* Yellow glow on hover */
-}
-
-/* Bullet Points and Title Styling for Faced Businesses */
-#faced-packages .package-card ul li::before {
-  color: #E2CB9F; /* Yellow bullet points for Faced Businesses */
-}
-
-#faced-packages .package-card h3 {
-  color: #E2CB9F; /* Yellow title for Faced Businesses */
-}
-
-/* Faced Businesses - Package Card Flicker Effect */
-@keyframes cardFlickerYellow {
-  0%, 10%, 42%, 44%, 65%, 67%, 80%, 82%, 100% {
-    border-color: #E2CB9F; /* Yellow border */
-    box-shadow: 
-      0 0 7px #E2CB9F,
-      0 0 10px #E2CB9F,
-      0 0 21px #E2CB9F; /* Yellow glow for the card */
-  }
-  12%, 41%, 43%, 66% {
-    border-color: rgba(226, 203, 159, 0.3); /* Slightly dimmed yellow */
-    box-shadow: none; /* No box shadow during these moments */
   }
 }
 
@@ -3317,7 +3124,7 @@ Dirty Secret
   Quote section
 ========================= */
 .quote-section {
-  margin-top: 15vh;
+  margin-top: 20vh;
   height: 20vh;
   display: flex;
   flex-direction: column;
@@ -3339,7 +3146,7 @@ Dirty Secret
   
 }
 
-.author {
+.author2 {
   position: absolute;
   bottom: 2vh;
   right: 20vh;
@@ -3363,7 +3170,7 @@ Dirty Secret
       font-size: 3vh;
   }
   
-  .author {
+  .author2 {
       font-size: 2vh;
       bottom: 3vh;
       right: 3vh;
@@ -3374,133 +3181,207 @@ Dirty Secret
   FAQs
 ========================= */
 
-
-/* FAQ Section Styles */
-.faq-section {
-  background-color: #000;
-  padding: 10vh 5vh;
-  min-height: 100vh;
+.faqs-container {
+  width: 90%;
+  max-width: 400px;
+  height: 90vh;
+  max-height: 600px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  font-family: 'SyneRegular', sans-serif;
+  margin: 20px auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.faq-heading {
-  font-family: 'GalleryModern', serif;
-  color: #fff;
-  font-size: 8vh;
-  margin-bottom: 8vh;
+.faqs-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chat-header {
+  padding: 16px;
+  border-bottom: 1px solid #efefef;
   text-align: center;
-  transition: all 0.3s ease;
 }
 
-.faq-heading:hover {
-  color: #E2CB9F;
-  text-shadow: 
-      0 0 7px #E2CB9F,
-      0 0 10px #E2CB9F,
-      0 0 21px #E2CB9F,
-      0 0 42px #E2CB9F;
-}
-
-.faq-container {
-  max-width: 120vh;
-  width: 90%;
-  margin: 0 auto;
-}
-
-.faq-item {
-  margin-bottom: 3vh;
-  border: 0.2vh solid #E2CB9F;
-  border-radius: 2vh;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.faq-item:hover {
-  transform: translateY(-0.5vh);
-  box-shadow: 0 0 15px rgba(226, 203, 159, 0.3);
-}
-
-.faq-question {
-  padding: 3vh;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: transparent;
-  color: #E2CB9F;
-  font-family: 'SyneRegular', sans-serif;
-  font-size: 2.5vh;
-  transition: all 0.3s ease;
-}
-
-.faq-question:hover {
-  background: rgba(226, 203, 159, 0.1);
-}
-
-.plus-icon {
-  font-size: 3vh;
-  transition: transform 0.3s ease;
-}
-
-.faq-item.active .plus-icon {
-  transform: rotate(45deg);
-}
-
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-  background: rgba(226, 203, 159, 0.05);
-}
-
-.faq-answer p {
-  padding: 3vh;
-  color: #fff;
-  font-family: 'SyneRegular', sans-serif;
-  font-size: 2vh;
-  line-height: 1.6;
+.chat-title {
+  font-weight: 600;
+  color: #262626;
   margin: 0;
 }
 
-/* Animation for answer reveal */
-@keyframes fadeIn {
-  from {
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  background: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.chat-area::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+@keyframes popIn {
+  0% {
       opacity: 0;
-      transform: translateY(-1vh);
+      transform: scale(0.9) translateY(15px);
   }
+  60% {
+      transform: scale(1.03) translateY(-2px);
+  }
+  80% {
+      transform: scale(0.98) translateY(1px);
+  }
+  100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+  }
+}
+
+.message {
+  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  line-height: 1.4;
+  opacity: 0;
+  font-family: 'SyneRegular', sans-serif;
+  animation: popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-origin: left bottom;
+  will-change: transform, opacity;
+}
+
+.questions {
+  background: #efefef;
+  align-self: flex-end;
+  color: #000;
+  border-top-right-radius: 4px;
+  transform-origin: right bottom;
+  font-family: 'SyneRegular', sans-serif;
+}
+
+.answer {
+  background: #0095f6;
+  color: white;
+  align-self: flex-start;
+  border-top-left-radius: 4px;
+  transform-origin: left bottom;
+  font-family: 'SyneRegular', sans-serif;
+}
+
+.typing-indicator {
+  background: #efefef;
+  padding: 12px 16px;
+  border-radius: 20px;
+  border-top-left-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+  margin-bottom: 8px;
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background: #666;
+  border-radius: 50%;
+  animation: typingAnimation 1s infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingAnimation {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.questions-area {
+  padding: 16px;
+  border-top: 1px solid #efefef;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+  max-height: 35vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  font-family: 'SyneRegular', sans-serif;
+  -ms-overflow-style: none;
+}
+
+.questions-area::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .faqs-container {
+      width: 95%;
+      height: 95vh;
+      margin: 10px auto;
+      border-radius: 8px;
+  }
+
+  .chat-area {
+      padding: 12px;
+  }
+
+  .questions-area {
+      padding: 12px;
+      gap: 6px;
+  }
+
+  .question-button {
+      padding: 8px;
+      font-size: 12px;
+  }
+}
+
+.question-button {
+  font-family: 'SyneRegular', sans-serif;
+  padding: 10px;
+  border: 1px solid #0095f6;
+  border-radius: 8px;
+  background: white;
+  color: #0095f6;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.question-button:hover {
+  background: #0095f6;
+  color: white;
+}
+
+.question-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@keyframes fadeIn {
   to {
       opacity: 1;
       transform: translateY(0);
   }
 }
 
-.faq-answer.show {
-  animation: fadeIn 0.5s ease-out;
-}
-
-/* Mobile Responsive Styles */
-@media (max-width: 768px) {
-  .faq-heading {
-      font-size: 5vh;
-      margin-bottom: 5vh;
-  }
-
-  .faq-question {
-      font-size: 2vh;
-      padding: 2vh;
-  }
-
-  .faq-answer p {
-      font-size: 1.8vh;
-      padding: 2vh;
-  }
-
-  .plus-icon {
-      font-size: 2.5vh;
-  }
-}
 /*=========================
   Careers
 ========================= */
@@ -3699,5 +3580,57 @@ Dirty Secret
   
   .position-description {
       font-size: 1.8vh;
+  }
+}
+
+/*=========================
+  Music Button
+========================= */
+
+.volume-button {
+  position: fixed;
+  bottom: 6vh;
+  left: 6vh;
+  z-index: 9999;
+  width: 6vh;
+  height: 6vh;
+  border-radius: 50%;
+  background: black;
+  border: 2px solid #E2CB9F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: scale(0);
+}
+
+.volume-button.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.volume-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(226, 203, 159, 0.5);
+}
+
+.volume-button i {
+  color: #E2CB9F;
+  font-size: 2vh;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .volume-button {
+      bottom: 3vh;
+      left: 3vh;
+      width: 8vh;
+      height: 8vh;
+  }
+  
+  .volume-button i {
+      font-size: 2vh;
   }
 }

@@ -25,7 +25,7 @@ class FairyDust {
             y,
             vx: (Math.random() - 0.5) * 3,
             vy: (Math.random() - 0.5) * 3 - 2,
-            size: Math.random() * 3 + 1,
+            size: Math.random() * 7 + 2,
             alpha: 1,
             color: '#E2CB9F'
         };
@@ -36,7 +36,7 @@ class FairyDust {
             const p = this.particles[i];
             p.x += p.vx;
             p.y += p.vy;
-            p.alpha *= 0.95;
+            p.alpha *= 0.97;
 
             if (p.alpha < 0.01) {
                 this.particles.splice(i, 1);
@@ -58,6 +58,9 @@ class FairyDust {
         
         this.particles.forEach(p => {
             this.ctx.beginPath();
+            this.ctx.shadowColor = p.color;
+            this.ctx.shadowBlur = 15; // Increase for a stronger glow
+            this.ctx.fillStyle = `rgba(226, 203, 159, ${p.alpha})`;
             this.ctx.fillStyle = `rgba(226, 203, 159, ${p.alpha})`;
             this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
             this.ctx.fill();
