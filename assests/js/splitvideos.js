@@ -13,15 +13,15 @@ videos.forEach(video => {
         });
     }, { threshold: 0.5 });
     
-    observer.observe(video.parentElement.parentElement);
+    const container = video.parentElement.parentElement;
+    observer.observe(container);
 
-    // Hover effects for audio
-    video.parentElement.parentElement.addEventListener('mouseenter', () => {
-        video.muted = false;
-    });
+    // Set pointer cursor so users know the container is clickable
+    container.style.cursor = 'pointer';
 
-    video.parentElement.parentElement.addEventListener('mouseleave', () => {
-        video.muted = true;
+    // Click event to toggle sound on/off
+    container.addEventListener('click', () => {
+        video.muted = !video.muted;
     });
 });
 
@@ -68,3 +68,4 @@ function animateSection(section, progress) {
     if (progress > 0.5) text.classList.add('visible');
     else text.classList.remove('visible');
 }
+    

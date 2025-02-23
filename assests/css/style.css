@@ -1,60 +1,71 @@
 
-
 @font-face {
-    font-family: 'GalleryModern';
-    src: url('../fonts/gallerymodern-webfont.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
-  
-  @font-face {
-    font-family: 'SyneRegular';
-    src: url('../fonts/Syne-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'MsMadi';
-    src: url('../fonts/MsMadi-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
-  
-  /* =========================
-     ROOT VARIABLES
-     ========================= */
-  :root {
-    /* Use your local fonts in these variables */
-    --heading-font: 'GalleryModern', serif;
-    --body-font: 'SyneRegular', sans-serif;
-  }
-  a, button, input, select, textarea {
-    -webkit-tap-highlight-color: transparent;
-  }
-  * {
-    -webkit-tap-highlight-color: transparent;
-  }
+  font-family: 'GalleryModern';
+  src: url('../fonts/gallerymodern-webfont.woff2') format('woff2'),
+       url('../fonts/gallerymodern-webfont.woff') format('woff'),
+       url('../fonts/gallerymodern-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Ms Madi: Use this class to apply the Ms Madi font */
+.ms-madi-regular {
+  font-family: "Ms Madi", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Syne: Variable style example */
+/* Replace "syne-custom" with a unique class name and adjust the weight between 400 and 800 as needed */
+.syne-custom {
+  font-family: "Syne", serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /* Change this value to any weight between 400 and 800 */
+  font-style: normal;
+}
+
+/* Legacy Browser Support for Variable Fonts */
+/* For browsers that don’t support variable fonts, you may include additional fallback classes */
+.syne-regular {
+  font-family: "Syne", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+    /* =========================
+      ROOT VARIABLES
+      ========================= */
+    :root {
+      /* Use your local fonts in these variables */
+      --heading-font: 'GalleryModern', serif;
+      --body-font: 'Syne', serif;
+    }
+    a, button, input, select, textarea {
+      -webkit-tap-highlight-color: transparent;
+    }
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+      
+    /* =========================
+      GLOBAL STYLES
+      ========================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     
-  /* =========================
-     GLOBAL STYLES
-     ========================= */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: var(--body-font);
-    background: #fff;
-    color: #000;
-    overflow-x: clip;
-  }
-  
-  /* Headings: Use heading font */
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--heading-font);
-  }
+    body {
+      font-family: var(--body-font);
+      background: #fff;
+      color: #000;
+      overflow-x: clip;
+    }
+    
+    /* Headings: Use heading font */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--heading-font);
+    }
 
 
 /* Updated body styles */
@@ -712,7 +723,7 @@ LOADING SCREEN
 .page:nth-child(6) { z-index: 2; }
 
 .page-content {
-  font-family: 'MsMadi', cursive;
+  font-family: 'Ms Madi';
   font-size: 1.5vh;
   color: #333;
   line-height: 1.6;
@@ -957,27 +968,40 @@ Dirty Secret
 }
 
 .videosecret-container {
-  position: relative;  /* Allows the pseudo-element to be absolutely positioned inside */
-  max-width: 40vh;     
+  position: relative;
+  display: inline-block;  /* Shrink-wraps its content */
   margin: 0 auto;
   margin-bottom: 4vh;
   text-align: center;
+  max-width: 50vh;
+  /* Remove max-width if it’s not needed, or adjust it as necessary */
 }
 
-/* The fade overlay */
-.videosecret-container::after {
+/* Overlay with fades on all sides */
+.videosecret-container::before {
   content: '';
   position: absolute;
+  top: 0;
+  right: 0;
   bottom: 0;
   left: 0;
-  width: 100%;
-  /* Use a fixed height in px, %, or vh. 
-     Example: 30% of the container height */
-  height: 40%;
-  background: linear-gradient(to bottom, transparent, #000);
   pointer-events: none;
   z-index: 2;
+  background: 
+    /* Top fade */
+    linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 30%),
+    /* Bottom fade */
+    linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 30%),
+    /* Left fade */
+    linear-gradient(to right, rgba(0,0,0,0.8) 0%, transparent 30%),
+    /* Right fade */
+    linear-gradient(to left, rgba(0,0,0,0.8) 0%, transparent 30%);
+  background-repeat: no-repeat;
+  background-size: 100% 20%, 100% 20%, 20% 100%, 20% 100%;
+  background-position: top, bottom, left, right;
 }
+
+
 
 .secret-video {
   width: 100%;
@@ -1564,7 +1588,7 @@ Dirty Secret
   border: 1px solid #E2CB9F;
   border-radius: 50px;
   text-decoration: none;
-  font-family: 'MsMadi', cursive;
+  font-family: 'Ms Madi';
   font-size: 6vh;
   transition: all 0.3s ease;
   animation: flicker 1.5s infinite alternate;
@@ -1589,7 +1613,7 @@ Dirty Secret
   align-items: center;
   gap: 1rem;
   font-size: 0.9rem ;
-  font-family: 'SyneRegular', sans-serif;
+  font-family: 'Syne';
 }
 
 .socialf-links {
@@ -1604,7 +1628,7 @@ Dirty Secret
   text-transform: uppercase;
   font-weight: 500;
   transition: color 0.3s ease;
-  font-family: 'SyneRegular', sans-serif;
+  font-family: 'Syne';
 }
 
 .socialf-links a:hover {
@@ -1614,11 +1638,11 @@ Dirty Secret
 .copyright {
   color: #888;
   text-align: center;
-  font-family: 'SyneRegular', sans-serif;
+  font-family: 'Syne';
 }
 
 .contact-info {
-  font-family: 'SyneRegular', sans-serif;
+  font-family: 'Syne';
   text-align: right;
 }
 
@@ -2453,7 +2477,7 @@ Dirty Secret
 }
 
 .member-title {
-  font-family: 'SyneRegular', sans-serif;
+  font-family: 'Syne';
   font-size: 2.5vh; /* Increased size */
   font-weight: bold;
   color: #0e0e0e;
@@ -2464,7 +2488,7 @@ Dirty Secret
   font-size: 1.8vh; /* Increased size */
   color: #666;
   margin: 0.5rem 0 0;
-  font-family: 'SyneRegular', sans-serif;
+  font-family: 'Syne';
 }
 
 /* Responsive breakpoints */
@@ -2577,7 +2601,7 @@ Dirty Secret
   padding: 0.5rem;
   font-size: 3vh;
   color: #E2CB9F;
-  font-family: 'MsMadi', cursive;
+  font-family: 'Ms Madi';
   transform: translateY(100%);
   transition: transform 0.3s ease;
   text-shadow: 0 0 10px rgba(226, 203, 159, 0.7),
@@ -2676,7 +2700,7 @@ Dirty Secret
   color: #E2CB9F;
   font-size: 7vh;
   margin-bottom: 2vh;
-  font-family: 'Ms Madi', cursive;
+  font-family: 'Ms Madi';
   font-weight: 700;
 }
 
@@ -2710,7 +2734,7 @@ Dirty Secret
 ==========================*/
 .quote-text {
   color: #E2CB9F;
-  font-family: 'Ms Madi', cursive;
+  font-family: 'Ms Madi';
   font-size: 3vw;
   /* ********** LINE CLAMP MAGIC ********** */
   display: -webkit-box;          /* Needed for line-clamp in WebKit-based browsers */
@@ -2844,7 +2868,7 @@ Dirty Secret
   font-size: 2.5rem;
   font-weight: bold;
   text-align: center;
-  font-family: 'SyneRegular', sans-serif;
+  font-family: 'Syne';
   opacity: 0;
   transform: scale(0.5);
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -3016,7 +3040,7 @@ Dirty Secret
 .package-card h3 {
   margin-bottom: 1.5rem;
   font-size: 3vh;
-  font-family: 'SyneRegular', sans-serif;
+  font-family: 'Syne';
   text-align: center;
 }
 
@@ -3216,7 +3240,7 @@ Dirty Secret
 ========================= */
 .quote-section {
   margin-top: 20vh;
-  height: 20vh;
+  height: 30vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -3226,6 +3250,7 @@ Dirty Secret
   position: relative;
   overflow: hidden;
 }
+
 
 .quote-text2 {
   font-size: 4vh;
@@ -3241,10 +3266,10 @@ Dirty Secret
   position: absolute;
   bottom: 2vh;
   right: 20vh;
-  font-size: 3vh;
+  font-size: 5vh;
   font-style: italic;
   animation: glow 2s ease-in-out infinite alternate;
-  font-family: 'MsMadi', cursive;
+  font-family: 'Ms Madi';
 }
 
 @keyframes glow {
@@ -3259,223 +3284,211 @@ Dirty Secret
 @media (max-width: 768px) {
   .quote-text2 {
       font-size: 3vh;
+      line-height: 3;
   }
-  
+  .quote-section {
+    height: 40vh;
+  }
   .author2 {
-      font-size: 2vh;
+      font-size: 3vh;
       bottom: 3vh;
       right: 3vh;
   }
 }
+:root {
+  --dark-bg: #000000;
+  --dark-text: #E2E2E2;
+  --dark-secondary: #2A2A2A;
+  --accent-gold: #E2CB9F;
+  --message-bg: #2C2C2C;
+}
+.faqs-container {
+  width: 50%;
+  min-width: 320px;
+  max-width: 800px;
+  height: 100vh;
+  background: var(--dark-bg);
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+  position: relative;
+  left: 0;
+  right: 0;
+  font-family: 'Syne';
+}
 
-/* =========================
-  FAQs
-========================= */  
- :root {
-            --brand-yellow: #E2CB9F;
-            --brand-black: #0e0e0e;
-            --dark-grey: #333333;
-            --light-grey: #444444;
-        }
 
-  
+.faqs-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  border-bottom: 1px solid #333;
+}
 
-        .faqs-container {
-            width: 90%;
-            max-width: 400px;
-            height: 90vh;
-            max-height: 600px;
-            border-radius: 12px;
-            background: var(--dark-grey);
-            display: flex;
-            flex-direction: column;
-            margin: 20px auto;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        .faqs-container.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+.profile-image svg {
+  width: 24px;
+  height: 24px;
+  color: var(--dark-bg);
+}
 
-        .chat-header {
-            padding: 16px;
-            border-bottom: 2px solid var(--brand-yellow);
-            text-align: center;
-            background: var(--brand-black);
-        }
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
 
-        .chat-title {
-            font-weight: 600;
-            color: var(--brand-yellow);
-            margin: 0;
-            font-size: 18px;
-        }
+.profile-name {
+  color: var(--dark-text);
+  font-weight: 600;
+  font-size: 16px;
+}
 
-        .chat-area {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px;
-            background: var(--light-grey);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
+.profile-status {
+  color: var(--accent-gold);
+  font-size: 14px;
+  opacity: 0.8;
+}
 
-        .chat-area::-webkit-scrollbar {
-            display: none;
-        }
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  background: var(--dark-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
 
-        @keyframes popIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.9) translateY(15px);
-            }
-            60% {
-                transform: scale(1.03) translateY(-2px);
-            }
-            80% {
-                transform: scale(0.98) translateY(1px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
+.message {
+  max-width: 85%;
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 15px;
+  line-height: 1.5;
+  opacity: 0;
+  animation: slideIn 0.5s ease forwards;
+}
 
-        .message {
-            max-width: 80%;
-            padding: 12px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            line-height: 1.4;
-            opacity: 0;
-            animation: popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
+@keyframes slideIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
 
-        .questions {
-            background: var(--brand-black);
-            color: var(--brand-yellow);
-            align-self: flex-end;
-            border-top-right-radius: 4px;
-            transform-origin: right bottom;
-        }
+.questions {
+  background: var(--message-bg);
+  color: var(--accent-gold);
+  align-self: flex-end;
+  border-top-right-radius: 4px;
+}
 
-        .answer {
-            background: var(--brand-yellow);
-            color: var(--brand-black);
-            align-self: flex-start;
-            border-top-left-radius: 4px;
-            transform-origin: left bottom;
-            font-weight: 500;
-        }
+.answer {
+  background: var(--message-bg);
+  color: var(--dark-text);
+  align-self: flex-start;
+  border-top-left-radius: 4px;
+}
 
-        .typing-indicator {
-            background: var(--brand-yellow);
-            padding: 12px 16px;
-            border-radius: 20px;
-            border-top-left-radius: 4px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            align-self: flex-start;
-            margin-bottom: 8px;
-            animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
+.typing-indicator {
+  background: var(--message-bg);
+  padding: 16px 20px;
+  border-radius: 12px;
+  border-top-left-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+  width: auto;
+}
 
-        .typing-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--brand-black);
-            border-radius: 50%;
-            animation: typingAnimation 1s infinite;
-        }
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent-gold);
+  border-radius: 50%;
+  animation: wave 1.3s linear infinite;
+  opacity: 0.7;
+}
 
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
+.typing-dot:nth-child(2) { animation-delay: -1.1s; }
+.typing-dot:nth-child(3) { animation-delay: -0.9s; }
 
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
+@keyframes wave {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-4px); }
+}
 
-        @keyframes typingAnimation {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
+.questions-area {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--dark-bg);
+}
 
-        .questions-area {
-            padding: 16px;
-            border-top: 2px solid var(--brand-yellow);
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 8px;
-            background: var(--brand-black);
-            max-height: 35vh;
-            overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
+.question-button {
+  padding: 12px 16px;
+  border: 1px solid var(--message-bg);
+  border-radius: 8px;
+  background: var(--dark-bg);
+  color: var(--dark-text);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.5s ease forwards;
+}
 
-        .questions-area::-webkit-scrollbar {
-            display: none;
-        }
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
 
-        .question-button {
-            padding: 10px;
-            border: 2px solid var(--brand-yellow);
-            border-radius: 8px;
-            background: var(--brand-black);
-            color: var(--brand-yellow);
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
+.question-button:hover {
+  background: var(--message-bg);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
 
-        .question-button:hover {
-            background: var(--brand-yellow);
-            color: var(--brand-black);
-        }
-
-        .question-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        @media (max-width: 480px) {
-            .faqs-container {
-                width: 95%;
-                height: 95vh;
-                margin: 10px auto;
-            }
-
-            .chat-area {
-                padding: 12px;
-            }
-
-            .questions-area {
-                padding: 12px;
-                gap: 6px;
-            }
-
-            .question-button {
-                padding: 8px;
-                font-size: 12px;
-            }
-        }
-/*=========================
+.question-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}/*=========================
   Careers
 ========================= */
 .career-section {
   background-color: black;
   margin-top: 10vh;
   padding: 8vh 0;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3493,7 +3506,7 @@ Dirty Secret
 .question-container {
   width: 80%;
   max-width: 800px;
-  background: rgba(0, 0, 0, 0.8);
+  position: relative;
   border: 2px solid #E2CB9F;
   border-radius: 20px;
   padding: 4vh;
@@ -3501,28 +3514,62 @@ Dirty Secret
   transition: all 0.5s ease;
   opacity: 0;
   transform: translateY(20px);
-  position: relative;
+  overflow: hidden;
+}
+
+/* Black overlay for the question container */
+.question-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.option-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
 }
 
 @keyframes fadeIn {
   from {
-      opacity: 0;
-      transform: translateY(20px);
+    opacity: 0;
+    transform: translateY(20px);
   }
   to {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @keyframes fadeOut {
   from {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
   to {
-      opacity: 0;
-      transform: translateY(-20px);
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes textGlow {
+  from {
+    text-shadow: 0 0 5px #E2CB9F, 0 0 10px #E2CB9F;
+  }
+  to {
+    text-shadow: 0 0 20px #E2CB9F, 0 0 30px #E2CB9F;
   }
 }
 
@@ -3540,11 +3587,14 @@ Dirty Secret
 }
 
 .question {
-  font-family: 'SyneRegular', sans-serif;
+  font-family: 'Syne';
   color: #E2CB9F;
   font-size: 3vh;
   margin-bottom: 3vh;
   text-align: center;
+  position: relative;
+  z-index: 2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .options-container {
@@ -3552,6 +3602,8 @@ Dirty Secret
   flex-wrap: wrap;
   justify-content: center;
   gap: 2vh;
+  position: relative;
+  z-index: 2;
 }
 
 .option-btn {
@@ -3560,27 +3612,63 @@ Dirty Secret
   color: #E2CB9F;
   padding: 1.5vh 3vh;
   border-radius: 50px;
-  font-family: 'SyneRegular', sans-serif;
+  font-family: 'Syne';
   font-size: 2vh;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .option-btn:hover {
-  background: rgba(226, 203, 159, 0.1);
   transform: translateY(-3px);
+  text-shadow: 0 0 10px #E2CB9F, 0 0 20px #E2CB9F;
   box-shadow: 0 0 15px rgba(226, 203, 159, 0.3);
 }
 
 .option-btn.selected {
-  background: #E2CB9F;
-  color: black;
+  animation: textGlow 0.3s ease forwards;
+  transform: translateY(-3px);
+}
+
+/* Skip button styles */
+.skip-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 4vh;
+  position: relative;
+  z-index: 2;
+  padding-top: 2vh;
+  border-top: 1px solid rgba(226, 203, 159, 0.2);
+}
+
+.skip-btn {
+  background: transparent;
+  border: 1px solid #E2CB9F;
+  color: #E2CB9F;
+  padding: 1.5vh 3vh;
+  border-radius: 50px;
+  font-family: 'Syne';
+  font-size: 1.8vh;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.skip-btn:hover {
+  transform: translateY(-3px);
+  text-shadow: 0 0 10px #E2CB9F, 0 0 20px #E2CB9F;
+  box-shadow: 0 0 15px rgba(226, 203, 159, 0.3);
 }
 
 .result-container {
   width: 80%;
   max-width: 800px;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   border: 2px solid #E2CB9F;
   border-radius: 20px;
   padding: 4vh;
@@ -3588,6 +3676,7 @@ Dirty Secret
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.5s ease;
+  position: relative;
 }
 
 .result-container.active {
@@ -3595,13 +3684,40 @@ Dirty Secret
   transform: translateY(0);
 }
 
+.results-title {
+  font-family: 'GalleryModern', serif;
+  color: #E2CB9F;
+  font-size: 4vh;
+  margin-bottom: 4vh;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
 .position-card {
+  position: relative;
   background: rgba(226, 203, 159, 0.1);
   border: 1px solid #E2CB9F;
   border-radius: 15px;
   padding: 3vh;
   margin-bottom: 3vh;
   transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.position-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 1;
+}
+
+.position-content {
+  position: relative;
+  z-index: 2;
 }
 
 .position-card:hover {
@@ -3614,23 +3730,25 @@ Dirty Secret
   color: #E2CB9F;
   font-size: 3vh;
   margin-bottom: 2vh;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .position-description {
-  font-family: 'SyneRegular', sans-serif;
+  font-family: 'Syne';
   color: white;
   font-size: 2vh;
   line-height: 1.6;
   margin-bottom: 2vh;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .apply-btn {
-  background: #E2CB9F;
-  color: black;
-  border: none;
+  background: transparent;
+  color: #E2CB9F;
+  border: 1px solid #E2CB9F;
   padding: 1.5vh 3vh;
   border-radius: 50px;
-  font-family: 'SyneRegular', sans-serif;
+  font-family: 'Syne';
   font-size: 2vh;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -3638,37 +3756,54 @@ Dirty Secret
 
 .apply-btn:hover {
   transform: translateY(-2px);
+  text-shadow: 0 0 10px #E2CB9F, 0 0 20px #E2CB9F;
   box-shadow: 0 0 15px rgba(226, 203, 159, 0.5);
+}
+
+.card-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
 }
 
 @media (max-width: 768px) {
   .career-title {
-      font-size: 6vh;
+    font-size: 6vh;
   }
   
   .question-container {
-      width: 90%;
-      padding: 3vh;
+    width: 90%;
+    padding: 3vh;
   }
   
   .question {
-      font-size: 2.5vh;
+    font-size: 2.5vh;
   }
   
-  .option-btn {
-      font-size: 1.8vh;
-      padding: 1.2vh 2.4vh;
+  .option-btn, .skip-btn {
+    font-size: 1.8vh;
+    padding: 1.2vh 2.4vh;
   }
   
   .position-title {
-      font-size: 2.5vh;
+    font-size: 2.5vh;
   }
   
   .position-description {
-      font-size: 1.8vh;
+    font-size: 1.8vh;
+  }
+  
+  .results-title {
+    font-size: 3vh;
   }
 }
-
 /*=========================
   Music Button
 ========================= */

@@ -27,54 +27,52 @@ class FAQs {
         this.questionsArea = document.getElementById('questionsArea');
         this.initialized = false;
         
-        // Create intersection observer
+        this.setupProfile();
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !this.initialized) {
                     this.initialize();
                     this.initialized = true;
-                    observer.disconnect(); // Stop observing once initialized
+                    observer.disconnect();
                 }
             });
-        }, {
-            threshold: 0.3 // Trigger when 30% of the element is visible
-        });
+        }, { threshold: 0.1 });
         
-        // Start observing the FAQ container
         observer.observe(document.querySelector('.faqs-container'));
     }
 
+    setupProfile() {
+        const profileSection = document.createElement('div');
+        profileSection.className = 'profile-section';
+        
+        profileSection.innerHTML = `
+            <div class="profile-image">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                </svg>
+            </div>
+            <div class="profile-info">
+                <div class="profile-name">FAQ Assistant</div>
+                <div class="profile-status">AI Assistant</div>
+            </div>
+        `;
+        
+        document.querySelector('.faqs-container').insertBefore(profileSection, this.chatArea);
+    }
+
     async initialize() {
-        // Add visible class to container
         document.querySelector('.faqs-container').classList.add('visible');
         
-        // Wait for container animation
-        await new Promise(resolve => setTimeout(resolve, 600));
-
-        // Add initial greeting with typing indicator
-        const typingIndicator = this.createTypingIndicator();
-        this.chatArea.appendChild(typingIndicator);
+        await this.addMessage("Hello! I'm your FAQ assistant. How can I help you today?", 'answer');
         
-        // Wait for typing animation
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        // Remove typing indicator and add greeting
-        typingIndicator.remove();
-        const greetingDiv = document.createElement('div');
-        greetingDiv.className = 'message answer';
-        greetingDiv.textContent = 'Ask me anything! 👋';
-        this.chatArea.appendChild(greetingDiv);
-
-        // Add question buttons with slight delay
-        setTimeout(() => {
-            this.questions.forEach((qa, index) => {
-                const button = document.createElement('button');
-                button.className = 'question-button';
-                button.textContent = qa.question;
-                button.addEventListener('click', () => this.handleQuestion(index));
-                this.questionsArea.appendChild(button);
-            });
-        }, 800);
+        this.questions.forEach((qa, index) => {
+            const button = document.createElement('button');
+            button.className = 'question-button';
+            button.textContent = qa.question;
+            button.addEventListener('click', () => this.handleQuestion(index));
+            this.questionsArea.appendChild(button);
+        });
     }
 
     createTypingIndicator() {
@@ -88,59 +86,60 @@ class FAQs {
         return typingDiv;
     }
 
-    getRandomTypingDuration() {
-        return Math.floor(Math.random() * (3000 - 1000 + 1) + 1000); // Random duration between 1-3 seconds
+    async typeWriter(element, text, speed = 15) {
+        let i = 0;
+        element.textContent = '';
+        
+        return new Promise(resolve => {
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    resolve();
+                }
+            }
+            type();
+        });
+    }
+
+    async addMessage(text, type) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${type}`;
+        this.chatArea.appendChild(messageDiv);
+        
+        if (type === 'answer') {
+            await this.typeWriter(messageDiv, text);
+        } else {
+            messageDiv.textContent = text;
+        }
+        
+        this.chatArea.scrollTop = this.chatArea.scrollHeight;
     }
 
     async handleQuestion(index) {
         const qa = this.questions[index];
         
-        // Disable all buttons temporarily
         const buttons = this.questionsArea.querySelectorAll('.question-button');
         buttons.forEach(button => button.disabled = true);
         
-        // Add question to chat
-        const questionDiv = document.createElement('div');
-        questionDiv.className = 'message questions';
-        questionDiv.textContent = qa.question;
-        this.chatArea.appendChild(questionDiv);
-        this.chatArea.scrollTop = this.chatArea.scrollHeight;
-
-        // Wait a bit before showing typing indicator
-        await new Promise(resolve => setTimeout(resolve, 800));
-
-        // Show typing indicator
+        await this.addMessage(qa.question, 'questions');
+        
         const typingIndicator = this.createTypingIndicator();
         this.chatArea.appendChild(typingIndicator);
         this.chatArea.scrollTop = this.chatArea.scrollHeight;
 
-        // Wait for random typing duration
-        const typingDuration = this.getRandomTypingDuration();
-        await new Promise(resolve => setTimeout(resolve, typingDuration));
-
-        // Remove typing indicator and add answer
+        await new Promise(resolve => setTimeout(resolve, 800));
+        
         typingIndicator.remove();
-        const answerDiv = document.createElement('div');
-        answerDiv.className = 'message answer';
-        answerDiv.textContent = qa.answer;
-        this.chatArea.appendChild(answerDiv);
-        this.chatArea.scrollTop = this.chatArea.scrollHeight;
+        await this.addMessage(qa.answer, 'answer');
 
-        // Re-enable buttons after a delay
-        setTimeout(() => {
-            buttons.forEach(button => button.disabled = false);
-        }, 1000);
-
-        // Disable the clicked button temporarily
-        const button = this.questionsArea.children[index];
-        button.disabled = true;
-        setTimeout(() => {
-            button.disabled = false;
-        }, 2000);
-
-        this.chatArea.scrollTop = this.chatArea.scrollHeight;
+        buttons.forEach(button => button.disabled = false);
     }
 }
 
 // Initialize the FAQ chat
-const faqChat = new FAQs();
+document.addEventListener('DOMContentLoaded', () => {
+    new FAQs();
+});
