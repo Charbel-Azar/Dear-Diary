@@ -967,48 +967,26 @@ Dirty Secret
   }
 }
 
+
 .videosecret-container {
-  position: relative;
-  display: inline-block;  /* Shrink-wraps its content */
-  margin: 0 auto;
-  margin-bottom: 4vh;
-  text-align: center;
-  max-width: 50vh;
-  /* Remove max-width if it’s not needed, or adjust it as necessary */
+  max-width: 40vh;    /* Adjust as needed */
+  margin: 0 auto;      /* Center the container */
+  margin-bottom: 4vh;  /* Same spacing as before */
+  text-align: center;  /* If you want it centered in text context */
 }
-
-/* Overlay with fades on all sides */
-.videosecret-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 2;
-  background: 
-    /* Top fade */
-    linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 30%),
-    /* Bottom fade */
-    linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 30%),
-    /* Left fade */
-    linear-gradient(to right, rgba(0,0,0,0.8) 0%, transparent 30%),
-    /* Right fade */
-    linear-gradient(to left, rgba(0,0,0,0.8) 0%, transparent 30%);
-  background-repeat: no-repeat;
-  background-size: 100% 20%, 100% 20%, 20% 100%, 20% 100%;
-  background-position: top, bottom, left, right;
-}
-
-
 
 .secret-video {
   width: 100%;
-
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 0 20px rgba(255,255,255,0.15);
+  /* Or try a white border plus shadow:
+     border: 2px solid #fff;
+     box-shadow: 0 0 20px rgba(255,255,255,0.2);
+  */
   display: block;
-  /* No extra z-index needed unless you want other overlays on top */
 }
+
+
 
 
 .secret-text {
