@@ -1,77 +1,151 @@
-// Define questions with background images
 const questions = [
     {
-        question: "What's your favorite way to start the day?",
+        question: "Which of these sounds like your dream task?",
         options: [
             {
-                text: "Creating something beautiful",
-                background: "url('./assests/images/art/art (1).jpeg')",
-                score: { creative: 2, content: 1 }
+                text: "Making designs that make people say, 'Wow, who made this?!'",
+                background: "url('./assests/images/questions/graphic.jpg')",
+                score: { graphic: 2 }
             },
             {
-                text: "Planning and organizing",
-                background: "url('./assests/images/art/art (1).jpg')",
-                score: { production: 2, marketing: 1 }
+                text: "Taking raw footage and transforming it into pure storytelling magic.",
+                background: "url('path/to/video-editor.jpg')",
+                score: { videoEditor: 2 }
             },
             {
-                text: "Brainstorming new ideas",
-                background: "url('./assests/images/art/art (2).jpg')",
-                score: { marketing: 2, creative: 1 }
+                text: "Filming and editing videos that turn ordinary moments into cinematic masterpieces.",
+                background: "url('path/to/videographer.jpg')",
+                score: { videographer: 2 }
             },
             {
-                text: "Connecting with people",
-                background: "url('./assests/images/art/art (3).jpg')",
-                score: { content: 2, marketing: 1 }
+                text: "Writing lines of code that give birth to crazy looking websites.",
+                background: "url('path/to/software-developer.jpg')",
+                score: { softwareDeveloper: 2 }
+            },
+            {
+                text: "Creating viral content that makes people stop scrolling and go 'OMG, I NEED to share this!'",
+                background: "url('path/to/social-media.jpg')",
+                score: { socialMedia: 2 }
             }
         ]
     },
     {
-        question: "If you were a camera filter, which would you be?",
+        question: "If you were stuck on a desert island, which software would you take with you?",
         options: [
             {
-                text: "Dramatic Black & White",
-                background: "url('path/to/bw.jpg')",
-                score: { creative: 2, production: 1 }
+                text: "Adobe Illustrator, logos arent gonna make themselves",
+                background: "url('./assests/images/questions/graphic1.jpg)",
+                score: { graphic: 2 }
             },
             {
-                text: "Vintage Film",
-                background: "url('path/to/vintage.jpg')",
-                score: { content: 2, creative: 1 }
+                text: "Adobe Premiere Pro – Because even my rescue story needs seamless transitions and killer effects.",
+                background: "url('path/to/video-editor-software.jpg')",
+                score: { videoEditor: 2 }
             },
             {
-                text: "Vibrant Colors",
-                background: "url('path/to/vibrant.jpg')",
-                score: { marketing: 2, content: 1 }
+                text: "Final Cut Pro to document and edit my survival journey in 4K.",
+                background: "url('path/to/videographer-software.jpg')",
+                score: { videographer: 2 }
             },
             {
-                text: "Soft Glam",
-                background: "url('path/to/glam.jpg')",
-                score: { production: 2, marketing: 1 }
+                text: "HTML and CSS, obviously id just change the background and ill be back home",
+                background: "url('path/to/software-developer-tools.jpg')",
+                score: { softwareDeveloper: 2 }
+            },
+            {
+                text: "Instagram – Because if I don’t post it, did I even survive?",
+                background: "url('path/to/social-media-app.jpg')",
+                score: { socialMedia: 2 }
             }
         ]
     },
     {
-        question: "Your perfect work environment is...",
+        question: "How do you know you’ve nailed your work?",
         options: [
             {
-                text: "A creative studio",
-                background: "url('path/to/studio.jpg')",
-                score: { creative: 2, content: 1 }
+                text: "When my design looks so good, even Comic Sans is jealous.",
+                background: "url('./assests/images/questions/graphic2.jpg')",
+                score: { graphic: 2 }
             },
             {
-                text: "A dynamic office",
-                background: "url('path/to/office.jpg')",
-                score: { production: 2, marketing: 1 }
+                text: "When the cuts are so clean that even Scorsese would approve.",
+                background: "url('path/to/video-editor.jpg')",
+                score: { videoEditor: 2 }
             },
             {
-                text: "Working remotely",
-                background: "url('path/to/remote.jpg')",
-                score: { content: 2, creative: 1 }
+                text: "When my video makes people cry happy tears and replay it five times.",
+                background: "url('path/to/videographer.jpg')",
+                score: { videographer: 2 }
             },
             {
-                text: "Mixed environments",
-                background: "url('path/to/mixed.jpg')",
-                score: { marketing: 2, production: 1 }
+                text: "When my code runs without errors, and I do a little victory dance.",
+                background: "url('path/to/software-developer.jpg')",
+                score: { softwareDeveloper: 2 }
+            },
+            {
+                text: "When my post gets 100+ shares and a flood of DMs asking for more.",
+                background: "url('path/to/social-media.jpg')",
+                score: { socialMedia: 2 }
+            }
+        ]
+    },
+    {
+        question: "What’s your creative spirit animal?",
+        options: [
+            {
+                text: "A chameleon – always adapting colors and styles!",
+                background: "url('./assests/images/questions/graphic3.jpg')",
+                score: { graphic: 2 }
+            },
+            {
+                text: "An eagle – capturing everything from the perfect angle.",
+                background: "url('path/to/videographer-spirit.jpg')",
+                score: { videographer: 2 }
+            },
+            {
+                text: "A hummingbird – fast, precise, and constantly making cuts.",
+                background: "url('path/to/video-editor-spirit.jpg')",
+                score: { videoEditor: 2 }
+            },
+            {
+                text: "An octopus – multi-tasking with a million open tabs.",
+                background: "url('path/to/software-developer-spirit.jpg')",
+                score: { softwareDeveloper: 2 }
+            },
+            {
+                text: "A parrot – talking, engaging, and keeping the buzz alive!",
+                background: "url('path/to/social-media-spirit.jpg')",
+                score: { socialMedia: 2 }
+            }
+        ]
+    },
+    {
+        question: "What excites you most about joining Dear Diary Media?",
+        options: [
+            {
+                text: "Making brands look so good that even Picasso would approve.",
+                background: "url('./assests/images/questions/graphic4.jpg')",
+                score: { graphic: 2 }
+            },
+            {
+                text: "Editing footage so smoothly that people don’t even notice the jump cuts.",
+                background: "url('path/to/video-editor-branding.jpg')",
+                score: { videoEditor: 2 }
+            },
+            {
+                text: "Creating videos so engaging that Netflix might steal our ideas.",
+                background: "url('path/to/videographer-branding.jpg')",
+                score: { videographer: 2 }
+            },
+            {
+                text: "Building digital magic that makes our marketing efforts smoother than a fresh cup of coffee.",
+                background: "url('path/to/software-developer-branding.jpg')",
+                score: { softwareDeveloper: 2 }
+            },
+            {
+                text: "Growing online communities and making 'going viral' an everyday thing.",
+                background: "url('path/to/social-media-branding.jpg')",
+                score: { socialMedia: 2 }
             }
         ]
     }
@@ -79,35 +153,41 @@ const questions = [
 
 // Define career positions
 const positions = {
-    creative: {
-        title: "Creative Director",
-        description: "Lead our creative vision and inspire teams to produce exceptional content. Perfect for visionary individuals who love to push boundaries.",
-        background: "url('path/to/creative-director.jpg')"
+    graphic: {
+        title: "Graphic Designer",
+        description: "Craft visually stunning designs that captivate and inspire audiences. Ideal for creative minds with an eye for detail.",
+        background: "url('path/to/graphic-designer-position.jpg')"
     },
-    marketing: {
-        title: "Marketing Specialist",
-        description: "Drive our brand's success through innovative marketing strategies. Ideal for analytical minds with a creative spark.",
-        background: "url('path/to/marketing.jpg')"
+    videoEditor: {
+        title: "Video Editor",
+        description: "Transform raw footage into compelling narratives. Perfect for those who love precision, creativity, and storytelling.",
+        background: "url('path/to/video-editor-position.jpg')"
     },
-    content: {
-        title: "Content Creator",
-        description: "Create engaging content that tells compelling stories. Great for creative souls who love connecting with audiences.",
-        background: "url('path/to/content.jpg')"
+    videographer: {
+        title: "Videographer",
+        description: "Capture moments and turn them into cinematic stories. Great for individuals with a passion for filming and visual artistry.",
+        background: "url('path/to/videographer-position.jpg')"
     },
-    production: {
-        title: "Production Manager",
-        description: "Coordinate and oversee our production process. Perfect for organized individuals who excel at managing projects.",
-        background: "url('path/to/production.jpg')"
+    softwareDeveloper: {
+        title: "Software Developer",
+        description: "Develop and maintain cutting-edge digital solutions. Perfect for problem solvers who thrive in a dynamic tech environment.",
+        background: "url('path/to/software-developer-position.jpg')"
+    },
+    socialMedia: {
+        title: "Social Media Manager",
+        description: "Engage online communities and drive brand conversations. Ideal for energetic individuals who excel in digital engagement.",
+        background: "url('path/to/social-media-position.jpg')"
     }
 };
 
 // Initialize state
 let currentQuestion = 0;
 let userScores = {
-    creative: 0,
-    marketing: 0,
-    content: 0,
-    production: 0
+    graphic: 0,
+    videoEditor: 0,
+    videographer: 0,
+    softwareDeveloper: 0,
+    socialMedia: 0
 };
 
 // Show question and handle background images
