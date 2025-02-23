@@ -2733,6 +2733,7 @@ Dirty Secret
 }
 
 .workvideos-sticky {
+  padding-top: 30vh;
   height: 100vh;
   position: sticky;
   top: 0;
