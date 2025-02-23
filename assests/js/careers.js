@@ -124,7 +124,7 @@ const questions = [
         options: [
             {
                 text: "Making brands look so good that even Picasso would approve.",
-                background: "url('./assests/images/questions/graphic4.jpg')",
+                background: "url('./assests/images/questions/graphic4   .jpg')",
                 score: { graphic: 2 }
             },
             {
