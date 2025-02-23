@@ -14,17 +14,17 @@ const questions = [
             },
             {
                 text: "Filming and editing videos that turn ordinary moments into cinematic masterpieces.",
-                background: "url('path/to/videographer.jpg')",
+                background: "url('./assests/images/questions/photographer.jpg')",
                 score: { videographer: 2 }
             },
             {
                 text: "Writing lines of code that give birth to crazy looking websites.",
-                background: "url('path/to/software-developer.jpg')",
+                background: "url('./assests/images/questions/webdev.jpg')",
                 score: { softwareDeveloper: 2 }
             },
             {
                 text: "Creating viral content that makes people stop scrolling and go 'OMG, I NEED to share this!'",
-                background: "url('path/to/social-media.jpg')",
+                background: "url('./assests/images/questions/socialmedia.jpg')",
                 score: { socialMedia: 2 }
             }
         ]
@@ -34,7 +34,7 @@ const questions = [
         options: [
             {
                 text: "Adobe Illustrator, logos arent gonna make themselves",
-                background: "url('./assests/images/questions/graphic1.jpg)",
+                background: "url('./assests/images/questions/graphic1.jpg')",
                 score: { graphic: 2 }
             },
             {
@@ -44,17 +44,17 @@ const questions = [
             },
             {
                 text: "Final Cut Pro to document and edit my survival journey in 4K.",
-                background: "url('path/to/videographer-software.jpg')",
+                background: "url('./assests/images/questions/photographer2.jpg')",
                 score: { videographer: 2 }
             },
             {
                 text: "HTML and CSS, obviously id just change the background and ill be back home",
-                background: "url('path/to/software-developer-tools.jpg')",
+                background: "url('./assests/images/questions/webdev2.jpg')",
                 score: { softwareDeveloper: 2 }
             },
             {
                 text: "Instagram – Because if I don’t post it, did I even survive?",
-                background: "url('path/to/social-media-app.jpg')",
+                background: "url('./assests/images/questions/socailmedia2.jpg')",
                 score: { socialMedia: 2 }
             }
         ]
@@ -74,17 +74,17 @@ const questions = [
             },
             {
                 text: "When my video makes people cry happy tears and replay it five times.",
-                background: "url('path/to/videographer.jpg')",
+                background: "url('./assests/images/questions/photographer3.jpg')",
                 score: { videographer: 2 }
             },
             {
                 text: "When my code runs without errors, and I do a little victory dance.",
-                background: "url('path/to/software-developer.jpg')",
+                background: "url('./assests/images/questions/webdev3.jpg')",
                 score: { softwareDeveloper: 2 }
             },
             {
                 text: "When my post gets 100+ shares and a flood of DMs asking for more.",
-                background: "url('path/to/social-media.jpg')",
+                background: "url('./assests/images/questions/socialmedia3.jpg')",
                 score: { socialMedia: 2 }
             }
         ]
@@ -100,21 +100,21 @@ const questions = [
             {
                 text: "An eagle – capturing everything from the perfect angle.",
                 background: "url('./assests/images/questions/videoediting4.jpg')",
-                score: { videographer: 2 }
-            },
-            {
-                text: "A hummingbird – fast, precise, and constantly making cuts.",
-                background: "url('path/to/video-editor-spirit.jpg')",
                 score: { videoEditor: 2 }
             },
             {
+                text: "A hummingbird – fast, precise, and constantly making cuts.",
+                background: "url('./assests/images/questions/photographer3.jpg')",
+                score: { videographer: 2 }
+            },
+            {
                 text: "An octopus – multi-tasking with a million open tabs.",
-                background: "url('path/to/software-developer-spirit.jpg')",
+                background: "url('./assests/images/questions/webdev4.jpg')",
                 score: { softwareDeveloper: 2 }
             },
             {
                 text: "A parrot – talking, engaging, and keeping the buzz alive!",
-                background: "url('path/to/social-media-spirit.jpg')",
+                background: "url('./assests/images/questions/socialmedia4.jpg')",
                 score: { socialMedia: 2 }
             }
         ]
@@ -134,17 +134,17 @@ const questions = [
             },
             {
                 text: "Creating videos so engaging that Netflix might steal our ideas.",
-                background: "url('path/to/videographer-branding.jpg')",
+                background: "url('./assests/images/questions/photographer5.jpg')",
                 score: { videographer: 2 }
             },
             {
                 text: "Building digital magic that makes our marketing efforts smoother than a fresh cup of coffee.",
-                background: "url('path/to/software-developer-branding.jpg')",
+                background: "url('./assests/images/questions/webdev5.jpg')",
                 score: { softwareDeveloper: 2 }
             },
             {
                 text: "Growing online communities and making 'going viral' an everyday thing.",
-                background: "url('path/to/social-media-branding.jpg')",
+                background: "url('./assests/images/questions/socialmedia5.jpg')",
                 score: { socialMedia: 2 }
             }
         ]
@@ -194,52 +194,64 @@ let userScores = {
 function showQuestion() {
     const questionContainer = document.getElementById('questionContainer');
     const question = questions[currentQuestion];
-    
+  
     const newContent = `
-        <div class="question">${question.question}</div>
-        <div class="options-container">
-            ${question.options.map((option, index) => `
-                <button 
-                    class="option-btn" 
-                    data-background="${option.background}"
-                    onmouseover="handleOptionHover(this, true)"
-                    onmouseout="handleOptionHover(this, false)"
-                    onclick="selectOption(${index})"
-                >${option.text}</button>
-            `).join('')}
-        </div>
-        <div class="skip-button-container">
-            <button class="skip-btn" onclick="showAllPositions()">Too Lazy?</button>
-        </div>
-        <div class="option-background"></div>
+      <div class="question">${question.question}</div>
+      <div class="options-container">
+        ${question.options.map((option, index) => `
+          <button 
+            class="option-btn" 
+            data-background="${option.background}"
+            onmouseover="handleOptionHover(this, true)"
+            onmouseout="handleOptionHover(this, false)"
+            onclick="selectOption(${index})"
+          >${option.text}</button>
+        `).join('')}
+      </div>
+      <div class="skip-button-container">
+        <button class="skip-btn" onclick="showAllPositions()">Too Lazy?</button>
+      </div>
+      <div class="option-background"></div>
     `;
-    
+  
+    // For the very first question, simply set content and trigger fade-in.
     if (currentQuestion === 0) {
-        questionContainer.innerHTML = newContent;
-        questionContainer.classList.add('fade-in');
-        return;
+      questionContainer.innerHTML = newContent;
+      questionContainer.classList.remove('fade-out');
+      questionContainer.classList.add('fade-in');
+      return;
     }
-    
+  
+    // For subsequent questions, fade-out first.
+    questionContainer.classList.remove('fade-in');
     questionContainer.classList.add('fade-out');
-    setTimeout(() => {
-        questionContainer.classList.remove('fade-out');
-        questionContainer.innerHTML = newContent;
-        questionContainer.classList.add('fade-in');
-    }, 500);
-}
+  
+    // Wait for fade-out animation to finish before updating content.
+    questionContainer.addEventListener('animationend', function handler() {
+      // Remove this event listener so it doesn't trigger for other animations.
+      questionContainer.removeEventListener('animationend', handler);
+      // Update content and trigger fade-in.
+      questionContainer.innerHTML = newContent;
+      questionContainer.classList.remove('fade-out');
+      questionContainer.classList.add('fade-in');
+    });
+  }
+  
 
 // Handle option hover effects
 function handleOptionHover(button, isHovering) {
-    const background = button.closest('.question-container').querySelector('.option-background');
+    const background = button.closest('.question-container')?.querySelector('.option-background');
     const backgroundImage = button.getAttribute('data-background');
-    
-    if (isHovering) {
-        background.style.backgroundImage = backgroundImage;
-        background.style.opacity = '1';
-        button.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-    } else {
-        background.style.opacity = '0';
-        button.style.backgroundColor = 'transparent';
+
+    if (background) {
+        if (isHovering) {
+            background.style.backgroundImage = backgroundImage;
+            background.style.opacity = '1';
+            button.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        } else {
+            background.style.opacity = '0';
+            button.style.backgroundColor = 'transparent';
+        }
     }
 }
 
@@ -247,17 +259,17 @@ function handleOptionHover(button, isHovering) {
 function selectOption(optionIndex) {
     const question = questions[currentQuestion];
     const selectedOption = question.options[optionIndex];
-    
+
     // Update scores
     Object.entries(selectedOption.score).forEach(([category, points]) => {
         userScores[category] += points;
     });
-    
+
     // Visual feedback
     const buttons = document.querySelectorAll('.option-btn');
     buttons.forEach(btn => btn.classList.remove('selected'));
     buttons[optionIndex].classList.add('selected');
-    
+
     // Transition effect
     setTimeout(() => {
         if (currentQuestion < questions.length - 1) {
@@ -271,20 +283,19 @@ function selectOption(optionIndex) {
     }, 800);
 }
 
-// Show results
+// Show results after quiz is complete, with a reset button
 function showResults() {
     const questionContainer = document.getElementById('questionContainer');
     const resultContainer = document.getElementById('resultContainer');
-    
+
     questionContainer.style.display = 'none';
-    
+
     // Get top 2 positions based on scores
     const topPositions = Object.entries(userScores)
-        .sort(([,a], [,b]) => b - a)
+        .sort(([, a], [, b]) => b - a)
         .slice(0, 2)
         .map(([position]) => position);
-    
-    // Create results HTML
+
     resultContainer.innerHTML = `
         <h2 class="results-title">Here are your perfect matches!</h2>
         ${topPositions.map(position => `
@@ -302,49 +313,24 @@ function showResults() {
                 <div class="card-background"></div>
             </div>
         `).join('')}
+        <div class="reset-button-container">
+            <button class="skip-btn" onclick="resetQuiz()">Reset Quiz</button>
+        </div>
     `;
-    
+
     resultContainer.style.display = 'block';
     setTimeout(() => resultContainer.classList.add('active'), 50);
 }
 
-// Handle result card hover effects
-function handleCardHover(card, isHovering) {
-    const background = card.querySelector('.card-background');
-    const backgroundImage = card.getAttribute('data-background');
-    
-    if (isHovering) {
-        background.style.backgroundImage = backgroundImage;
-        background.style.opacity = '1';
-    } else {
-        background.style.opacity = '0';
-    }
-}
-
-// Handle job application
-function applyForPosition(position) {
-    const roleTitle = positions[position].title;
-    const subject = encodeURIComponent(`Application for ${roleTitle}`);
-    const body = encodeURIComponent(
-        `Dear Dear Diary Team,\n\n` +
-        `I am excited to apply for the ${roleTitle} position.\n\n` +
-        `Best regards,\n[Your Name]`
-    );
-    
-    window.location.href = `mailto:careers@deardiary.com?subject=${subject}&body=${body}`;
-    alert(`Thanks for your interest in the ${roleTitle} position! Our team will be in touch soon.`);
-}
-
+// Handle "Too Lazy?" positions view (skip) with reset button at the bottom
 function showAllPositions() {
     const questionContainer = document.getElementById('questionContainer');
     const resultContainer = document.getElementById('resultContainer');
-    
-    // Hide question container with fade effect
+
     questionContainer.classList.add('fade-out');
     setTimeout(() => {
         questionContainer.style.display = 'none';
-        
-        // Show all positions
+
         resultContainer.innerHTML = `
             <h2 class="results-title">All Available Positions</h2>
             ${Object.entries(positions).map(([key, position]) => `
@@ -362,13 +348,64 @@ function showAllPositions() {
                     <div class="card-background"></div>
                 </div>
             `).join('')}
+            <div class="reset-button-container">
+                <button class="skip-btn" onclick="resetQuiz()">Reset Quiz</button>
+            </div>
         `;
-        
-        // Show and animate result container
+
         resultContainer.style.display = 'block';
         setTimeout(() => resultContainer.classList.add('active'), 50);
     }, 500);
 }
 
-// Start the quiz
+// Handle result card hover effects
+function handleCardHover(card, isHovering) {
+    const background = card.querySelector('.card-background');
+    const backgroundImage = card.getAttribute('data-background');
+
+    if (isHovering) {
+        background.style.backgroundImage = backgroundImage;
+        background.style.opacity = '1';
+    } else {
+        background.style.opacity = '0';
+    }
+}
+
+// Handle job application
+function applyForPosition(position) {
+    const roleTitle = positions[position].title;
+    const subject = encodeURIComponent(`Application for ${roleTitle}`);
+    const body = encodeURIComponent(
+        `Dear Dear Diary Team,\n\n` +
+        `I am excited to apply for the ${roleTitle} position.\n\n` +
+        `Best regards,\n[Your Name]`
+    );
+
+    window.location.href = `mailto:careers@deardiary.com?subject=${subject}&body=${body}`;
+    alert(`Thanks for your interest in the ${roleTitle} position! Our team will be in touch soon.`);
+}
+
+// Reset the quiz to the initial state
+function resetQuiz() {
+    currentQuestion = 0;
+    userScores = {
+        graphic: 0,
+        videoEditor: 0,
+        videographer: 0,
+        softwareDeveloper: 0,
+        socialMedia: 0
+    };
+
+    // Hide the result container and show the question container again
+    const resultContainer = document.getElementById('resultContainer');
+    resultContainer.classList.remove('active');
+    setTimeout(() => {
+        resultContainer.style.display = 'none';
+        const questionContainer = document.getElementById('questionContainer');
+        questionContainer.style.display = 'block';
+        showQuestion();
+    }, 500);
+}
+
+// Start the quiz on page load
 document.addEventListener('DOMContentLoaded', showQuestion);

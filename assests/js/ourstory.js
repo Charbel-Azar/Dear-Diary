@@ -2,7 +2,7 @@
     const stories = [
         {
             id: 1,  // New first item
-            username: 'Add Story',
+            username: 'Add Story\u00A0\u00A0\u00A0\u00A0\u00A0↑',
             mediaUrl: 'assests/images/logo/white_transparent_logo.png',
             profilePic: 'assests/images/logo/black_transparent_logo.png', // Replace with your profile pic
             type: 'add-story',  // Special type for add story
@@ -11,7 +11,7 @@
         },
         {
             id: 2,
-            username: 'Beginning',
+            username: 'Uniting.',
             mediaUrl: 'assests/images/logo/white_transparent_logo.png',
             profilePic: 'assests/images/logo/black_transparent_logo.png',
             type: 'image',
@@ -20,7 +20,7 @@
         },
         {
             id: 3,
-            username: 'Growth',
+            username: 'Beginning.',
             mediaUrl: 'assests/images/ourstory/introvideo.mp4',
             profilePic: 'assests/images/logo/black_transparent_logo.png',
             type: 'video',
@@ -29,7 +29,7 @@
         },
         {
             id: 4,
-            username: 'Innovation',
+            username: 'Learning.',
             mediaUrl: 'assests/images/ourstory/load (3).jpg',
             profilePic: 'assests/images/ourstory/load (3).jpg',
             type: 'image',
@@ -38,16 +38,7 @@
         },
         {
             id: 5,
-            username: 'Beginning',
-            mediaUrl: 'assests/images/logo/white_transparent_logo.png',
-            profilePic: 'assests/images/logo/black_transparent_logo.png',
-            type: 'image',
-            duration: 10000, // 10 seconds
-            viewed: false
-        },
-        {
-            id: 5,
-            username: 'Beginning',
+            username: 'Growing.',
             mediaUrl: 'assests/images/logo/white_transparent_logo.png',
             profilePic: 'assests/images/logo/black_transparent_logo.png',
             type: 'image',

@@ -2,10 +2,7 @@ class MusicController {
     constructor() {
         // List of songs to choose from (update with your actual file paths)
         this.songs = [
-            './assests/music/music (1).mpeg',
-            './assests/music/music (2).mpeg',
-            './assests/music/music (3).mpeg',
-            './assests/music/music (4).mpeg'
+            './assests/music/music (1).mpeg'
         ];
         
         this.isMuted = true;  // Whether the *background music* is muted

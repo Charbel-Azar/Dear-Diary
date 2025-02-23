@@ -1576,7 +1576,7 @@ Dirty Secret
   text-align: center;
   line-height: 1.1;
   margin-bottom: 2rem;
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-family: 'GalleryModern', sans-serif;
 }
 
@@ -2111,7 +2111,7 @@ Dirty Secret
 
 @media (max-width: 768px) {
   .story {
-    width: 8vh; /* Back to original mobile size */
+    width: 7.3vh; /* Back to original mobile size */
   }
   
   .story-border {
@@ -2387,9 +2387,8 @@ Dirty Secret
   }
 }
 
-/*=========================
-  our team
-========================= */   .team-section {
+/*=========================/* TEAM SECTION */
+.team-section {
   background-color: #000;
   margin-top: 5vh;
   margin-bottom: 5vh;
@@ -2401,8 +2400,8 @@ Dirty Secret
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(3, 35vh); /* Changed to 3 columns, 35vh each */
-  gap: 5vh; /* Increased gap between cards */
+  grid-template-columns: repeat(3, 35vh); /* 3 columns, each 35vh wide */
+  gap: 10vh;
   margin: 0 auto;
   justify-content: center;
   width: fit-content; /* Ensure grid wraps content */
@@ -2413,13 +2412,13 @@ Dirty Secret
   border-radius: 15px;
   overflow: hidden;
   transition: all 0.3s ease;
-  width: 35vh; /* Fixed width */
+  width: 35vh;
 }
 
 .image-containerteam {
   position: relative;
-  width: 35vh; /* Fixed width */
-  height: 35vh; /* Fixed height */
+  width: 35vh;
+  height: 35vh;
   overflow: hidden;
 }
 
@@ -2433,60 +2432,24 @@ Dirty Secret
   transition: opacity 0.3s ease;
 }
 
-.filter-icons {
-  position: absolute;
-  bottom: 2vh;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 1.5vh; /* Slightly increased gap */
-  z-index: 2;
-}
-
-.filter-icon {
-  width: 5vh; /* Increased size */
-  height: 5vh; /* Increased size */
-  border-radius: 50%;
-  background-color: rgba(128, 128, 128, 0.8);
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.filter-icon i {
-  color: white;
-  font-size: 2.2vh; /* Increased size */
-}
-
-.filter-icon:hover {
-  background-color: #E2CB9F;
-}
-
-.filter-icon.active {
-  background-color: #E2CB9F;
-}
-
 .info-container {
-  background-color: #E2CB9F;
-  padding: 1.5rem; /* Increased padding */
+  background-color: #2b2a29;
+  padding: 1.5rem;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
 }
 
 .member-title {
   font-family: 'Syne';
-  font-size: 2.5vh; /* Increased size */
+  font-size: 2.5vh;
   font-weight: bold;
-  color: #0e0e0e;
+  color: #E2CB9F;
   margin: 0;
 }
 
 .member-name {
-  font-size: 1.8vh; /* Increased size */
-  color: #666;
+  font-size: 1.8vh;
+  color: #89795a;
   margin: 0.5rem 0 0;
   font-family: 'Syne';
 }
@@ -2590,25 +2553,9 @@ Dirty Secret
   height: 100%;
   object-fit: cover;
   pointer-events: none;
+  display: block;
 }
 
-.element .description {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.938);
-  padding: 0.5rem;
-  font-size: 3vh;
-  color: #E2CB9F;
-  font-family: 'Ms Madi';
-  transform: translateY(100%);
-  transition: transform 0.3s ease;
-  text-shadow: 0 0 10px rgba(226, 203, 159, 0.7),
-               0 0 20px rgba(226, 203, 159, 0.5),
-               0 0 30px rgba(226, 203, 159, 0.3);
-  animation: glow 2s ease-in-out infinite alternate;
-}
 
 @keyframes glow {
   from {
@@ -2623,9 +2570,7 @@ Dirty Secret
   }
 }
 
-.element:hover .description {
-  transform: translateY(0);
-}
+
 
 /* Floating animation */
 @keyframes float {
