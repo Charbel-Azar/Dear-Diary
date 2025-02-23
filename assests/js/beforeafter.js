@@ -26,7 +26,7 @@ document.querySelectorAll('.image-container').forEach(container => {
         if (!isResizing) return;
 
         const rect = wrapper.getBoundingClientRect();
-        const x = (e.type === 'mousemove' ? e.pageX : e.touches[0].pageX) - rect.left;
+        const x = (e.type === 'mousemove' ? e.clientX : e.touches[0].clientX) - rect.left; // Using clientX for more precise positioning
         const percent = Math.min(Math.max(x / rect.width * 100, 0), 100);
 
         slider.style.left = `${percent}%`;

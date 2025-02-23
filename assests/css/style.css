@@ -66,6 +66,7 @@ body {
     padding: 0;
   }
   
+   
  /*=========================
 NAVIGATION STYLES
 ========================= */
@@ -73,183 +74,195 @@ NAVIGATION STYLES
 
  /* Update the z-index values and loading screen transition */
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Lower than loading screen */
-    transition: all 0.3s ease;
-  }
-  
-  .navbar.scrolled {
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-  
-  .nav-container {
-    max-width: 120vh;
-    margin: 0 auto;
-    padding: 0 3vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  /* Logo styles and hover effect */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Lower than loading screen */
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-container {
+  max-width: 120vh;
+  margin: 0 auto;
+  padding: 0 3vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo styles and hover effect */
 .logo {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.logo img {
+  height: 14vh;
+  width: auto;
+  transition: all 0.3s ease;
+}
+
+.logo:hover img {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8))
+         drop-shadow(0 0 20px rgba(255, 255, 255, 0.8))
+         drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
+  transform: scale(1.05);
+}
+
+
+.nav-links {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1vh 3vh;
+  border-radius: 5vh;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+/* Navigation Links Hover Effect */
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  padding: 1vh 2vh;
+  margin: 0 1vh;
+  font-size: 2vh;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+               0 0 20px rgba(255, 255, 255, 0.8),
+               0 0 30px rgba(255, 255, 255, 0.6);
+}
+
+/* Social Links Hover Effect */
+.social-links a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 2vh;
+  font-size: 2.5vh;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+               0 0 20px rgba(255, 255, 255, 0.8),
+               0 0 30px rgba(255, 255, 255, 0.6);
+  transform: scale(1.1);
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.menu-circle {
+  width: 4vh;
+  height: 4vh;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.menu-bar {
+  width: 2vh;
+  height: 0.2vh;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: right 0.3s ease;
+  z-index: 100;
+}
+
+.mobile-menu.active {
+  right: 0;
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  padding: 80px 2rem;
+}
+
+.mobile-menu-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 2.5vh;
+  padding: 2vh 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile Menu Button Active State */
+.mobile-menu-btn.active .menu-bar:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.mobile-menu-btn.active .menu-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.active .menu-bar:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-links, .social-links {
+    display: none;
   }
-  
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .nav-container {
+    padding: 0 1rem;
+  }
+
   .logo img {
     height: 12vh;
     width: auto;
-    transition: all 0.3s ease;
   }
+}
+
+
+
   
-  .logo:hover img {
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8))
-           drop-shadow(0 0 20px rgba(255, 255, 255, 0.8))
-           drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
-    transform: scale(1.05);
-  }
-  
-  
-  .nav-links {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1vh 3vh;
-    border-radius: 5vh;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-  }
-  
- /* Navigation Links Hover Effect */
-.nav-links a {
-    color: #fff;
-    text-decoration: none;
-    padding: 1vh 2vh;
-    margin: 0 1vh;
-    font-size: 2vh;
-    transition: all 0.3s ease;
-  }
-  
-  .nav-links a:hover {
-    color: #fff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-                 0 0 20px rgba(255, 255, 255, 0.8),
-                 0 0 30px rgba(255, 255, 255, 0.6);
-  }
-  
-  /* Social Links Hover Effect */
-  .social-links a {
-    color: #fff;
-    text-decoration: none;
-    margin-left: 2vh;
-    font-size: 2.5vh;
-    transition: all 0.3s ease;
-  }
-  
-  .social-links a:hover {
-    color: #fff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-                 0 0 20px rgba(255, 255, 255, 0.8),
-                 0 0 30px rgba(255, 255, 255, 0.6);
-    transform: scale(1.1);
-  }
-  
-  /* Mobile Menu Button */
-  .mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-  }
-  
-  .menu-circle {
-    width: 4vh;
-    height: 4vh;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-  }
-  
-  .menu-bar {
-    width: 2vh;
-    height: 0.2vh;
-    background: #fff;
-    transition: all 0.3s ease;
-  }
-  
-  /* Mobile Menu */
-  .mobile-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: right 0.3s ease;
-    z-index: 1001;
-  }
-  
-  .mobile-menu.active {
-    right: 0;
-  }
-  
-  .mobile-menu-links {
-    display: flex;
-    flex-direction: column;
-    padding: 80px 2rem;
-  }
-  
-  .mobile-menu-links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 2.5vh;
-    padding: 2vh 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  /* Mobile Menu Button Active State */
-  .mobile-menu-btn.active .menu-bar:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
-  }
-  
-  .mobile-menu-btn.active .menu-bar:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .mobile-menu-btn.active .menu-bar:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .nav-links, .social-links {
-      display: none;
-    }
-  
-    .mobile-menu-btn {
-      display: block;
-    }
-  
-    .nav-container {
-      padding: 0 1rem;
-    }
-  
-    .logo img {
-      height: 10vh;
-      width: auto;
-    }
-  }
-  
+  /* Active page glowing effect for both desktop and mobile nav links */
+.nav-links a.active,
+.mobile-menu-links a.active {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+               0 0 20px rgba(255, 255, 255, 0.8),
+               0 0 30px rgba(255, 255, 255, 0.6);
+}
+
 
 
 
@@ -284,15 +297,23 @@ LOADING SCREEN
     pointer-events: none; /* Prevent interaction while hidden */
     z-index: 10000; /* Maintain high z-index during transition */
   }
-  /* Desktop styles */
-.containercamera {
-  position: relative;
-  width: 80vh;
-  height: 50vh;
-  overflow: hidden;
-  cursor: crosshair;
-  border-radius: 20px;
-}
+  .custom-crosshair {
+    position: fixed;
+    width: 4vh; /* Adjust based on your image size */
+    height: 4vh; /* Adjust based on your image size */
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 100000;
+    display: none; /* Start hidden */
+  }
+  
+  .containercamera {
+    position: relative;
+    width: 80vh;
+    height: 50vh;
+    overflow: hidden;
+    cursor: none; /* Hide the default cursor */
+  }
 
 .videocamera {
   position: absolute;
@@ -323,7 +344,7 @@ LOADING SCREEN
 
 .wave-text {
   position: absolute;
-  bottom: 5vh;
+  bottom: 10vh;
   left: 50%;
   transform: translateX(-50%);
   color: white;
@@ -347,9 +368,33 @@ LOADING SCREEN
     transform: translateY(-15px);
   }
 }
+.skip-button {
+  position: absolute;
+  bottom: 2vh;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 30px;
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  border-radius: 25px;
+  font-family: var(--body-font);
+  font-size: 2vh;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.5s ease;
+  visibility: hidden; /* Start with button hidden */
+}
 
-  
+.skip-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
 
+.skip-button.show {
+  opacity: 1;
+  visibility: visible;
+}
 
   .imagecamera {
     position: absolute;
@@ -436,10 +481,6 @@ LOADING SCREEN
     border-radius: 5px;
   }
 
-  /* Ensure mobile menu stays below loading screen */
-.mobile-menu {
-    z-index: 99;
-  }
  /*=========================
  Video intro
 ========================= */
@@ -672,7 +713,7 @@ LOADING SCREEN
 
 .page-content {
   font-family: 'MsMadi', cursive;
-  font-size: 2vh;
+  font-size: 1.5vh;
   color: #333;
   line-height: 1.6;
   text-align: center;
@@ -690,7 +731,7 @@ LOADING SCREEN
 }
 @media (min-width: 768px) {
   .page-content {
-    font-size: 6vh; /* Desktop size */
+    font-size: 4vh; /* Desktop size */
   }
 }
 
@@ -731,36 +772,44 @@ LOADING SCREEN
 
 /*=========================
   slogan
-========================= */
+========================= *//* Ensure the slogan section is positioned properly */
+.slogan-section {
+  position: relative;
+  margin-top: 50px;
+}
+
+
+/* Ensure the slogan text is displayed properly */
 .slogan {
   text-align: center;
   font-family: var(--heading-font);
   color: #fff;
   margin-bottom: 8vh;
-  
   position: relative;
-  /* Mobile font size */
   font-size: 8vh;
 }
 
-/* Desktop font size */
+/* Mobile font size */
 @media (min-width: 768px) {
   .slogan {
     font-size: 13vh;
     margin-top: -20vh;
   }
 }
-/* Hide br on mobile */
+
+/* Hide the line break (br) on mobile */
 .slogan br {
   display: block;
 }
 
-/* Show br on desktop */
+/* Show the line break (br) only on desktop */
 @media (min-width: 768px) {
   .slogan br {
     display: none;
   }
 }
+
+/* Neon text effect */
 .neon-text {
   color: #E2CB9F;
   text-shadow: 
@@ -908,21 +957,33 @@ Dirty Secret
 }
 
 .videosecret-container {
-  max-width: 40vh;    /* Adjust as needed */
-  margin: 0 auto;      /* Center the container */
-  margin-bottom: 4vh;  /* Same spacing as before */
-  text-align: center;  /* If you want it centered in text context */
+  position: relative;  /* Allows the pseudo-element to be absolutely positioned inside */
+  max-width: 40vh;     
+  margin: 0 auto;
+  margin-bottom: 4vh;
+  text-align: center;
+}
+
+/* The fade overlay */
+.videosecret-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  /* Use a fixed height in px, %, or vh. 
+     Example: 30% of the container height */
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, #000);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .secret-video {
   width: 100%;
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 0 20px rgba(255,255,255,0.15);
-  /* Or try a white border plus shadow:
-     border: 2px solid #fff;
-     box-shadow: 0 0 20px rgba(255,255,255,0.2);
-  */
+
   display: block;
+  /* No extra z-index needed unless you want other overlays on top */
 }
 
 
@@ -1472,6 +1533,8 @@ Dirty Secret
   }
 }
 
+
+
 /*=========================
   Footer
 ========================= */
@@ -1502,7 +1565,7 @@ Dirty Secret
   border-radius: 50px;
   text-decoration: none;
   font-family: 'MsMadi', cursive;
-  font-size: 2vh;
+  font-size: 6vh;
   transition: all 0.3s ease;
   animation: flicker 1.5s infinite alternate;
   text-shadow: 
@@ -1595,7 +1658,7 @@ Dirty Secret
   }
 
   .cta-button {
-      font-size: 1.2rem;
+      font-size: 4vh;
       padding: 0.8rem 1.6rem;
   }
 }
@@ -2210,7 +2273,7 @@ Dirty Secret
       transform: scale(1);
   }
   50% {
-      transform: scale(1.1);
+      transform: scale(1.5);
   }
   100% {
       transform: scale(1);
@@ -2256,6 +2319,8 @@ Dirty Secret
   background: black;
   overflow: hidden;
   position: relative;
+  padding-right: 4vh;
+  padding-left: 4vh;
 }
 
 .text-container {
@@ -2572,9 +2637,9 @@ Dirty Secret
     font-size: 2.5vw;
   }
 }
-/*=========================
-  Container & Box Styling
-=========================*/
+/*==========================
+  QUOTE CONTAINER
+==========================*/
 .quote-container {
   width: 70vw;          /* 70% of viewport width (desktop default) */
   height: 50vh;         /* 50% of viewport height */
@@ -2586,6 +2651,9 @@ Dirty Secret
   margin: 0 auto;
 }
 
+/*==========================
+  QUOTE BOX
+==========================*/
 .quote-box {
   background-color: #000000;
   border-radius: 2vh;
@@ -2600,9 +2668,9 @@ Dirty Secret
   transform: translateY(-5px);
 }
 
-/*=========================
-  Title Styling
-=========================*/
+/*==========================
+  TITLE
+==========================*/
 .quote-title {
   text-align: center;
   color: #E2CB9F;
@@ -2612,19 +2680,15 @@ Dirty Secret
   font-weight: 700;
 }
 
-/*=========================
+/*==========================
   "Notebook" Writing Area
-=========================*/
+==========================*/
 .writing-area {
-  /* Background color */
   background-color: #000;
-
   /*
-    Notebook lines:
-    - Transparent gap controls the vertical spacing between lines
-    - "2em" means each set of lines is spaced by 2em
-    - "1px" means each line is 1px thick
-    - background-position-y: shift lines down to add a "top margin" for the first line
+    Example "lined paper" using repeating-linear-gradient:
+    The pattern repeats every 12vh. 
+    Adjust as necessary if you want different spacing.
   */
   background-image: repeating-linear-gradient(
     to bottom,
@@ -2633,22 +2697,28 @@ Dirty Secret
     transparent 0.1vh,
     transparent 12vh
   );
-  background-position-y: 0vh; /* Shift the first line 2em from the top */
-  
+  background-position-y: 1vh; /* Shift lines slightly from top */
+
   border-radius: 1.5vh;
   padding: 2vw;
   overflow-wrap: break-word;
   height: 30vh;
 }
 
-/*=========================
-  Text Being Typed
-=========================*/
+/*==========================
+  TEXT BEING TYPED (CLAMPED)
+==========================*/
 .quote-text {
   color: #E2CB9F;
   font-family: 'Ms Madi', cursive;
-  font-size: 3vw;        /* Desktop font size */
-  line-height: 2;        /* Aligns nicely with the 2em spacing in the background */
+  font-size: 3vw;
+  /* ********** LINE CLAMP MAGIC ********** */
+  display: -webkit-box;          /* Needed for line-clamp in WebKit-based browsers */
+  -webkit-box-orient: vertical;  /* Vertical box-orient */
+  -webkit-line-clamp: 2;         /* (Desktop) exactly 2 lines */
+  overflow: hidden;              /* Hide overflow beyond the 2 lines */
+
+  line-height: 1.8;
   text-shadow:
     0 0 5px   #E2CB9F,
     0 0 10px  #E2CB9F,
@@ -2686,12 +2756,13 @@ Dirty Secret
       transparent 0.1vh,
       transparent 5vh
     );
-    background-position-y: -0.1vh; /* Shift lines 1em from the top */
+    background-position-y: 5vh; /* Shift lines 1em from the top */
   }
 
   .quote-text {
-    font-size: 4vh;  /* Increase relative font size on mobile */
-    line-height: 5vh;
+    font-size: 4vh;   
+    line-height: 5vh;         
+    -webkit-line-clamp: 5;      /* ← Force 5 lines on phones/tablets */
   }
 }
 
@@ -2739,7 +2810,7 @@ Dirty Secret
   width: 28vh;
   height: 55vh;
   background: #333;
-  border-radius: 25px;
+  border-radius: 3vh;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);

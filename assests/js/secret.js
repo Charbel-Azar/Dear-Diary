@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-
+  const container = document.querySelector('.secret-section');
   // --- Physics constants ---
   const FRICTION = 0.995;
   const MAX_ROTATION_SPEED = 8;
@@ -34,61 +34,56 @@ document.addEventListener('DOMContentLoaded', function() {
   // ------------------------------------------------------------
   function updateClonePosition(keyData) {
     if (!keyData.clone) return;
-    keyData.clone.style.transform = `
-      translate3d(${keyData.x}px, ${keyData.y}px, 0)
-      rotate(${keyData.rotation}deg)
-    `;
+    keyData.clone.style.transform = `translate3d(${keyData.x}px, ${keyData.y}px, 0) rotate(${keyData.rotation}deg)`;
   }
+  
 
   // ------------------------------------------------------------
   // startDrag: Called on mousedown/touchstart
   // ------------------------------------------------------------
-  function startDrag(e, keyData) {
-    e.preventDefault();
+ // Updated startDrag function:
+ function startDrag(e, keyData) {
+  e.preventDefault();
+  if (!keyData.isFloating) {
+    keyData.isFloating = true;
+    const rect = keyData.original.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
 
-    // If this key is not yet floating, create a clone & hide the original
-    if (!keyData.isFloating) {
-      keyData.isFloating = true;
-      const rect = keyData.original.getBoundingClientRect();
+    // Create the clone and append it to the container
+    const clone = keyData.original.cloneNode(true);
+    clone.classList.add('drag-clone');
+    clone.style.position = 'absolute'; // Absolute positioning within container
 
-      // Create the clone
-      const clone = keyData.original.cloneNode(true);
-      clone.classList.add('drag-clone'); 
-      clone.style.position = 'fixed';    
-      clone.style.left = '0';
-      clone.style.top  = '0';
-      clone.style.zIndex = '999999';
-      clone.style.pointerEvents = 'auto'; // Let the clone receive pointer events
+    // Set initial position relative to the container, stored in keyData
+    keyData.x = rect.left - containerRect.left;
+    keyData.y = rect.top - containerRect.top;
 
-      // Append the clone to the body
-      document.body.appendChild(clone);
+    // Set left/top to 0 so that transform is the only positioning mechanism
+    clone.style.left = '0px';
+    clone.style.top = '0px';
+    clone.style.zIndex = '999999';
+    clone.style.pointerEvents = 'auto';
 
-      // Attach new listeners so the clone can be dragged again later
-      clone.addEventListener('mousedown', ev => startDrag(ev, keyData));
-      clone.addEventListener('touchstart', ev => startDrag(ev, keyData), { passive: false });
+    container.appendChild(clone);
 
-      // Initialize clone & position
-      keyData.clone = clone;
-      keyData.x = rect.left;
-      keyData.y = rect.top;
-      updateClonePosition(keyData);
+    // Attach listeners to the clone as before
+    clone.addEventListener('mousedown', ev => startDrag(ev, keyData));
+    clone.addEventListener('touchstart', ev => startDrag(ev, keyData), { passive: false });
 
-      // Hide the original key
-      keyData.original.style.visibility = 'hidden';
-    }
+    keyData.clone = clone;
 
-    // Mark as dragging
-    keyData.isDragging = true;
-    keyData.clone.classList.add('dragging');
-
-    // Store last mouse/touch position
-    const touch = e.type === 'touchstart' ? e.touches[0] : e;
-    keyData.lastX = touch.clientX;
-    keyData.lastY = touch.clientY;
-
-    // Stop leftover spin velocity
-    keyData.rotationSpeed = 0;
+    // Hide the original key
+    keyData.original.style.visibility = 'hidden';
   }
+
+  keyData.isDragging = true;
+  keyData.clone.classList.add('dragging');
+
+  const touch = e.type === 'touchstart' ? e.touches[0] : e;
+  keyData.lastX = touch.clientX;
+  keyData.lastY = touch.clientY;
+
+  keyData.rotationSpeed = 0;}
 
   // ------------------------------------------------------------
   // drag: Called on mousemove/touchmove
@@ -140,10 +135,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // ------------------------------------------------------------
   // animate: Loop called via requestAnimationFrame
   // ------------------------------------------------------------
-  function animate() {
-    // Update physics for each key
+   // Updated animate function:
+   function animate() {
+    // Get container dimensions
+    const containerRect = container.getBoundingClientRect();
+    const width = containerRect.width;
+    const height = containerRect.height;
+
     keysData.forEach(keyData => {
-      // If the key is floating but not being actively dragged, update its motion
       if (keyData.isFloating && !keyData.isDragging && keyData.clone) {
         keyData.velocityX *= FRICTION;
         keyData.velocityY *= FRICTION;
@@ -153,9 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
         keyData.rotation += keyData.rotationSpeed;
         keyData.rotationSpeed *= FRICTION;
 
-        // (Optional) Screen wrapping
-        const width = window.innerWidth;
-        const height = window.innerHeight;
+        // Use container boundaries instead of window dimensions
         if (keyData.x > width)  keyData.x = 0;
         if (keyData.x < 0)      keyData.x = width;
         if (keyData.y > height) keyData.y = 0;
@@ -164,7 +161,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updateClonePosition(keyData);
       }
     });
-
     // ------------------------------------------------------------
     // Collision detection and response between keys
     // ------------------------------------------------------------

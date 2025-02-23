@@ -31,10 +31,10 @@
     <a href="careers.html">Careers</a>
       </div>
       <div class="social-links">
-        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/deardiary.media" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/people/Dear-Diary-Media/61572525600344/" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
         <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.tiktok.com/@deardiary.media" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>    
       </div>
 
     <button class="mobile-menu-btn" aria-label="Toggle menu">
@@ -55,15 +55,14 @@
     <a href="offers.html">Offers</a>
     <a href="careers.html">Careers</a>
   </div>
-  <div class="mobile-social-links">
-    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+   <div class="mobile-social-links">
+    <a href="https://www.instagram.com/deardiary.media" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.facebook.com/people/Dear-Diary-Media/61572525600344/" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
     <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+    <a href="https://www.tiktok.com/@deardiary.media" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
   </div>
 </div>
 
-<!-- LOADING SCREEN -->
 <section id="loading-screen" class="loading-screen-section">
   <div class="containercamera">
     <video class="videocamera" autoplay muted loop playsinline>
@@ -97,7 +96,7 @@
     <span style="--i: 21;">r</span>
     <span style="--i: 22;">e</span>
   </div>
-  
+  <button id="skip-button" class="skip-button">Skip</button>
 </section>
 
   <!-- MAIN WEBSITE CONTENT -->
@@ -172,28 +171,31 @@
     <div class="workvideos-spacer"></div>
 
 </section>
-
+<button id="volumeButton" class="volume-button" aria-label="Toggle Music">
+  <i class="fas fa-volume-mute"></i>
+</button>
 <footer class="footer-container">
   <div class="footer-message">
       Oh Look, You've Made it<br>
       All The Way Down Here
   </div>
-  <div style="text-align: center;">
-      <a href="#contact" class="cta-button" style="margin-bottom: 5vh;">Let's Connect</a>
+    <div style="text-align: center;">
+      <a href="https://wa.me/96171293786?text=Hey%21" target="_blank" class="cta-button" style="margin-bottom: 5vh;">Let's Connect</a>
   </div>
   <div class="footer-bottom">
-      <div class="socialf-links">
-          <a href="#instagram">Instagram</a>
-          <a href="#twitter">Facebook</a>
-          <a href="#linkedin">LinkedIn</a>
-          <a href="#tiktok">TikTok</a>
-      </div>
-      <div class="copyright">
-          © 2024 YourCompany - Created with Purpose
+   <div class="socialf-links">
+    <a href="https://www.instagram.com/deardiary.media">Instagram</a>
+    <a href="https://www.facebook.com/people/Dear-Diary-Media/61572525600344/">Facebook</a>
+    <a href="#">LinkedIn</a>
+    <a href="https://www.tiktok.com/@deardiary.media">TikTok</a>
+</div>
+
+     <div class="copyright">
+          © 2024 DearDiary
       </div>
       <div class="contact-info">
-        <p>123 Creative Avenue, Suite 101</p>
-        <p><a href="mailto:hello@yourcompany.com" style=" animation: flicker 1.2s infinite alternate; color: #E2CB9F;">hello@yourcompany.com</a></p>
+        <p><a href="https://g.co/kgs/cCJ9SnF" target="_blank">BDD, Bechara El Khoury, Beirut, Lebanon</a></p>
+        <p><a href="mailto:hello@deardiary.media" style=" animation: flicker 1.2s infinite alternate; color: #E2CB9F;">hello@deardiary.media  </a></p>
     </div>
   </div>
 </footer>
@@ -203,146 +205,139 @@
  
   <script src="./assests/js/camera.js"></script>
   <script src="./assests/js/splitvideos.js"></script>
+  <script src="./assests/js/music.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="./assests/js/main.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function() {
-    const LETTER_DELAY = 0.1;  // Delay between each letter (in seconds)
-    const RANDOM_VARIANCE = 0.05;  // Random extra delay
-    const START_DELAY = 2; // Delay (in seconds) before starting animation
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const LETTER_DELAY = 0.1;
+    const RANDOM_VARIANCE = 0.05;
+    const START_DELAY = 2;
 
-    const titleEl = document.querySelector('.quote-title');
     const textEl = document.querySelector('.quote-text');
     let currentIndex = -1;
 
-    // Create sparkles at the position of the last letter
     function createSparklesAt(lastSpan) {
-      const spanRect = lastSpan.getBoundingClientRect();
-      const containerRect = titleEl.getBoundingClientRect();
-      const x = spanRect.left - containerRect.left + spanRect.width / 2;
-      const y = spanRect.top - containerRect.top + spanRect.height / 2;
-      
-      const sparkleCount = 5;
-      for (let i = 0; i < sparkleCount; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.classList.add('sparkle');
-        sparkle.style.left = `${x}px`;
-        sparkle.style.top = `${y}px`;
-        titleEl.appendChild(sparkle);
+        const spanRect = lastSpan.getBoundingClientRect();
+        const containerRect = textEl.getBoundingClientRect();
+        const x = spanRect.left - containerRect.left + spanRect.width / 2;
+        const y = spanRect.top - containerRect.top + spanRect.height / 2;
         
-        const angle = Math.random() * Math.PI * 2;
-        const distance = 20 + Math.random() * 20;
-        const targetX = Math.cos(angle) * distance;
-        const targetY = Math.sin(angle) * distance;
-        
-        gsap.to(sparkle, {
-          duration: 1,
-          x: targetX,
-          y: targetY,
-          opacity: 0,
-          scale: 1.5,
-          ease: "power1.out",
-          onComplete: () => sparkle.remove()
-        });
-      }
-    }
-
-    // Write "Dear Diary," letter by letter
-    function writeTitle() {
-      const title = "Dear Diary,";
-      titleEl.innerHTML = '';
-      
-      const chars = title.split('');
-      let lastSpan = null;
-
-      chars.forEach((char, index) => {
-        const span = document.createElement('span');
-        span.textContent = char;
-        titleEl.appendChild(span);
-
-        gsap.from(span, {
-          opacity: 0,
-          duration: 0.1,
-          delay: (index * LETTER_DELAY) + (Math.random() * RANDOM_VARIANCE),
-          ease: "power1.out",
-          onComplete: () => {
-            if (index === chars.length - 1) {
-              createSparklesAt(lastSpan);
-              setTimeout(startDiaryEntries, 1000);  // Start diary entries after title animation ends
-            }
-          }
-        });
-        
-        if (index === chars.length - 1) {
-          lastSpan = span;
+        const sparkleCount = 5;
+        for (let i = 0; i < sparkleCount; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.style.left = `${x}px`;
+            sparkle.style.top = `${y}px`;
+            textEl.appendChild(sparkle);
+            
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 20 + Math.random() * 20;
+            const targetX = Math.cos(angle) * distance;
+            const targetY = Math.sin(angle) * distance;
+            
+            gsap.to(sparkle, {
+                duration: 1,
+                x: targetX,
+                y: targetY,
+                opacity: 0,
+                scale: 1.5,
+                ease: "power1.out",
+                onComplete: () => sparkle.remove()
+            });
         }
-      });
     }
 
     function startDiaryEntries() {
-      const quotes = [
-        "Success is not final, failure is not fatal: it is the courage to continue that counts.",
-        "In three words I can sum up everything I've learned about life: it goes on.",
-        "The future belongs to those who believe in the beauty of their dreams.",
-        "Life is what happens while you're busy making other plans.",
-        "Every moment is a fresh beginning."
-      ];
+        const quotes = [
+            "Dear Diary,  success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "Dear Diary,  in three words I can sum up everything I've learned about life: it goes on.",
+            "Dear Diary,  the future belongs to those who believe in the beauty of their dreams.",
+            "Dear Diary,  life is what happens while you're busy making other plans.",
+            "Dear Diary,  every moment is a fresh beginning."
+        ];
 
-      function getRandomQuote() {
-        let newIndex;
-        do {
-          newIndex = Math.floor(Math.random() * quotes.length);
-        } while (newIndex === currentIndex && quotes.length > 1);
-        currentIndex = newIndex;
-        return quotes[currentIndex];
-      }
-
-      function typeQuote() {
-        const quote = getRandomQuote();
-        textEl.innerHTML = '';
-        
-        const chars = quote.split('');
-        let lastSpan = null;
-
-        chars.forEach((char, index) => {
-          const span = document.createElement('span');
-          span.textContent = char;
-          textEl.appendChild(span);
-          
-          gsap.from(span, {
-            opacity: 0,
-            duration: 0.1,
-            delay: (index * LETTER_DELAY) + (Math.random() * RANDOM_VARIANCE),
-            ease: "power1.out"
-          });
-
-          if (index === chars.length - 1) {
-            lastSpan = span;
-          }
-        });
-
-        if (lastSpan) {
-          gsap.delayedCall((chars.length * LETTER_DELAY) + 0.1, () => {
-            createSparklesAt(lastSpan);
-          });
+        function getRandomQuote() {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * quotes.length);
+            } while (newIndex === currentIndex && quotes.length > 1);
+            currentIndex = newIndex;
+            return quotes[currentIndex];
         }
 
-        gsap.to(textEl, {
-          delay: 20,
-          duration: 1,
-          opacity: 0,
-          onComplete: () => {
-            gsap.set(textEl, { opacity: 1 });
-            typeQuote();
-          }
-        });
-      }
+        function typeQuote() {
+            const quote = getRandomQuote();
+            textEl.innerHTML = '';
+            
+            // Split the quote into "Dear Diary," and the rest
+            const [dearDiary, ...restOfQuote] = quote.split('Dear Diary, ');
+            const dearDiaryChars = 'Dear Diary,'.split('');
+            const restChars = restOfQuote.join('').split('');
+            
+            let lastSpan = null;
 
-      typeQuote();
+            // Type "Dear Diary,"
+            dearDiaryChars.forEach((char, index) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                textEl.appendChild(span);
+                
+                gsap.from(span, {
+                    opacity: 0,
+                    duration: 0.1,
+                    delay: (index * LETTER_DELAY) + (Math.random() * RANDOM_VARIANCE),
+                    ease: "power1.out"
+                });
+
+                // If it's the last character of "Dear Diary,"
+                if (index === dearDiaryChars.length - 1) {
+                    // Add 1 second pause before continuing with the rest
+                    const pauseDelay = (index * LETTER_DELAY) + 1;
+                    
+                    // Type the rest of the quote after the pause
+                    restChars.forEach((restChar, restIndex) => {
+                        const restSpan = document.createElement('span');
+                        restSpan.textContent = restChar;
+                        textEl.appendChild(restSpan);
+                        
+                        gsap.from(restSpan, {
+                            opacity: 0,
+                            duration: 0.1,
+                            delay: pauseDelay + (restIndex * LETTER_DELAY) + (Math.random() * RANDOM_VARIANCE),
+                            ease: "power1.out"
+                        });
+
+                        if (restIndex === restChars.length - 1) {
+                            lastSpan = restSpan;
+                        }
+                    });
+                }
+            });
+
+            if (lastSpan) {
+                gsap.delayedCall((dearDiaryChars.length * LETTER_DELAY) + 1 + (restChars.length * LETTER_DELAY) + 0.1, () => {
+                    createSparklesAt(lastSpan);
+                });
+            }
+
+            gsap.to(textEl, {
+                delay: 20,
+                duration: 1,
+                opacity: 0,
+                onComplete: () => {
+                    gsap.set(textEl, { opacity: 1 });
+                    typeQuote();
+                }
+            });
+        }
+
+        typeQuote();
     }
 
-    // Delay the start of the title animation
-    setTimeout(writeTitle, START_DELAY * 1000);
-  });
+    // Start immediately since we removed the title animation
+    setTimeout(startDiaryEntries, START_DELAY * 1000);
+});
   </script>
   
 </body>

@@ -52,3 +52,25 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   });
+ 
+
+  document.addEventListener("DOMContentLoaded", function() {
+    // Get the current page filename from the URL
+    let currentPage = window.location.pathname.split("/").pop();
+    // If no filename is found (i.e., the homepage), assume index.html
+    if (!currentPage) {
+      currentPage = "index.html";
+    }
+    
+    // Select all nav links (both desktop and mobile)
+    const navLinks = document.querySelectorAll(".nav-links a, .mobile-menu-links a");
+
+    // Loop through each link and add the active class if its href matches the current page
+    navLinks.forEach(link => {
+      const linkPage = link.getAttribute("href");
+      if (linkPage === currentPage) {
+        link.classList.add("active");
+      }
+    });
+  });
+
