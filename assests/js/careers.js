@@ -9,7 +9,7 @@ const questions = [
             },
             {
                 text: "Taking raw footage and transforming it into pure storytelling magic.",
-                background: "url('path/to/video-editor.jpg')",
+                background: "url('./assests/images/questions/videoediting.jpg')",
                 score: { videoEditor: 2 }
             },
             {
@@ -39,7 +39,7 @@ const questions = [
             },
             {
                 text: "Adobe Premiere Pro – Because even my rescue story needs seamless transitions and killer effects.",
-                background: "url('path/to/video-editor-software.jpg')",
+                background: "url('./assests/images/questions/videoediting2.jpg')",
                 score: { videoEditor: 2 }
             },
             {
@@ -69,7 +69,7 @@ const questions = [
             },
             {
                 text: "When the cuts are so clean that even Scorsese would approve.",
-                background: "url('path/to/video-editor.jpg')",
+                background: "url('./assests/images/questions/videoediting3.jpg')",
                 score: { videoEditor: 2 }
             },
             {
@@ -99,7 +99,7 @@ const questions = [
             },
             {
                 text: "An eagle – capturing everything from the perfect angle.",
-                background: "url('path/to/videographer-spirit.jpg')",
+                background: "url('./assests/images/questions/videoediting4.jpg')",
                 score: { videographer: 2 }
             },
             {
@@ -124,12 +124,12 @@ const questions = [
         options: [
             {
                 text: "Making brands look so good that even Picasso would approve.",
-                background: "url('./assests/images/questions/graphic4   .jpg')",
+                background: "url('./assests/images/questions/graphic4.jpg')",
                 score: { graphic: 2 }
             },
             {
                 text: "Editing footage so smoothly that people don’t even notice the jump cuts.",
-                background: "url('path/to/video-editor-branding.jpg')",
+                background: "url('./assests/images/questions/videoediting5.jpg')",
                 score: { videoEditor: 2 }
             },
             {

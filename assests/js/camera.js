@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             skipButton.classList.add('show');
           });
         }
-      }, 5000);
+      }, 3000);
     }
   }
 
