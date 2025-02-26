@@ -586,201 +586,194 @@ LOADING SCREEN
 
   /*=========================
   boook/* ===================== Story Section Styles ===================== */
-.story-section {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
 
-.story-container {
-  max-width: 1200px;
-  width: 100%;
-  text-align: center;
-}
+    .story-section {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
 
-.story-heading {
-  font-family: var(--heading-font);
-  font-size: 4rem;
-  color: #fff;
-  margin-bottom: 3rem;
-  transition: all 0.3s ease;
-  cursor: default;
-}
-.story-heading:hover {
-  color: #fff;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-               0 0 20px rgba(255, 255, 255, 0.8),
-               0 0 30px rgba(255, 255, 255, 0.6),
-               0 0 40px rgba(255, 255, 255, 0.4),
-               0 0 70px rgba(255, 255, 255, 0.3);
-}
+    .story-container {
+      max-width: 1200px;
+      width: 100%;
+      text-align: center;
+    }
 
-.book-container {
-  width: 100%;
-  min-height: 400px;
-}
+    .story-heading {
+      font-family: var(--heading-font, Arial);
+      font-size: 4rem;
+      color: #fff;
+      margin-bottom: 3rem;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+    .story-heading:hover {
+      color: #fff;
+      text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.8),
+        0 0 30px rgba(255, 255, 255, 0.6),
+        0 0 40px rgba(255, 255, 255, 0.4),
+        0 0 70px rgba(255, 255, 255, 0.3);
+    }
 
-.notebook-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 60vh;
-  margin-top: 40vh;
-  background: #000000;
-}
+    .book-container {
+      width: 100%;
+      min-height: 400px;
+    }
 
-.notebook {
-  position: sticky;
-  top: 50vh;
-  width: 15vh;
-  height: 25vh;
-  transform-style: preserve-3d;
-  /* Smoother or removed transition for the notebook's position */
-  transition: transform 0.3s ease-out;
-  transform: translateY(-50%) perspective(1500px);
-  perspective: 1500px;
-}
+    .notebook-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 60vh;
+      margin-top: 40vh;
+      background: #000000;
+    }
 
-@media (min-width: 768px) {
-  .notebook {
-    width: 50vh;
-    height: 70vh;
-  }
-}
+    .notebook {
+      position: sticky;
+      top: 50vh;
+      width: 15vh;
+      height: 25vh;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease-out;
+      transform: translateY(-50%) perspective(1500px);
+      perspective: 1500px;
+    }
 
-.notebook::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 15vh;
-  height: 15vh;
-  transform: translate(-50%, -50%);
-  z-index: 100;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-.notebook:has(.page.active)::before {
-  opacity: 1;
-}
+    @media (min-width: 768px) {
+      .notebook {
+        width: 50vh;
+        height: 70vh;
+      }
+    }
 
-/* Remove these as we rely on JS now */
-.notebook.tilted,
-.notebook.tilted.slid-right {
-  transform: none;
-}
+    .notebook::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 15vh;
+      height: 15vh;
+      transform: translate(-50%, -50%);
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .notebook:has(.page.active)::before {
+      opacity: 1;
+    }
 
-.page {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform-origin: left;
-  transform-style: preserve-3d;
-  /* Use a slightly slower timing for flips and a smooth easing */
-  transition: transform 0.8s ease-in-out;
-  cursor: pointer;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 
-    10px 0 20px rgba(102, 101, 101, 0.4),
-    0 0 30px rgba(0, 0, 0, 0.1) inset;
-}
+    .page {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform-origin: left;
+      transform-style: preserve-3d;
+      transition: transform 0.8s ease-in-out;
+      cursor: pointer;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow:
+        10px 0 20px rgba(102, 101, 101, 0.4),
+        0 0 30px rgba(0, 0, 0, 0.1) inset;
+    }
 
-.page.active {
-  transform: rotateY(-180deg);
-  box-shadow: 
-    -10px 0 20px rgba(255, 255, 255, 0.4),
-    0 0 30px rgba(0, 0, 0, 0.1) inset;
-}
+    .page.active {
+      transform: rotateY(-180deg);
+      box-shadow:
+        -10px 0 20px rgba(255, 255, 255, 0.4),
+        0 0 30px rgba(0, 0, 0, 0.1) inset;
+    }
 
-.page-front,
-.page-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .page-front,
+    .page-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-.page-back {
-  transform: rotateY(180deg);
-}
+    .page-back {
+      transform: rotateY(180deg);
+    }
 
-/* Z-indices for stacking order */
-.page:nth-child(1) { z-index: 7; }
-.page:nth-child(2) { z-index: 6; }
-.page:nth-child(3) { z-index: 5; }
-.page:nth-child(4) { z-index: 4; }
-.page:nth-child(5) { z-index: 3; }
-.page:nth-child(6) { z-index: 2; }
+    /* Example stacking so front page is topmost by default */
+    .page:nth-child(1) { z-index: 7; }
+    .page:nth-child(2) { z-index: 6; }
+    .page:nth-child(3) { z-index: 5; }
+    .page:nth-child(4) { z-index: 4; }
+    .page:nth-child(5) { z-index: 3; }
+    .page:nth-child(6) { z-index: 2; }
 
-.page-content {
-  font-family: 'Ms Madi';
-  font-size: 1.5vh;
-  color: #333;
-  line-height: 1.6;
-  text-align: center;
-  width: 90%;
-  padding: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-@media (min-width: 768px) {
-  .page-content {
-    font-size: 4vh; /* Desktop size */
-  }
-}
+    .page-content {
+      font-family: 'Ms Madi', cursive, sans-serif;
+      font-size: 1.5vh;
+      color: #333;
+      line-height: 1.6;
+      text-align: center;
+      width: 90%;
+      padding: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      .page-content {
+        font-size: 4vh; /* Desktop size */
+      }
+    }
 
-.cover-image {
-  position: absolute;
-  width: 80%;
-  height: 80%;
-  object-fit: contain;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+    .cover-image {
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      object-fit: contain;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
 
-.back-cover {
-  z-index: 1;
-  cursor: pointer;
-}
-.back-cover .page-front,
-.back-cover .page-back {
-  padding: 0;
-}
+    .back-cover {
+      z-index: 1;
+      cursor: pointer;
+    }
+    .back-cover .page-front,
+    .back-cover .page-back {
+      padding: 0;
+    }
 
-.scroll-spacer {
-  height: 1700vh;
-  
-}
+    /* Make this large enough that scrolling triggers flips */
+    .scroll-spacer {
+      height: 1700vh;
+    }
 
-/* Responsive heading */
-@media (max-width: 768px) {
-  .story-heading {
-    font-size: 2.5rem;
-  }
-  
-  .story-section {
-    padding: 3rem 1rem;
-  }
-}
+    /* Responsive heading */
+    @media (max-width: 768px) {
+      .story-heading {
+        font-size: 2.5rem;
+      }
 
+      .story-section {
+        padding: 3rem 1rem;
+      }
+    }
 /*=========================
   slogan
 ========================= *//* Ensure the slogan section is positioned properly */
