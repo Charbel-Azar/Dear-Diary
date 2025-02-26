@@ -11,38 +11,38 @@
         },
         {
             id: 2,
-            username: 'Uniting.',
-            mediaUrl: 'assests/images/logo/white_transparent_logo.png',
-            profilePic: 'assests/images/logo/black_transparent_logo.png',
-            type: 'image',
-            duration: 10000, // 10 seconds
+            username: 'Uniting',
+            mediaUrl: 'assests/images/ourstory/story (2).mp4',
+            profilePic: 'assests/images/ourstory/ourstory1.png',
+            type: 'video',
+            duration: 7000, // 36 seconds
             viewed: false
         },
         {
             id: 3,
-            username: 'Beginning.',
-            mediaUrl: 'assests/images/ourstory/introvideo.mp4',
-            profilePic: 'assests/images/logo/black_transparent_logo.png',
+            username: 'Beginning',
+            mediaUrl: 'assests/images/ourstory/story (3).mp4',
+            profilePic: 'assests/images/ourstory/ourstory2.png',
             type: 'video',
-            duration: 36000, // 36 seconds
+            duration: 7000, // 36 seconds
             viewed: false
         },
         {
             id: 4,
-            username: 'Learning.',
-            mediaUrl: 'assests/images/ourstory/load (3).jpg',
-            profilePic: 'assests/images/ourstory/load (3).jpg',
-            type: 'image',
-            duration: 10000, // 10 seconds
+            username: 'Learning',
+            mediaUrl: 'assests/images/ourstory/story (1).mp4',
+            profilePic: 'assests/images/ourstory/ourstory3.png',
+            type: 'video',
+            duration: 7000, // 36 seconds
             viewed: false
         },
         {
             id: 5,
-            username: 'Growing.',
-            mediaUrl: 'assests/images/logo/white_transparent_logo.png',
-            profilePic: 'assests/images/logo/black_transparent_logo.png',
-            type: 'image',
-            duration: 10000, // 10 seconds
+            username: 'Growing',
+            mediaUrl: 'assests/images/ourstory/story (4).mp4',
+            profilePic: 'assests/images/ourstory/ourstory4.png',
+            type: 'video',
+            duration: 7000, // 36 seconds
             viewed: false
         }
     ];
@@ -50,6 +50,7 @@
     let currentStoryIndex = 0;
     let progressInterval;
     let videoElement = null;
+
     function createStories() {
         const container = document.getElementById('storiesContainer');
         container.innerHTML = ''; // Clear container first
@@ -83,7 +84,7 @@
     
             storyElement.addEventListener('click', () => {
                 if (story.type === 'add-story') {
-                    window.location.href = '/create-story';
+                    window.location.href = 'https://wa.me/96171293786?text=Hey%21';
                 } else {
                     storyElement.classList.add('active');
                     const rect = storyElement.getBoundingClientRect();
@@ -96,6 +97,7 @@
             container.appendChild(storyElement);
         });
     }
+
     function openStory(index, clickX, clickY, direction = "right") {
         currentStoryIndex = index;
         const modal = document.getElementById('storyModal');
@@ -132,6 +134,7 @@
             mediaElement.src = story.mediaUrl;
             mediaElement.controls = false;
             mediaElement.autoplay = true;
+            mediaElement.loop = true; // <-- Loop the video
             videoElement = mediaElement;
         } else {
             mediaElement = document.createElement('img');
@@ -153,15 +156,21 @@
         // Append the new media element to the container
         mediaContainer.appendChild(mediaElement);
 
-        // Handle video events and progress bar
+        // Handle video or image progress
         if (story.type === 'video') {
             mediaElement.addEventListener('loadedmetadata', function() {
-                const duration = Math.min(mediaElement.duration * 1000, story.duration);
-                startProgress(duration);
+                // Always use the story's specified duration if > 0;
+                // otherwise, fallback to the video's natural duration
+                const forcedDuration = story.duration > 0
+                    ? story.duration
+                    : mediaElement.duration * 1000;
+
+                startProgress(forcedDuration);
             });
-            mediaElement.addEventListener('ended', () => nextStory());
+            // No 'ended' event calling nextStory(), because we want to loop
             mediaElement.addEventListener('error', () => startProgress(story.duration));
         } else {
+            // For images, just use the story's duration
             startProgress(story.duration);
         }
         
@@ -206,6 +215,7 @@
         progress.style.transition = `transform ${duration}ms linear`;
         progress.style.transform = 'scaleX(1)';
 
+        // When the story's duration completes, move to the next
         progressInterval = setTimeout(() => {
             nextStory();
         }, duration);

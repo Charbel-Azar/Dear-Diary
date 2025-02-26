@@ -1,9 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
   const videoGrid = document.querySelector('.video-grid');
+  if (!videoGrid) {
+    console.error('No element with class "video-grid" found in the DOM.');
+    return;
+  }
+  
   const gridSize = 3; // 3x3 grid
   let currentPlayingVideo = null; // Track the currently playing video
 
+  // Array of 9 different video directories
+  const videoSources = [
+    'assests/images/cube/pint (1).mp4',
+    'assests/images/cube/pint (2).mp4',
+    'assests/images/cube/pint (3).mp4',
+    'assests/images/cube/pint (4).mp4',
+    'assests/images/cube/pint (5).mp4',
+    'assests/images/cube/pint (6).mp4',
+    'assests/images/cube/pint (7).mp4',
+    'assests/images/cube/pint (8).mp4',
+    'assests/images/cube/pint (9).mp4'
+  ];
+
+  // Log the video sources for debugging
+  console.log('Video sources:', videoSources);
+
   // 1. Generate 3x3 cells with video, overlay, PLAY button, and PAUSE button.
+  let videoIndex = 0;
   for (let row = 1; row <= gridSize; row++) {
     for (let col = 1; col <= gridSize; col++) {
       const cell = document.createElement('div');
@@ -17,9 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
       video.setAttribute('muted', '');
       video.setAttribute('loop', '');
       const source = document.createElement('source');
-      source.src = 'https://www.w3schools.com/html/mov_bbb.mp4';
+      source.src = videoSources[videoIndex];
       source.type = 'video/mp4';
       video.appendChild(source);
+      videoIndex++;
 
       // Create overlay
       const overlay = document.createElement('div');
@@ -102,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. Video logic:
   //    - Start all videos paused (with grayscale).
   //    - Use separate PLAY/PAUSE buttons.
-
   const videos = document.querySelectorAll('.video-cell video');
   videos.forEach(video => {
     video.pause();

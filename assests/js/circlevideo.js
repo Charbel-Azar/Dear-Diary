@@ -1,51 +1,55 @@
-
 document.addEventListener('DOMContentLoaded', function() {
   const video = document.querySelector('.expanding-video');
   const wrapper = document.querySelector('.video-wrapper');
   let videoStarted = false;
 
-  // Add volume button
-  const volumeBtn = document.createElement('button');
-  volumeBtn.className = 'volume-btn';
-  volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-  wrapper.appendChild(volumeBtn);
-
-  // Volume control
-  let isMuted = true;
-  volumeBtn.addEventListener('click', () => {
-    isMuted = !isMuted;
-    video.muted = isMuted;
-    volumeBtn.innerHTML = isMuted ?
-      '<i class="fas fa-volume-mute"></i>' :
-      '<i class="fas fa-volume-up"></i>';
-  });
-
   function updateVideoSize() {
     const rect = wrapper.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
 
+    // Calculate how much of the video is in the viewport
+    const visibleTop = Math.max(0, rect.top);
+    const visibleBottom = Math.min(viewportHeight, rect.bottom);
+    const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+    
+    // Calculate visibility percentage
+    const visibilityPercent = visibleHeight / viewportHeight;
+    
+    // Calculate scroll percentage for sizing
     const transitionDistance = window.innerHeight; 
     let scrollPercent = (transitionDistance - rect.top) / transitionDistance;
     scrollPercent = Math.min(Math.max(scrollPercent, 0), 1);
 
-    // Play/pause video at appropriate times
-    if (scrollPercent > 0 && !videoStarted) {
+    // Set volume based on visibility
+    video.volume = visibilityPercent;
+    
+    // Mute if barely visible
+    if (visibilityPercent < 0.1) {
+      video.muted = true;
+    } else {
+      video.muted = false;
+    }
+
+    // Play/pause video based on visibility
+    if (visibilityPercent > 0 && !videoStarted) {
       video.play();
       videoStarted = true;
+    } else if (visibilityPercent === 0) {
+      video.pause();
+      videoStarted = false;
     }
+
+    // Handle video sizing based on scroll percentage
     if (scrollPercent === 0) {
       // Reset to circle
       video.style.width = '200px';
       video.style.height = '200px';
       video.style.borderRadius = '50%';
-      videoStarted = false;
-      video.pause();
-      volumeBtn.classList.add('visible');
     } else if (scrollPercent === 1) {
       // Fully expanded
       video.style.width = '100%';
       video.style.height = '100vh';
       video.style.borderRadius = '0';
-      volumeBtn.classList.remove('visible');
     } else {
       // Transitioning
       const size = 200 + (scrollPercent * (window.innerWidth - 200));
@@ -55,9 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
       video.style.width = `${size}px`;
       video.style.height = `${heightSize}px`;
       video.style.borderRadius = `${borderRadius}%`;
-
-      // Fade out volume button as you scroll further
-      volumeBtn.style.opacity = Math.max(0, 1 - scrollPercent);
     }
   }
 

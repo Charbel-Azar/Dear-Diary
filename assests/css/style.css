@@ -766,8 +766,8 @@ LOADING SCREEN
 }
 
 .scroll-spacer {
-  height: 300vh;
-  pointer-events: none;
+  height: 1700vh;
+  
 }
 
 /* Responsive heading */
@@ -850,8 +850,7 @@ LOADING SCREEN
   Round video 
 ========================= */
 /* CSS Updates */
-/* CSS Updates */
-.video-expand-section {
+/* CSS Updates */.video-expand-section {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -887,48 +886,11 @@ LOADING SCREEN
   box-shadow: none !important;
 }
 
-/* Volume button styles */
-.volume-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50px;
-  height: 50px;
-  background: rgba(0, 0, 0, 0.5);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s ease;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.volume-btn.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.volume-btn:hover {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.volume-btn i {
-  color: white;
-  font-size: 20px;
-}
-
 /* Override any hover effects on the video */
 .video-wrapper:hover .expanding-video {
   box-shadow: none;
   transform: none;
 }
-
-/* Remove volume button styles */
 
 /* Override any additional hover effects from the sliding video styles */
 .video-wrapper:hover,
@@ -1388,7 +1350,6 @@ Dirty Secret
 .comparison-section {
   margin: 2rem auto;
   padding: 0 1rem;
-  cursor: none;
 }
 
 #fairyCanvas {
@@ -1534,7 +1495,19 @@ Dirty Secret
 
   }
 }
+.before-video, .after-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
+.before-video {
+  z-index: 1;
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+}
 
 
 /*=========================
@@ -2583,13 +2556,12 @@ Dirty Secret
   .title p {
     font-size: 2.5vw;
   }
-}
-/*==========================
+}/*==========================
   QUOTE CONTAINER
 ==========================*/
 .quote-container {
-  width: 70vw;          /* 70% of viewport width (desktop default) */
-  height: 50vh;         /* 50% of viewport height */
+  width: 70vw;         
+  height: 50vh;        
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2628,24 +2600,10 @@ Dirty Secret
 }
 
 /*==========================
-  "Notebook" Writing Area
+  Writing Area (No Lines)
 ==========================*/
 .writing-area {
-  background-color: #000;
-  /*
-    Example "lined paper" using repeating-linear-gradient:
-    The pattern repeats every 12vh. 
-    Adjust as necessary if you want different spacing.
-  */
-  background-image: repeating-linear-gradient(
-    to bottom,
-    #e2cb9fcc 0,
-    #e2cb9fcc 1px,
-    transparent 0.1vh,
-    transparent 12vh
-  );
-  background-position-y: 1vh; /* Shift lines slightly from top */
-
+  background-color: #000; 
   border-radius: 1.5vh;
   padding: 2vw;
   overflow-wrap: break-word;
@@ -2659,12 +2617,15 @@ Dirty Secret
   color: #E2CB9F;
   font-family: 'Ms Madi';
   font-size: 3vw;
-  /* ********** LINE CLAMP MAGIC ********** */
-  display: -webkit-box;          /* Needed for line-clamp in WebKit-based browsers */
-  -webkit-box-orient: vertical;  /* Vertical box-orient */
-  -webkit-line-clamp: 2;         /* (Desktop) exactly 2 lines */
-  overflow: hidden;              /* Hide overflow beyond the 2 lines */
 
+  /* Center the text */
+  text-align: center;
+  
+  /* For line clamping */
+  display: -webkit-box;          
+  -webkit-box-orient: vertical;  
+  -webkit-line-clamp: 2;         
+  overflow: hidden;              
   line-height: 1.8;
   text-shadow:
     0 0 5px   #E2CB9F,
@@ -2675,41 +2636,27 @@ Dirty Secret
   position: relative;
 }
 
-
 /*=========================
   Responsive (Phone)
 =========================*/
 @media (max-width: 768px) {
-  /* Adjust container dimensions for smaller screens if desired */
   .quote-container {
     width: 80vw;
     height: 50vh;
   }
 
   .quote-title {
-    font-size: 10vw; /* Larger relative size on small devices */
+    font-size: 10vw; 
   }
 
   .writing-area {
-    /*
-      Tighter line spacing on phone (optional).
-      This example changes from 2em to 1.5em. 
-      Also shift lines less from the top.
-    */
-    background-image: repeating-linear-gradient(
-      to bottom,
-      #e2cb9fcc 0,
-      #e2cb9fcc 1px,
-      transparent 0.1vh,
-      transparent 5vh
-    );
-    background-position-y: 5vh; /* Shift lines 1em from the top */
+    background-color: #000; 
   }
 
   .quote-text {
     font-size: 4vh;   
     line-height: 5vh;         
-    -webkit-line-clamp: 5;      /* ← Force 5 lines on phones/tablets */
+    -webkit-line-clamp: 5;      
   }
 }
 
@@ -2818,7 +2765,7 @@ Dirty Secret
 
 .workvideos-title {
   position: absolute;
-  top: 5%;
+  top: 3%;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -2839,6 +2786,17 @@ Dirty Secret
     z-index: 20;
   }
 }
+.workvideos-spacer {
+  position: absolute;
+  top: 20%;       /* Adjust this value if needed */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem; /* Adjust size as necessary */
+  color: #E2CB9F;
+  text-align: center;
+  z-index: 20;
+}
+
 
 /*=========================
   Services
@@ -3230,7 +3188,7 @@ Dirty Secret
   width: 50%;
   min-width: 320px;
   max-width: 800px;
-  height: 100vh;
+  height: 50vh;
   background: var(--dark-bg);
   display: flex;
   flex-direction: column;
@@ -3242,6 +3200,12 @@ Dirty Secret
   left: 0;
   right: 0;
   font-family: var(--body-font);
+}
+
+@media (max-width: 768px) {
+  .faqs-container {
+    height: 90vh;
+  }
 }
 
 
@@ -3300,6 +3264,14 @@ Dirty Secret
   flex-direction: column;
   font-family: var(--body-font);
   gap: 24px;
+
+  /* Hide the scrollbar */
+  -ms-overflow-style: none;    /* IE 11 and older Edge */
+  scrollbar-width: none;       /* Firefox */
+}
+/* For WebKit-based browsers (Chrome, Safari, Opera) */
+.chat-area::-webkit-scrollbar {
+  display: none;
 }
 
 .message {
@@ -3366,7 +3338,7 @@ Dirty Secret
 
 @keyframes wave {
   0%, 60%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-4px); }
+  30% { transform: translateY(-1.5vh); }
 }
 
 .questions-area {
@@ -3738,17 +3710,16 @@ Dirty Secret
 /*=========================
   Music Button
 ========================= */
-
-.volume-button {
+.music-controller {
   position: fixed;
   bottom: 6vh;
   left: 6vh;
   z-index: 9999;
-  width: 6vh;
-  height: 6vh;
-  border-radius: 50%;
+  width: 8vh;
+  height: 8vh;
   background: black;
   border: 2px solid #E2CB9F;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3756,33 +3727,60 @@ Dirty Secret
   transition: all 0.3s ease;
   opacity: 0;
   transform: scale(0);
+  padding: 0;
+  overflow: hidden;
 }
 
-.volume-button.visible {
+.music-controller.visible {
   opacity: 1;
   transform: scale(1);
 }
 
-.volume-button:hover {
+.music-controller:hover {
   transform: scale(1.1);
   box-shadow: 0 0 15px rgba(226, 203, 159, 0.5);
 }
 
-.volume-button i {
+.control-half {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.volume-half {
+  border-right: 1px solid #E2CB9F;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.next-half {
+  border-left: 1px solid #E2CB9F;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.control-half:hover {
+  background-color: rgba(226, 203, 159, 0.2);
+}
+
+.music-controller i {
   color: #E2CB9F;
   font-size: 2vh;
 }
 
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
-  .volume-button {
-      bottom: 3vh;
-      left: 3vh;
-      width: 8vh;
-      height: 8vh;
+  .music-controller {
+    bottom: 3vh;
+    left: 3vh;
+    width: 10vh;
+    height: 10vh;
   }
   
-  .volume-button i {
-      font-size: 2vh;
+  .music-controller i {
+    font-size: 2.5vh;
   }
 }

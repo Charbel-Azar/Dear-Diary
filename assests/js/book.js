@@ -42,16 +42,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollProgress = Math.max(0, Math.min(1, scrollInSection / maxScroll));
 
     // From 0 -> centerSlide in the first ~3% of the scroll
-    if (scrollProgress < 0.03) {
-      const slideProgress = scrollProgress / 0.03;
+    if (scrollProgress < 0.1) {
+      const slideProgress = scrollProgress / 0.1;
       let slideAmount = centerSlide * slideProgress;
       notebook.style.transform = `
         translateY(-50%) perspective(1500px) translateX(${slideAmount}vh)
       `;
     }
     // Then centerSlide -> finalSlide in the last ~3%
-    else if (scrollProgress > 0.97) {
-      const finalSlideProgress = (scrollProgress - 0.97) / 0.03;
+    else if (scrollProgress > 0.9) {
+      const finalSlideProgress = (scrollProgress - 0.9) / 0.1;
       let finalSlideAmount = centerSlide + (finalSlide * finalSlideProgress);
       
       // Clamp the final slide

@@ -1,43 +1,70 @@
 document.querySelectorAll('.image-container').forEach(container => {
     const wrapper = container.querySelector('.comparison-wrapper');
     const slider = wrapper.querySelector('.slider');
-    const beforeImage = wrapper.querySelector('.before-image');
+    const beforeVideo = wrapper.querySelector('.before-video');
     const neonText = container.querySelector('.neon-textslide');
     let isResizing = false;
 
-    // Mouse events
-    slider.addEventListener('mousedown', initResize);
-    document.addEventListener('mousemove', resize);
-    document.addEventListener('mouseup', stopResize);
+    // Mouse events - attach only to the slider element
+    slider.addEventListener('mousedown', e => {
+        e.preventDefault();
+        initResize();
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+    });
 
-    // Touch events
-    slider.addEventListener('touchstart', initResize);
-    document.addEventListener('touchmove', resize);
-    document.addEventListener('touchend', stopResize);
+    // Touch events - attach only to the slider element
+    slider.addEventListener('touchstart', e => {
+        e.preventDefault();
+        initResize();
+        document.addEventListener('touchmove', handleTouchMove);
+        document.addEventListener('touchend', handleTouchEnd);
+    });
 
-    function initResize(e) {
+    function initResize() {
         isResizing = true;
         wrapper.classList.add('active');
-        e.preventDefault();
         wrapper.style.boxShadow = '0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.6), 0 0 90px rgba(255, 255, 255, 0.4)';
     }
 
-    function resize(e) {
+    function handleMouseMove(e) {
+        resize(e.clientX);
+    }
+
+    function handleTouchMove(e) {
+        if (e.touches.length > 0) {
+            resize(e.touches[0].clientX);
+        }
+    }
+
+    function resize(clientX) {
         if (!isResizing) return;
 
         const rect = wrapper.getBoundingClientRect();
-        const x = (e.type === 'mousemove' ? e.clientX : e.touches[0].clientX) - rect.left; // Using clientX for more precise positioning
+        const x = clientX - rect.left;
         const percent = Math.min(Math.max(x / rect.width * 100, 0), 100);
 
         slider.style.left = `${percent}%`;
-        beforeImage.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
+        beforeVideo.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
 
-        // Show text when slider is near the start (5% or less)
+        // Show text when slider is near the start (15% or less)
         if (percent <= 15) {
             neonText.style.opacity = '1';
         } else {
             neonText.style.opacity = '0';
         }
+    }
+
+    function handleMouseUp() {
+        stopResize();
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+    }
+
+    function handleTouchEnd() {
+        stopResize();
+        document.removeEventListener('touchmove', handleTouchMove);
+        document.removeEventListener('touchend', handleTouchEnd);
     }
 
     function stopResize() {
