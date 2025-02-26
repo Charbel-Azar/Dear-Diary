@@ -761,8 +761,7 @@ LOADING SCREEN
 
     /* Make this large enough that scrolling triggers flips */
     .scroll-spacer {
-      height: 300vh;
-      pointer-events: none;
+      height: 1700vh;
     }
 
     /* Responsive heading */

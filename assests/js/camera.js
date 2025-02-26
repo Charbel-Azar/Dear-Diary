@@ -4,27 +4,7 @@
 class MusicController {
   constructor(userVolume = 0.5) {
     this.songs = [
-      './assests/music/ES_Always by Your Side - House Of Say.mp3',
-      './assests/music/ES_Blessed - DonVayei.mp3',
-      './assests/music/ES_Breeze - Basixx.mp3',
-      './assests/music/ES_Come My Way - HATAMITSUNAMI.mp3',
-      './assests/music/ES_Full Tank - Timothy Infinite.mp3',
-      './assests/music/ES_Hip Hop Rock Song - Def Lev.mp3',
-      './assests/music/ES_Honey - Maybe.mp3',
-      './assests/music/ES_I\'m Sweet - Adelyn Paik.mp3',
-      './assests/music/ES_Im Never Giving Up - Frook.mp3',
-      './assests/music/ES_Ladies First - John Runefelt.mp3',
-      './assests/music/ES_Long Way Home - Aiyo.mp3',
-      './assests/music/ES_Magic - Torii Wolf.mp3',
-      './assests/music/ES_Nights Off - Mimmi Bangoura.mp3',
-      './assests/music/ES_Otto\'s First Flight - Beyza.mp3',
-      './assests/music/ES_Radiance - Mizlo.mp3',
-      './assests/music/ES_Smell of Morning Coffee - Franz Gordon.mp3',
-      './assests/music/ES_The End of the Line - Rachel Collier.mp3',
-      './assests/music/ES_Two Steppin\' - Nbhd Nick.mp3',
-      './assests/music/ES_White Light - The Foundling.mp3',
-      './assests/music/ES_Ur Face - LeDorean.mp3',
-      './assests/music/ES_You - SRA.mp3'
+      './assests/music/ES_Always by Your Side - House Of Say.mp3'
     ];
 
     this.isMuted = false;  
