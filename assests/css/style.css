@@ -1338,7 +1338,7 @@ Dirty Secret
 }
 /*=========================
   Before after
-========================= */
+========================= *//* Fixed CSS for the comparison section */
 
 .comparison-section {
   margin: 2rem auto;
@@ -1355,28 +1355,29 @@ Dirty Secret
   z-index: 1000;
 }
 
-
 .comparison-container {
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  gap: 5rem; /* Space between comparisons */
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 0;
 }
 
 .image-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  width: 100%;
+  margin-bottom: 4rem;
 }
 
 .comparison-wrapper {
+  width: 70%; /* Reduced from 90% to make smaller */
+  max-width: 1000px; /* Reduced from 1200px */
+  height: auto;
+  aspect-ratio: 16/9; /* Maintain aspect ratio */
+  margin: 0 auto;
   position: relative;
-  width: 40vh;
-  height: 30vh;
-  overflow: hidden;
-  border-radius: 30px;
-  transition: box-shadow 0.3s ease;
+  overflow: hidden; /* Prevent videos from overflowing */
+  border-radius: 4vh; /* Add rounded corners */
 }
 
 .comparison-wrapper.active {
@@ -1385,8 +1386,8 @@ Dirty Secret
               0 0 90px rgba(255, 255, 255, 0.4);
 }
 
-.before-image,
-.after-image {
+/* Unified styling for both before/after videos */
+.before-video, .after-video {
   position: absolute;
   top: 0;
   left: 0;
@@ -1395,8 +1396,14 @@ Dirty Secret
   object-fit: cover;
 }
 
-.before-image {
+/* The after video is underneath */
+.after-video {
   z-index: 1;
+}
+
+/* The before video is on top with a clip path */
+.before-video {
+  z-index: 2;
   clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
 }
 
@@ -1406,7 +1413,7 @@ Dirty Secret
   height: 100%;
   background: rgb(0, 0, 0);
   left: 50%;
-  z-index: 2;
+  z-index: 3; /* Ensure slider is on top of both videos */
   cursor: ew-resize;
 }
 
@@ -1449,7 +1456,6 @@ Dirty Secret
   left: 47%;              /* Adjust as needed for perfect centering */
 }
 
-
 .neon-textslide {
   color: #E2CB9F;
   text-shadow: 
@@ -1471,38 +1477,23 @@ Dirty Secret
       height: 60vw;
   }
 }
+
 .sloganslide {
   text-align: center;
   font-family: var(--heading-font);
   color: #fff;
   margin-bottom: 8vh;
-  
   position: relative;
   /* Mobile font size */
   font-size: 8vh;
 }
+
 /* Desktop font size */
 @media (min-width: 768px) {
   .slogan {
     font-size: 13vh;
-
   }
 }
-.before-video, .after-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.before-video {
-  z-index: 1;
-  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-}
-
-
 /*=========================
   Footer
 ========================= */

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const gridSize = 3; // 3x3 grid
   let currentPlayingVideo = null; // Track the currently playing video
 
-  // Array of 9 different video directories
+  // Array of 9 different video paths
   const videoSources = [
     'assests/images/cube/pint (1).mp4',
     'assests/images/cube/pint (2).mp4',
@@ -19,6 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
     'assests/images/cube/pint (7).mp4',
     'assests/images/cube/pint (8).mp4',
     'assests/images/cube/pint (9).mp4'
+  ];
+
+  // Array of corresponding poster images (thumbnails)
+  const posterSources = [
+    'assests/images/cube/pint (1).jpg',
+    'assests/images/cube/pint (2).jpg',
+    'assests/images/cube/pint (3).jpg',
+    'assests/images/cube/pint (4).jpg',
+    'assests/images/cube/pint (5).jpg',
+    'assests/images/cube/pint (6).jpg',
+    'assests/images/cube/pint (7).jpg',
+    'assests/images/cube/pint (8).jpg',
+    'assests/images/cube/pint (9).jpg'
   ];
 
   console.log('Video sources:', videoSources);
@@ -41,6 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Mark as a clickable (lazy-load) video and store the source path
       video.dataset.clickToPlay = "";
       video.dataset.src = videoSources[videoIndex];
+      // Set the poster image (the thumbnail)
+      video.setAttribute('poster', posterSources[videoIndex]);
       videoIndex++;
 
       // Create overlay

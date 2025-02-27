@@ -39,20 +39,14 @@ document.querySelectorAll('.image-container').forEach(container => {
 
     function resize(clientX) {
         if (!isResizing) return;
-
         const rect = wrapper.getBoundingClientRect();
         const x = clientX - rect.left;
         const percent = Math.min(Math.max(x / rect.width * 100, 0), 100);
-
         slider.style.left = `${percent}%`;
         beforeVideo.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
 
         // Show text when slider is near the start (15% or less)
-        if (percent <= 15) {
-            neonText.style.opacity = '1';
-        } else {
-            neonText.style.opacity = '0';
-        }
+        neonText.style.opacity = (percent <= 15) ? '1' : '0';
     }
 
     function handleMouseUp() {
