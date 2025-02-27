@@ -1,25 +1,24 @@
-/****************************************************
- *  MusicController Class
- ****************************************************/
 class MusicController {
   constructor(userVolume = 0.5) {
     this.songs = [
       './assests/music/ES_Always by Your Side - House Of Say.mp3'
     ];
 
+    // These flags control the playback
     this.isMuted = false;  
+    this.manualMute = false; // Indicates user intent
     this.controller = document.getElementById('musicController');
     this.volumeHalf = this.controller.querySelector('.volume-half');
     this.nextHalf = this.controller.querySelector('.next-half');
     this.volumeIcon = this.volumeHalf.querySelector('i');
 
-    // Random song
+    // Random song selection
     this.currentSongIndex = Math.floor(Math.random() * this.songs.length);
     this.selectedSong = this.songs[this.currentSongIndex];
 
     this.audio = new Audio(this.selectedSong);
     this.audio.loop = true;
-    this.audio.volume = 0; // Start volume=0 for fade in
+    this.audio.volume = 0; // Start with volume 0 for fade in
 
     // Fade settings
     this.fadeTime = 500;
@@ -28,6 +27,9 @@ class MusicController {
     this.isFading = false; 
     this.fadeTimer = null; 
 
+    // Flag to track if a video is interfering with music
+    this.isVideoInterference = false;
+
     // Make the controller visible
     this.controller.classList.add('visible');
 
@@ -35,21 +37,34 @@ class MusicController {
   }
 
   init() {
-    // Mute for autoplay
-    this.audio.muted = true;
-    this.audio.play().then(() => {
-      // Autoplay success, unmute and fade in
-      this.audio.muted = false;
-      this.updateVolumeIcon();
-      this.fadeIn();
-    }).catch(error => {
-      // Autoplay blocked
-      console.warn('Auto-play prevented:', error);
+    // Check if the user already muted music (persisted from a previous action)
+    if (localStorage.getItem('musicMuted') === 'true') {
       this.isMuted = true;
+      this.manualMute = true;
       this.updateVolumeIcon();
-    });
+      // Do not auto-play music since the user has it muted
+    } else {
+      // Attempt autoplay with a temporary mute for permission
+      this.audio.muted = true;
+      this.audio.play().then(() => {
+        // Autoplay succeeded; now unmute and start fade-in
+        // Only start if the user hasn’t manually muted in the meantime
+        if (!this.manualMute) {
+          this.audio.muted = false;
+          this.updateVolumeIcon();
+          this.fadeIn();
+        }
+      }).catch(error => {
+        // Autoplay was blocked – treat as if user muted
+        console.warn('Auto-play prevented:', error);
+        this.isMuted = true;
+        this.manualMute = true;
+        localStorage.setItem('musicMuted', 'true');
+        this.updateVolumeIcon();
+      });
+    }
 
-    // Controller events
+    // Controller event listeners
     this.volumeHalf.addEventListener('click', (e) => {
       e.stopPropagation();
       this.toggleMusic();
@@ -62,7 +77,7 @@ class MusicController {
       this.nextSong();
     });
 
-    // Observe videos
+    // Observe videos for interference
     this.observeVideos();
   }
 
@@ -115,16 +130,21 @@ class MusicController {
 
   toggleMusic() {
     if (this.isMuted) {
-      // Unmute
+      // Unmute manually
       this.isMuted = false;
+      this.manualMute = false;
+      localStorage.setItem('musicMuted', 'false');
       this.updateVolumeIcon();
-      if (!this.isAnyUnmutedVideoPlaying()) {
+      // Resume playback only if no video is interfering and the audio is paused
+      if (!this.isAnyUnmutedVideoPlaying() && this.audio.paused) {
         this.audio.volume = 0;
         this.audio.play().then(() => this.fadeIn());
       }
     } else {
-      // Mute
+      // Mute manually
       this.isMuted = true;
+      this.manualMute = true;
+      localStorage.setItem('musicMuted', 'true');
       this.updateVolumeIcon();
       this.fadeOut(() => this.audio.pause());
     }
@@ -145,7 +165,7 @@ class MusicController {
     this.fadeOut(() => {
       this.audio.pause();
 
-      // Next track
+      // Switch to the next track
       this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
       this.selectedSong = this.songs[this.currentSongIndex];
 
@@ -161,7 +181,7 @@ class MusicController {
     });
   }
 
-  // Video Observation
+  // Observe video elements for interference
   observeVideos() {
     const videos = document.querySelectorAll('video');
     videos.forEach(video => this.attachVideoListeners(video));
@@ -196,13 +216,20 @@ class MusicController {
 
   updateAudioState() {
     if (this.isAnyUnmutedVideoPlaying()) {
-      // Fade out music
+      // A video is playing with audio; mark interference and fade out music
+      this.isVideoInterference = true;
       if (!this.audio.paused) {
-        this.fadeOut(() => this.audio.pause());
+        this.fadeOut(() => {
+          if (this.isVideoInterference) {
+            this.audio.pause();
+          }
+        });
       }
     } else {
-      // Resume if not muted
-      if (!this.isMuted && this.audio.paused) {
+      // Clear interference if no video is playing with audio
+      this.isVideoInterference = false;
+      // Only auto-resume if the user hasn’t manually muted
+      if (!this.isMuted && !this.manualMute && this.audio.paused) {
         this.audio.volume = 0;
         this.audio.play().then(() => this.fadeIn());
       }
@@ -218,12 +245,10 @@ class MusicController {
   }
 }
 
-/****************************************************
- *  Expose a start function to initialize music
- ****************************************************/
 window.startMusic = function() {
   new MusicController();
 };
+
 
 /****************************************************
  *  Loading Screen + Combined Logic
@@ -288,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function() {
         skipButton.classList.add('show');
       });
     }
-  }, 3000);
+  }, 6000);
 
   // End loading screen function
   function endLoadingScreen(event) {
@@ -302,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
           loadingScreen.style.display = 'none';
           mainContent.style.display = 'block';
           document.body.classList.remove('no-scroll');
-          window.scrollTo(0, initialScroll);
+          //window.scrollTo(0, initialScroll);
           video.pause();
           crosshair.remove();
 
