@@ -107,15 +107,15 @@
     <section class="hero-video-section">
       <div class="video-container">
         <video 
-  class="hero-video" 
-  data-autoplay 
-  data-src="./assests/images/camera/intro.mp4"
-  muted 
-  loop 
-  playsinline 
-  preload="none"
->
-</video>
+          class="hero-video" 
+          data-autoplay 
+          data-src="./assests/images/camera/intro.mp4"
+          muted 
+          loop 
+          playsinline 
+          preload="none"
+        >
+        </video>
 
       </div>
     </section>
@@ -237,9 +237,16 @@
 
 <section class="video-expand-section">
   <div class="video-wrapper">
-    <video class="expanding-video" muted loop playsinline>
-      <source src="./assests/images/camera/intro.mp4" type="video/mp4">
-    </video>
+    <video 
+        class="expanding-video"
+        data-autoplay 
+        data-src="./assests/images/camera/intro.mp4"
+        muted 
+        loop 
+        playsinline
+        preload="none"
+      ></video>
+
   </div>
 </section>
 
@@ -255,16 +262,14 @@
     -->
     <video
       class="secret-video"
-      autoplay
-      loop
-      muted
+      autoplay 
+      loop 
+      muted 
       playsinline
     >
       <source src="./assests/images/secrets/secrets.mp4" type="video/mp4">
-      <!-- Optionally provide a WebM source for better browser coverage -->
-      <!-- <source src="./assets/videos/secret.webm" type="video/webm"> -->
-      Your browser does not support the video tag.
     </video>
+
   </div>
   <p class="secret-text">We're here to tell your untold story!</p>
   
@@ -310,8 +315,27 @@ It isn't Magic, Just Good Storytelling
       <!-- First Comparison -->
       <div class="image-container">
         <div class="comparison-wrapper">
-            <video src="./assests/images/beforeafter/After1.mp4" alt="Before Video 1" class="after-video" autoplay muted loop></video>
-            <video src="./assests/images/beforeafter/Before1.mp4" alt="After Video 1" class="before-video" autoplay muted loop></video>
+          <video
+          data-autoplay
+          data-src="./assests/images/beforeafter/After1.mp4"
+          alt="Before Video 1"
+          class="after-video"
+          muted
+          loop
+          playsinline
+          preload="none"
+        ></video>
+        <video
+          data-autoplay
+          data-src="./assests/images/beforeafter/Before1.mp4"
+          alt="Before Video 1"
+          class="after-video"
+          muted
+          loop
+          playsinline
+          preload="none"
+        ></video>
+
             <div class="slider">
                 <div class="slider-button"></div>
             </div>
@@ -322,8 +346,27 @@ It isn't Magic, Just Good Storytelling
       <!-- Second Comparison -->
       <div class="image-container">
         <div class="comparison-wrapper">
-            <video src="./assests/images/beforeafter/After2.mp4" alt="Before Video 1" class="after-video" autoplay muted loop></video>
-            <video src="./assests/images/beforeafter/Before2.mp4" alt="After Video 1" class="before-video" autoplay muted loop></video>
+          <video
+          data-autoplay
+          data-src="./assests/images/beforeafter/After2.mp4"
+          alt="Before Video 1"
+          class="after-video"
+          muted
+          loop
+          playsinline
+          preload="none"
+        ></video>
+        <video
+          data-autoplay
+          data-src="./assests/images/beforeafter/Before2.mp4"
+          alt="Before Video 1"
+          class="after-video"
+          muted
+          loop
+          playsinline
+          preload="none"
+        ></video>
+
             <div class="slider">
                 <div class="slider-button"></div>
             </div>
@@ -334,9 +377,26 @@ It isn't Magic, Just Good Storytelling
       <!-- Third Comparison -->
       <div class="image-container">
         <div class="comparison-wrapper">
-            <video src="./assests/images/beforeafter/after3.mp4" alt="Before Video 1" class="after-video" autoplay muted loop></video>
-            <video src="./assests/images/beforeafter/before3.mp4" alt="After Video 1" class="before-video" autoplay muted loop></video>
-            <div class="slider">
+          <video
+          data-autoplay
+          data-src="./assests/images/beforeafter/After3.mp4"
+          alt="Before Video 1"
+          class="after-video"
+          muted
+          loop
+          playsinline
+          preload="none"
+        ></video>
+        <video
+          data-autoplay
+          data-src="./assests/images/beforeafter/Before3.mp4"
+          alt="Before Video 1"
+          class="after-video"
+          muted
+          loop
+          playsinline
+          preload="none"
+        ></video> <div class="slider">
                 <div class="slider-button"></div>
             </div>
         </div>
@@ -656,6 +716,7 @@ It isn't Magic, Just Good Storytelling
   <script src="./assests/js/beforeafter.js"></script>
   <script src="./assests/js/envelope.js"></script>
   <script src="./assests/js/dust.js"></script>
+  <script src="./assests/js/lazyload.js"></script>
  
 
 </body>
