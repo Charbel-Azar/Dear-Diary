@@ -4,9 +4,9 @@ class MusicController {
       './assests/music/ES_Always by Your Side - House Of Say.mp3'
     ];
 
-    // These flags control the playback
+    // Flags controlling playback
     this.isMuted = false;  
-    this.manualMute = false; // Indicates user intent
+    this.manualMute = false; // User intent
     this.controller = document.getElementById('musicController');
     this.volumeHalf = this.controller.querySelector('.volume-half');
     this.nextHalf = this.controller.querySelector('.next-half');
@@ -18,7 +18,7 @@ class MusicController {
 
     this.audio = new Audio(this.selectedSong);
     this.audio.loop = true;
-    this.audio.volume = 0; // Start with volume 0 for fade in
+    this.audio.volume = 0; // Start with volume 0 for fade-in
 
     // Fade settings
     this.fadeTime = 500;
@@ -37,25 +37,20 @@ class MusicController {
   }
 
   init() {
-    // Check if the user already muted music (persisted from a previous action)
     if (localStorage.getItem('musicMuted') === 'true') {
       this.isMuted = true;
       this.manualMute = true;
       this.updateVolumeIcon();
-      // Do not auto-play music since the user has it muted
+      // Do not auto-play music if user had it muted
     } else {
-      // Attempt autoplay with a temporary mute for permission
       this.audio.muted = true;
       this.audio.play().then(() => {
-        // Autoplay succeeded; now unmute and start fade-in
-        // Only start if the user hasn’t manually muted in the meantime
         if (!this.manualMute) {
           this.audio.muted = false;
           this.updateVolumeIcon();
           this.fadeIn();
         }
       }).catch(error => {
-        // Autoplay was blocked – treat as if user muted
         console.warn('Auto-play prevented:', error);
         this.isMuted = true;
         this.manualMute = true;
@@ -64,7 +59,7 @@ class MusicController {
       });
     }
 
-    // Controller event listeners
+    // Event listeners for controller
     this.volumeHalf.addEventListener('click', (e) => {
       e.stopPropagation();
       this.toggleMusic();
@@ -84,7 +79,6 @@ class MusicController {
   fadeIn() {
     if (this.isFading) clearInterval(this.fadeTimer);
     this.isFading = true;
-
     const startVolume = this.audio.volume;
     const volumeStep = (this.targetVolume - startVolume) / (this.fadeTime / this.fadeInterval);
     let currentTime = 0;
@@ -107,7 +101,6 @@ class MusicController {
   fadeOut(callback) {
     if (this.isFading) clearInterval(this.fadeTimer);
     this.isFading = true;
-
     const startVolume = this.audio.volume;
     const volumeStep = startVolume / (this.fadeTime / this.fadeInterval);
     let currentTime = 0;
@@ -130,18 +123,15 @@ class MusicController {
 
   toggleMusic() {
     if (this.isMuted) {
-      // Unmute manually
       this.isMuted = false;
       this.manualMute = false;
       localStorage.setItem('musicMuted', 'false');
       this.updateVolumeIcon();
-      // Resume playback only if no video is interfering and the audio is paused
       if (!this.isAnyUnmutedVideoPlaying() && this.audio.paused) {
         this.audio.volume = 0;
         this.audio.play().then(() => this.fadeIn());
       }
     } else {
-      // Mute manually
       this.isMuted = true;
       this.manualMute = true;
       localStorage.setItem('musicMuted', 'true');
@@ -164,15 +154,11 @@ class MusicController {
     const wasMuted = this.isMuted;
     this.fadeOut(() => {
       this.audio.pause();
-
-      // Switch to the next track
       this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
       this.selectedSong = this.songs[this.currentSongIndex];
-
       this.audio = new Audio(this.selectedSong);
       this.audio.loop = true;
       this.audio.volume = 0;
-
       if (!wasMuted && !this.isAnyUnmutedVideoPlaying()) {
         this.audio.play().then(() => this.fadeIn());
       }
@@ -181,7 +167,6 @@ class MusicController {
     });
   }
 
-  // Observe video elements for interference
   observeVideos() {
     const videos = document.querySelectorAll('video');
     videos.forEach(video => this.attachVideoListeners(video));
@@ -216,7 +201,6 @@ class MusicController {
 
   updateAudioState() {
     if (this.isAnyUnmutedVideoPlaying()) {
-      // A video is playing with audio; mark interference and fade out music
       this.isVideoInterference = true;
       if (!this.audio.paused) {
         this.fadeOut(() => {
@@ -226,9 +210,7 @@ class MusicController {
         });
       }
     } else {
-      // Clear interference if no video is playing with audio
       this.isVideoInterference = false;
-      // Only auto-resume if the user hasn’t manually muted
       if (!this.isMuted && !this.manualMute && this.audio.paused) {
         this.audio.volume = 0;
         this.audio.play().then(() => this.fadeIn());
@@ -251,8 +233,7 @@ window.startMusic = function() {
 
 /****************************************************
  *  Loading Screen + Combined Logic
- ****************************************************/
-document.addEventListener('DOMContentLoaded', function() {
+ ****************************************************/document.addEventListener('DOMContentLoaded', function() {
   // Initial scroll fix
   const initialScroll = window.scrollY;
   window.scrollTo(0, 0);
@@ -260,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // DOM elements
   const container = document.querySelector('.containercamera');
-  const video = document.querySelector('.videocamera');
+  const loadingVideo = document.querySelector('.videocamera'); // Use the loading screen video
   const flash = document.querySelector('.flash');
   const loadingScreen = document.getElementById('loading-screen');
   const mainContent = document.getElementById('main-content');
@@ -294,46 +275,53 @@ document.addEventListener('DOMContentLoaded', function() {
   const shutterSound = new Audio('./assests/images/camera/camera.mp3');
   shutterSound.preload = 'auto';
 
-  // Track page load
+  // Track load states
   let isFullyLoaded = false;
+  let isVideoLoaded = false;
 
-  // Once everything has loaded (images, iframes, etc.)
   window.addEventListener('load', function() {
     isFullyLoaded = true;
   });
 
-  // End loading screen function - now automatically starts when loaded
-  function endLoadingScreen() {
-    if (isFullyLoaded) {
-      setTimeout(() => {
-        loadingScreen.classList.add('hide');
-        setTimeout(() => {
-          loadingScreen.style.display = 'none';
-          mainContent.style.display = 'block';
-          document.body.classList.remove('no-scroll');
-          //window.scrollTo(0, initialScroll);
-          video.pause();
-          crosshair.remove();
+  // Wait for the loading video to be ready
+  loadingVideo.addEventListener('canplaythrough', () => {
+    isVideoLoaded = true;
+  });
 
-          // Start music
-          window.startMusic();
-        }, 1000);
-      }, 500);
+  // End loading screen when both page and video are ready
+  function endLoadingScreen() {
+    if (!isVideoLoaded) {
+      console.log("Waiting for loading video to be ready...");
+      return;
     }
+    setTimeout(() => {
+      loadingScreen.classList.add('hide');
+      setTimeout(() => {
+        loadingScreen.style.display = 'none';
+        mainContent.style.display = 'block';
+        document.body.classList.remove('no-scroll');
+        //window.scrollTo(0, initialScroll);
+        loadingVideo.pause(); // Pause the loading screen video
+        crosshair.remove();
+
+        // Start background music
+        window.startMusic();
+      }, 1000);
+    }, 500);
   }
 
-  // 15s fallback: if not fully loaded, periodically check and then end loading when ready
-  setTimeout(() => {
-    if (isFullyLoaded) {
+  // Use a timer to check if both conditions are met
+  const checkLoadInterval = setInterval(() => {
+    if (isFullyLoaded && isVideoLoaded) {
       endLoadingScreen();
-    } else {
-      const waitForLoad = setInterval(() => {
-        if (isFullyLoaded) {
-          endLoadingScreen();
-          clearInterval(waitForLoad);
-        }
-      }, 100);
+      clearInterval(checkLoadInterval);
     }
+  }, 100);
+
+  // Fallback: after 15 seconds, end loading screen regardless
+  setTimeout(() => {
+    endLoadingScreen();
+    clearInterval(checkLoadInterval);
   }, 15000);
 
   // Flash effect
@@ -383,7 +371,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 5000);
   }
 
-  // Capture logic
+  // Capture logic: now capture from loadingVideo (the loading screen video)
   const captureCanvas = document.createElement('canvas');
   const ctx = captureCanvas.getContext('2d');
 
@@ -402,13 +390,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const sourceX = Math.max(0, x - 100);
     const sourceY = Math.max(0, y - 100);
-    const sourceWidth = Math.min(200, video.videoWidth - sourceX);
-    const sourceHeight = Math.min(200, video.videoHeight - sourceY);
+    const sourceWidth = Math.min(200, loadingVideo.videoWidth - sourceX);
+    const sourceHeight = Math.min(200, loadingVideo.videoHeight - sourceY);
 
     ctx.drawImage(
-      video,
-      sourceX * (video.videoWidth / rect.width),
-      sourceY * (video.videoHeight / rect.height),
+      loadingVideo,
+      sourceX * (loadingVideo.videoWidth / rect.width),
+      sourceY * (loadingVideo.videoHeight / rect.height),
       sourceWidth,
       sourceHeight,
       0,
