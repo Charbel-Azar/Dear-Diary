@@ -6,7 +6,7 @@
   <meta name="description" content="Tell Stories That Matter" />
   <meta name="author" content="Dear Diary">
   <link rel="icon" type="image/ico" href="./assests/images/camera/favicon.ico" />
-  <link rel="stylesheet" href="./assests/css/style.css" />
+  <link rel="stylesheet" href="./assests/css/style2.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,8 +14,53 @@
   <title>Dear Diary</title>
 </head>
 <body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="./assests/images/logo/white_transparent_logo.png" alt="Dear Diary Logo">
+        </a>
+      </div>
+      
+      <div class="nav-links">
+     <a href="ourstory.html">Our Story</a>
+    <a href="ourwork.html">Our Work</a>
+    <a href="offers.html">Offers</a>
+    <a href="careers.html">Careers</a>
+      </div>
+     <div class="social-links">
+        <a href="https://www.instagram.com/deardiary.media" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/people/Dear-Diary-Media/61572525600344/" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+       <a href="https://www.linkedin.com/company/dear-diary-media/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.tiktok.com/@deardiary.media" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>    
+      </div>
 
+    <button class="mobile-menu-btn" aria-label="Toggle menu">
+      <div class="menu-circle">
+        <div class="menu-bar"></div>
+        <div class="menu-bar"></div>
+        <div class="menu-bar"></div>
+      </div>
+    </button>
+  </div>
+</nav>
 
+<!-- Mobile Menu -->
+<div class="mobile-menu">
+  <div class="mobile-menu-links">
+    <a href="ourstory.html">Our Story</a>
+    <a href="ourwork.html">Our Work</a>
+    <a href="offers.html">Offers</a>
+    <a href="careers.html">Careers</a>
+  </div>
+   <div class="mobile-social-links">
+    <a href="https://www.instagram.com/deardiary.media" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.facebook.com/people/Dear-Diary-Media/61572525600344/" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.linkedin.com/company/dear-diary-media/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.tiktok.com/@deardiary.media" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+  </div>
+</div>
 
   <!-- LOADING SCREEN -->
 <!-- LOADING SCREEN -->
@@ -81,103 +126,18 @@
     <section class="story-section">
       <div class="story-container">
         <h1 class="story-heading">Once Upon a Time</h1>
-        <div class="book-container">
-          <section class="notebook-section">
-            <div class="notebook">
-              <!-- Cover -->
-              <div class="page" id="coverPage" onclick="this.classList.toggle('active'); this.closest('.notebook').classList.toggle('tilted');">
-                <div class="page-front">
-                  <img src="./assests/images/logo/black_transparent_logo.png" alt="Notebook Cover" class="cover-image">
-                </div>
-                <div class="page-back">
-                  <div class="page-content">
-                    Dear Diary,<br>
-                    Today I spent $1,000 on ads. I want this makeup thing to work 🙏
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Page 1 -->
-              <div class="page">
-                <div class="page-front">
-                  <div class="page-content">
-                    Dear Diary,<br>
-                    It's been 10 days since I spent all that money on ads and I still haven't seen any new engagement.
-                  </div>
-                </div>
-                <div class="page-back">
-                  <div class="page-content">
-                    Dear Diary,<br>
-                    It's been 10 days since I spent all that money on ads and I still haven't seen any new engagement.
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Page 2 -->
-              <div class="page">
-                <div class="page-front">
-                  <div class="page-content">
-                    Dear Diary,<br>
-                    I tried redoing my marketing but I didn't have enough time and I think I'm sounding too salesy.
-                  </div>
-                </div>
-                <div class="page-back">
-                  <div class="page-content">
-                    Dear Diary,<br>
-                    I tried redoing my marketing but I didn't have enough time and I think I'm sounding too salesy.
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Page 3 -->
-              <div class="page">
-                <div class="page-front">
-                  <div class="page-content">
-                    Dear Diary,<br>
-                    I'm exhausted and don't think this is for me anymore, should I just quit?
-                  </div>
-                </div>
-                <div class="page-back">
-                  <div class="page-content">
-                    Dear Diary,<br>
-                    I'm exhausted and don't think this is for me anymore, should I just quit?
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Page 4 -->
-              <div class="page">
-                <div class="page-front">
-                  <div class="page-content">
-                    Dear Diary,<br>
-                    I'm out of ideas what should I do??
-                  </div>
-                </div>
-                <div class="page-back">
-                  <div class="page-content">
-                    Dear Diary,<br>
-                    I'm out of ideas what should I do??
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Back Cover (Last Page) -->
-              <div class="page back-cover">
-                <div class="page-front">
-                  <div class="page-content">
-                    To Be Continued...
-                  </div>
-                </div>
-                <div class="page-back">
-                  <img src="./assests/images/logo/black_transparent_logo.png" alt="Back Cover" class="cover-image">
-                </div>
-              </div>
-            </div>
-            <div class="scroll-spacer"></div>
-          </section>
+        <!-- This div controls the scroll height -->
+        <div id="video-scroll-height"></div>
+        <!-- Video container -->
+        <div class="video-container">
+          <video id="scroll-video" muted preload="auto">
+            <source src="./assests/images/book/diary.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
-        
       </div>
+    </section>
+    
 
      
 
@@ -657,7 +617,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="./assests/js/camera.js"></script>
   <script src="./assests/js/main.js"></script>
-  <script src="./assests/js/book.js"></script>
   <script src="./assests/js/circlevideo.js"></script>
   <script src="./assests/js/cubesvideos.js"></script>
   <script src="./assests/js/secret.js"></script>
@@ -665,6 +624,202 @@
   <script src="./assests/js/envelope.js"></script>
   <script src="./assests/js/dust.js"></script>
   <script src="./assests/js/lazyload.js"></script>
+  <!-- Required libraries - Add these before your closing </body> tag -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get our elements
+    const video = document.getElementById('scroll-video');
+    const canvas = document.getElementById('video-canvas');
+    const container = document.querySelector('.video-scroll-container');
+    const ctx = canvas.getContext('2d');
+    
+    // Canvas dimensions and video status tracking
+    let canvasWidth, canvasHeight;
+    let videoFrames = [];
+    let frameCount = 0;
+    let isVideoReady = false;
+    let lastScrollTop = 0;
+    let lastFrameDrawn = -1;
+    let ticking = false;
+    
+    // Set canvas size
+    function resizeCanvas() {
+      canvasWidth = window.innerWidth;
+      canvasHeight = window.innerHeight;
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+    }
+    
+    // Initialize canvas size
+    resizeCanvas();
+    
+    // Adjust canvas on window resize
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Extract and store video frames for smoother playback
+    function extractVideoFrames() {
+      return new Promise(resolve => {
+        // Calculate total frames (assuming 30fps)
+        frameCount = Math.ceil(video.duration * 30);
+        
+        // Function to capture a frame
+        const captureFrame = (frameIndex) => {
+          return new Promise(frameResolve => {
+            // Set video to exact time for this frame
+            video.currentTime = frameIndex / 30;
+            
+            // Once video seeks to that time
+            video.addEventListener('seeked', function onSeeked() {
+              // Remove the event listener to prevent multiple calls
+              video.removeEventListener('seeked', onSeeked);
+              
+              // Create an offscreen canvas to store the frame
+              const offscreenCanvas = document.createElement('canvas');
+              offscreenCanvas.width = video.videoWidth;
+              offscreenCanvas.height = video.videoHeight;
+              const offscreenCtx = offscreenCanvas.getContext('2d');
+              
+              // Draw the video frame to the offscreen canvas
+              offscreenCtx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+              
+              // Store the frame
+              videoFrames[frameIndex] = offscreenCanvas;
+              
+              // Resolve the promise
+              frameResolve();
+            }, { once: true });
+          });
+        };
+        
+        // Indicate how many frames to capture (capturing every 2nd frame is usually sufficient)
+        // For a 25-second video at 30fps, this would be around 375 frames
+        // Adjust the step size based on your video length and desired smoothness
+        const step = 2;
+        const framesToCapture = Math.ceil(frameCount / step);
+        console.log(`Preparing to capture ${framesToCapture} frames...`);
+        
+        // Show loading state if needed
+        // document.querySelector('.loading-indicator').style.display = 'block';
+        
+        // Capture frames sequentially
+        let capturedCount = 0;
+        let frameIndex = 0;
+        
+        function captureNextFrame() {
+          if (frameIndex >= frameCount) {
+            console.log('All frames captured!');
+            isVideoReady = true;
+            // Hide loading indicator if needed
+            // document.querySelector('.loading-indicator').style.display = 'none';
+            resolve();
+            return;
+          }
+          
+          captureFrame(frameIndex).then(() => {
+            capturedCount++;
+            if (capturedCount % 10 === 0) {
+              console.log(`Captured ${capturedCount} frames...`);
+            }
+            frameIndex += step;
+            captureNextFrame();
+          });
+        }
+        
+        captureNextFrame();
+      });
+    }
+    
+    // Draw a specific frame to the canvas
+    function drawFrame(frameIndex) {
+      if (frameIndex !== lastFrameDrawn && videoFrames[frameIndex]) {
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        
+        // Calculate aspect ratio to maintain proportions
+        const videoRatio = video.videoWidth / video.videoHeight;
+        const canvasRatio = canvasWidth / canvasHeight;
+        
+        let drawWidth, drawHeight, offsetX, offsetY;
+        
+        if (videoRatio > canvasRatio) {
+          // Video is wider than canvas
+          drawHeight = canvasHeight;
+          drawWidth = drawHeight * videoRatio;
+          offsetX = (canvasWidth - drawWidth) / 2;
+          offsetY = 0;
+        } else {
+          // Video is taller than canvas
+          drawWidth = canvasWidth;
+          drawHeight = drawWidth / videoRatio;
+          offsetX = 0;
+          offsetY = (canvasHeight - drawHeight) / 2;
+        }
+        
+        // Draw the frame
+        ctx.drawImage(videoFrames[frameIndex], offsetX, offsetY, drawWidth, drawHeight);
+        lastFrameDrawn = frameIndex;
+      }
+    }
+    
+    // Handle scroll events
+    function handleScroll() {
+      if (!ticking && isVideoReady) {
+        window.requestAnimationFrame(() => {
+          // Calculate scroll progress
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const containerRect = container.getBoundingClientRect();
+          const containerTop = containerRect.top + scrollTop;
+          const scrollPosition = scrollTop - containerTop;
+          const scrollHeight = container.offsetHeight - window.innerHeight;
+          const scrollProgress = Math.max(0, Math.min(1, scrollPosition / scrollHeight));
+          
+          // Find the closest pre-rendered frame
+          const step = 2; // Same step as used in extractVideoFrames
+          const frameIndex = Math.round(scrollProgress * (frameCount - 1) / step) * step;
+          
+          // Draw the frame
+          drawFrame(frameIndex);
+          
+          ticking = false;
+        });
+        
+        ticking = true;
+      }
+    }
+    
+    // Initialize once video is loaded
+    video.addEventListener('loadedmetadata', function() {
+      console.log('Video metadata loaded. Duration:', video.duration);
+      
+      // Adjust container height based on video duration if needed
+      // For a 25-second video, 300vh is usually good, but you can adjust
+      const scrollHeight = Math.max(300, video.duration * 12);
+      container.style.height = `${scrollHeight}vh`;
+      
+      // Extract frames for smoother playback
+      extractVideoFrames().then(() => {
+        console.log('Frames extracted, scroll control ready');
+        
+        // Draw initial frame
+        drawFrame(0);
+        
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        // Initial scroll position check
+        handleScroll();
+      });
+    });
+    
+    // Pre-load the video
+    if (video.readyState >= 2) {
+      video.dispatchEvent(new Event('loadedmetadata'));
+    }
+  });
+  </script>
+    
  
 
 </body>
