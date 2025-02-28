@@ -11,83 +11,72 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Slide config for phone vs. desktop
   const slideConfig = {
-    mobile: {
-      centerSlide: 7,
-      finalSlide: 8
-    },
-    desktop: {
-      centerSlide: 25,
-      finalSlide: 25
-    },
+    mobile: { centerSlide: 7, finalSlide: 8 },
+    desktop: { centerSlide: 25, finalSlide: 25 },
     breakpoint: 768
   };
 
-  // Disable direct click pointer events on pages if you want scroll-only flipping
+  // Detect support for 3D transforms (a proxy for GPU acceleration)
+  const supports3D = CSS.supports('perspective', '1500px');
+  const lowPerformanceDevice = !supports3D;
+
+  // Disable pointer events on pages for scroll-only flipping
   pages.forEach(page => {
     page.style.pointerEvents = 'none';
+    // Set an appropriate transition duration based on device capability
+    page.style.transition = lowPerformanceDevice 
+      ? 'transform 0.5s ease'
+      : 'transform 0.8s ease-in-out';
   });
 
-  // A helper to pick which slide distances to use
+  // Helper to determine which slide amounts to use based on screen width
   function getSlideAmounts() {
     const isMobile = window.innerWidth < slideConfig.breakpoint;
     return isMobile ? slideConfig.mobile : slideConfig.desktop;
   }
 
-  // Smoothly position the notebook horizontally based on scroll progress
+  // Update the notebook position. For low performance devices, we skip the 3D perspective.
   function updateNotebookPosition(scrollPosition) {
     const { centerSlide, finalSlide } = getSlideAmounts();
     const sectionTop = storySection.offsetTop;
     const scrollInSection = scrollPosition - sectionTop;
-    const maxScroll = spacer.offsetHeight; // total range inside this section
+    const maxScroll = spacer.offsetHeight;
     const scrollProgress = Math.max(0, Math.min(1, scrollInSection / maxScroll));
 
-    // From 0 -> centerSlide in the first ~3% of the scroll
-    if (scrollProgress < 0.1) {
-      const slideProgress = scrollProgress / 0.1;
-      let slideAmount = centerSlide * slideProgress;
-      notebook.style.transform = `
-        translateY(-50%) perspective(1500px) translateX(${slideAmount}vh)
-      `;
+    let slideAmount = centerSlide;
+    if (!lowPerformanceDevice) {
+      if (scrollProgress < 0.1) {
+        slideAmount = centerSlide * (scrollProgress / 0.1);
+      } else if (scrollProgress > 0.9) {
+        let finalSlideAmount = centerSlide + (finalSlide * ((scrollProgress - 0.9) / 0.1));
+        // Clamp the final slide amount
+        const maxValue = window.innerWidth < slideConfig.breakpoint ? 20 : 60;
+        slideAmount = Math.min(finalSlideAmount, maxValue);
+      }
     }
-    // Then centerSlide -> finalSlide in the last ~3%
-    else if (scrollProgress > 0.9) {
-      const finalSlideProgress = (scrollProgress - 0.9) / 0.1;
-      let finalSlideAmount = centerSlide + (finalSlide * finalSlideProgress);
-      
-      // Clamp the final slide
-      const maxValue = window.innerWidth < slideConfig.breakpoint ? 20 : 60; 
-      finalSlideAmount = Math.min(finalSlideAmount, maxValue);
-
-      notebook.style.transform = `
-        translateY(-50%) perspective(1500px) translateX(${finalSlideAmount}vh)
-      `;
-    }
-    // Otherwise, remain at centerSlide
-    else {
-      notebook.style.transform = `
-        translateY(-50%) perspective(1500px) translateX(${centerSlide}vh)
-      `;
-    }
+    // Build transform string: skip perspective on low-performance devices
+    const transform = lowPerformanceDevice 
+      ? `translateX(${slideAmount}vh)` 
+      : `translateY(-50%) perspective(1500px) translateX(${slideAmount}vh)`;
+    notebook.style.transform = transform;
   }
 
-  // Reset all pages to "closed"
+  // Reset all pages to a "closed" state
   function resetPageStates() {
     animationInProgress = true;
     pages.forEach((page, index) => {
       page.classList.remove('active');
-      page.style.zIndex = pages.length - index; 
-      // Keep the normal flip transition
-      page.style.transition = 'transform 0.8s ease-in-out';
+      page.style.zIndex = pages.length - index;
+      // Transition is already set per page
     });
-
     setTimeout(() => {
       currentZ = pages.length;
       activePageIndex = -1;
       animationInProgress = false;
-    }, 800);
+    }, lowPerformanceDevice ? 500 : 800);
   }
 
-  // Calculate scroll threshold for each page
+  // Calculate the scroll threshold for each page
   function getScrollThreshold(index) {
     const sectionTop = storySection.offsetTop;
     const totalScrollRange = spacer.offsetHeight;
@@ -95,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return sectionTop + pageScrollRange * (index + 1);
   }
 
-  // Main logic: open or close pages based on scroll direction
+  // Main logic: determine whether to open or close pages based on scroll direction
   function updatePages() {
     if (animationInProgress) return;
     const scrollPosition = window.scrollY;
@@ -105,20 +94,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     pages.forEach((page, index) => {
       const threshold = getScrollThreshold(index);
-
       if (scrollDirection === 'down') {
-        // If going down & crossing threshold for the next page to open
-        if (!page.classList.contains('active') && index > activePageIndex) {
-          if (scrollPosition > threshold) {
-            flipPage(page, index, true); // open
-          }
+        if (!page.classList.contains('active') && index > activePageIndex && scrollPosition > threshold) {
+          flipPage(page, index, true); // open page
         }
       } else {
-        // If going up & above the threshold for the current active page, close it
-        if (page.classList.contains('active') && index === activePageIndex) {
-          if (scrollPosition < threshold) {
-            flipPage(page, index, false); // close
-          }
+        if (page.classList.contains('active') && index === activePageIndex && scrollPosition < threshold) {
+          flipPage(page, index, false); // close page
         }
       }
     });
@@ -133,35 +115,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (isOpening) {
       page.classList.add('active');
-      // Bring this page on top for flipping
       page.style.zIndex = currentZ++;
       activePageIndex = index;
     } else {
-      // Remove "active" so it flips back
       page.classList.remove('active');
-      // NOTE: we do NOT immediately change z-index here.
-      // Let transitionend handle that so it stays on top while flipping shut.
       activePageIndex = index - 1;
     }
 
     setTimeout(() => {
       animationInProgress = false;
       updatePages();
-    }, 800);
+    }, lowPerformanceDevice ? 500 : 800);
   }
 
-  // After a transition ends, if the page is closed, push it behind
+  // After a transition ends, if a page is closed, push it behind
   pages.forEach(page => {
     page.addEventListener('transitionend', () => {
       if (!page.classList.contains('active')) {
-        // Only set the zIndex if it’s no longer active (closed)
-        // This avoids flicker when flipping shut.
         page.style.zIndex = pages.length - pages.indexOf(page);
       }
     });
   });
 
-  // Use requestAnimationFrame to batch scroll updates
+  // Use requestAnimationFrame to throttle scroll events
   let ticking = false;
   window.addEventListener('scroll', () => {
     if (!ticking) {
@@ -173,16 +149,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Re-check positions on resize
+  // Recalculate positions on resize
   let resizeTimeout;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      updatePages();
-    }, 200);
+    resizeTimeout = setTimeout(updatePages, 200);
   });
 
-  // Initialize closed
+  // Initialize the pages
   resetPageStates();
 });
-
