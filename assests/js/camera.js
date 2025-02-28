@@ -249,7 +249,6 @@ window.startMusic = function() {
   new MusicController();
 };
 
-
 /****************************************************
  *  Loading Screen + Combined Logic
  ****************************************************/
@@ -263,7 +262,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const container = document.querySelector('.containercamera');
   const video = document.querySelector('.videocamera');
   const flash = document.querySelector('.flash');
-  const skipButton = document.getElementById('skip-button');
   const loadingScreen = document.getElementById('loading-screen');
   const mainContent = document.getElementById('main-content');
 
@@ -304,23 +302,9 @@ document.addEventListener('DOMContentLoaded', function() {
     isFullyLoaded = true;
   });
 
-  // Show skip button after 3 seconds (but don't hide the screen)
-  setTimeout(() => {
-    // Only show if still on loading screen
-    if (!loadingScreen.classList.contains('hide')) {
-      skipButton.style.display = 'block';
-      requestAnimationFrame(() => {
-        skipButton.classList.add('show');
-      });
-    }
-  }, 6000);
-
-  // End loading screen function
-  function endLoadingScreen(event) {
-    // Only hide if page is fully loaded or skip button was clicked
-    if (isFullyLoaded || (event && event.type === 'click')) {
-      skipButton.classList.remove('show');
-      
+  // End loading screen function - now automatically starts when loaded
+  function endLoadingScreen() {
+    if (isFullyLoaded) {
       setTimeout(() => {
         loadingScreen.classList.add('hide');
         setTimeout(() => {
@@ -338,10 +322,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Skip button
-  skipButton.addEventListener('click', endLoadingScreen);
-
-  // 15s fallback
+  // 15s fallback: if not fully loaded, periodically check and then end loading when ready
   setTimeout(() => {
     if (isFullyLoaded) {
       endLoadingScreen();
