@@ -104,21 +104,15 @@
   <!-- MAIN WEBSITE CONTENT -->
   <main id="main-content" class="main-content-section">
     <!-- Hero Video Section -->
-    <section class="hero-video-section">
-      <div class="video-container">
-        <video 
-          class="hero-video" 
-          data-autoplay 
-          data-src="./assests/images/camera/intro.mp4"
-          muted 
-          loop 
-          playsinline 
-          preload="none"
-        >
-        </video>
-
-      </div>
-    </section>
+  <!-- Hero Video Section -->
+  <section class="hero-video-section">
+    <div class="video-container">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto">
+        <source src="./assests/images/camera/intro.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
 
 
 
@@ -237,16 +231,10 @@
 
 <section class="video-expand-section">
   <div class="video-wrapper">
-    <video 
-        class="expanding-video"
-        data-autoplay 
-        data-src="./assests/images/camera/intro.mp4"
-        muted 
-        loop 
-        playsinline
-        preload="none"
-      ></video>
-
+    <video class="expanding-video" autoplay muted loop playsinline preload="auto">
+      <source src="./assests/images/camera/intro.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
   </div>
 </section>
 
@@ -260,14 +248,9 @@
       Autoplay, loop, muted, and playsinline ensure 
       it loops silently without user interaction. 
     -->
-    <video
-      class="secret-video"
-      autoplay 
-      loop 
-      muted 
-      playsinline
-    >
+    <video class="secret-video" autoplay loop muted playsinline preload="auto">
       <source src="./assests/images/secrets/secrets.mp4" type="video/mp4">
+      Your browser does not support the video tag.
     </video>
 
   </div>
@@ -314,27 +297,17 @@
     <!-- First Comparison -->
     <div class="image-container">
       <div class="comparison-wrapper">
-          <video 
-            data-autoplay 
-            data-src="./assests/images/beforeafter/After1.mp4" 
-            alt="After Video 1" 
-            class="after-video" 
-            muted 
-            loop 
-            preload="none">
-          </video>
-          <video 
-            data-autoplay 
-            data-src="./assests/images/beforeafter/Before1.mp4" 
-            alt="Before Video 1" 
-            class="before-video" 
-            muted 
-            loop 
-            preload="none">
-          </video>
-          <div class="slider">
-              <div class="slider-button"></div>
-          </div>
+        <video autoplay muted loop playsinline preload="auto" class="after-video">
+          <source src="./assests/images/beforeafter/After1.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <video autoplay muted loop playsinline preload="auto" class="before-video">
+          <source src="./assests/images/beforeafter/Before1.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="slider">
+          <div class="slider-button"></div>
+        </div>
       </div>
       <div class="neon-textslide">Now thats better!</div>
     </div>
@@ -342,27 +315,17 @@
     <!-- Second Comparison -->
     <div class="image-container">
       <div class="comparison-wrapper">
-          <video 
-            data-autoplay 
-            data-src="./assests/images/beforeafter/After2.mp4" 
-            alt="After Video 2" 
-            class="after-video" 
-            muted 
-            loop 
-            preload="none">
-          </video>
-          <video 
-            data-autoplay 
-            data-src="./assests/images/beforeafter/Before2.mp4" 
-            alt="Before Video 2" 
-            class="before-video" 
-            muted 
-            loop 
-            preload="none">
-          </video>
-          <div class="slider">
-              <div class="slider-button"></div>
-          </div>
+        <video autoplay muted loop playsinline preload="auto" class="after-video">
+          <source src="./assests/images/beforeafter/After2.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <video autoplay muted loop playsinline preload="auto" class="before-video">
+          <source src="./assests/images/beforeafter/Before2.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="slider">
+          <div class="slider-button"></div>
+        </div>
       </div>
       <div class="neon-textslide">Our Kind of Transformation!</div>
     </div>
@@ -370,27 +333,17 @@
     <!-- Third Comparison -->
     <div class="image-container">
       <div class="comparison-wrapper">
-          <video 
-            data-autoplay 
-            data-src="./assests/images/beforeafter/after3.mp4" 
-            alt="After Video 3" 
-            class="after-video" 
-            muted 
-            loop 
-            preload="none">
-          </video>
-          <video 
-            data-autoplay 
-            data-src="./assests/images/beforeafter/before3.mp4" 
-            alt="Before Video 3" 
-            class="before-video" 
-            muted 
-            loop 
-            preload="none">
-          </video>
-          <div class="slider">
-              <div class="slider-button"></div>
-          </div>
+        <video autoplay muted loop playsinline preload="auto" class="after-video">
+          <source src="./assests/images/beforeafter/after3.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <video autoplay muted loop playsinline preload="auto" class="before-video">
+          <source src="./assests/images/beforeafter/before3.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="slider">
+          <div class="slider-button"></div>
+        </div>
       </div>
       <div class="neon-textslide">That's How The Story Goes!</div>
     </div>
@@ -709,8 +662,7 @@
   <script src="./assests/js/beforeafter.js"></script>
   <script src="./assests/js/envelope.js"></script>
   <script src="./assests/js/dust.js"></script>
-  <script src="./assests/js/lazyload.js"></script>
- 
+
 
 </body>
 </html>
