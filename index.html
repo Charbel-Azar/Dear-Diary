@@ -681,6 +681,44 @@
   <script src="./assests/js/envelope.js"></script>
   <script src="./assests/js/dust.js"></script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  // Select all video elements except those with the "expanding-video" class.
+  const controlledVideos = document.querySelectorAll('video:not(.expanding-video)');
 
+  // IntersectionObserver options: adjust these values to control when videos play.
+  const observerOptions = {
+    threshold: 0.5,         // 50% of the video must be visible to trigger play.
+    rootMargin: '100px'     // Preload videos a bit before they fully enter view.
+  };
+
+  // Callback function for the observer.
+  const observerCallback = (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.play().catch((err) => console.error('Error playing video:', err));
+      } else {
+        entry.target.pause();
+      }
+    });
+  };
+
+  // Create the IntersectionObserver instance.
+  const videoObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+  // Observe each controlled video.
+  controlledVideos.forEach(video => {
+    videoObserver.observe(video);
+  });
+
+  // Optionally, ensure the expanding video plays (or manages its own playback)
+  const expandingVideo = document.querySelector('video.expanding-video');
+  if (expandingVideo) {
+    // Let its HTML attributes (like autoplay) handle it, or force play:
+    expandingVideo.play().catch((err) => console.error('Error playing expanding video:', err));
+  }
+});
+
+</script>
 </body>
 </html>
