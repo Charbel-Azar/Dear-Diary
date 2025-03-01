@@ -245,9 +245,6 @@ window.startMusic = function() {
   const flash = document.querySelector('.flash');
   const loadingScreen = document.getElementById('loading-screen');
   const mainContent = document.getElementById('main-content');
-  
-  // Hide the main content until everything is loaded
-  mainContent.style.display = 'none';
 
   // Custom crosshair
   const crosshair = document.createElement('img');
